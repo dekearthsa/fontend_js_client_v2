@@ -1,17 +1,16 @@
 <script setup>
-import FilterLogoVue from "../icons/FilterLogo.vue";
-import WellBreathLogoVue from "../icons/WellBreathLogo.vue";
+import AlwayDryLogoVue from "../icons/AlwayDryLogo.vue";
 </script>
 
 <template>
   <div class="">
     <div class="icon ">
-      <WellBreathLogoVue class="m-auto"/>
+      <AlwayDryLogoVue class="m-auto"/>
     </div>
     <div class="detail w-[180px] h-[220px] bg-white rounded-lg">
       <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center">
-        <div class="text-[#00B0F0] font-bold">WELL BREATH</div>
-        <div class="">
+        <div class="text-[#ED7D31] font-bold translate-x-[5px]">ALWAYS DRY</div>
+        <div class="translate-x-[20px]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#999999" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
           </svg>
@@ -20,9 +19,9 @@ import WellBreathLogoVue from "../icons/WellBreathLogo.vue";
       <div class="status-c m-auto w-[170px] h-[65px] bg-[#E5F6F7] mt-2 rounded-lg"> 
         <div class="flex">
           <div class="ml-1 mt-1">
-            <button class="btn-c rounded-full w-[40px] h-[40px]">
-              <div class="rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#00B0F0]">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00B0F0" class="w-6 h-6 m-auto translate-y-[3px]">
+            <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]">
+              <div class="rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ED7D31" class="w-6 h-6 m-auto translate-y-[3px]">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                 </svg>
               </div>
@@ -42,25 +41,23 @@ import WellBreathLogoVue from "../icons/WellBreathLogo.vue";
         </div>
       </div>
       <div class="data-c m-auto bg-[#E5F6F7] w-[170px] h-[45px] mt-2 rounded-lg">
-        <div class="">
-          <div class="text-[10px] font-bold ml-1 mt-1">AQI</div>
-        </div>
-        <div class="flex justify-center">
-          <div class="translate-y-[-5px]">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#F4B8B7" viewBox="0 0 24 24" stroke-width="1.5" stroke="#CB2A28" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
-            </svg>
+        <div class="set-timing font-bold flex justify-around">
+          <div class="mt-1 text-[#36A090]">
+            <div class="translate-x-[3px]">15</div>
+            <div class="translate-y-[-5px] text-[10px]">Mins</div>
           </div>
-          <div class="text-[#CB2A28] text-[12px] font-bold">
-            Unhealthy
+          <div class="text-[10px] mt-3 translate-y-[4px]">
+            Time Remaining
           </div>
         </div>
       </div>
       <div class="qta-c m-auto bg-[#E5F6F7] w-[170px] h-[45px] mt-2 rounded-lg">
-        <div class="text-[11px] font-bold mt-1 ml-1">Filter</div>
+        <div class="text-[11px] font-bold mt-1 ml-1">Sensor</div>
         <div class="flex justify-around">
           <div>
-            <FilterLogoVue class="translate-y-[-3px]"/>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+              <path fill-rule="evenodd" d="M5.636 4.575a.75.75 0 0 1 0 1.061 9 9 0 0 0 0 12.728.75.75 0 1 1-1.06 1.06c-4.101-4.1-4.101-10.748 0-14.849a.75.75 0 0 1 1.06 0Zm12.728 0a.75.75 0 0 1 1.06 0c4.101 4.1 4.101 10.75 0 14.85a.75.75 0 1 1-1.06-1.061 9 9 0 0 0 0-12.728.75.75 0 0 1 0-1.06ZM7.757 6.697a.75.75 0 0 1 0 1.06 6 6 0 0 0 0 8.486.75.75 0 0 1-1.06 1.06 7.5 7.5 0 0 1 0-10.606.75.75 0 0 1 1.06 0Zm8.486 0a.75.75 0 0 1 1.06 0 7.5 7.5 0 0 1 0 10.606.75.75 0 0 1-1.06-1.06 6 6 0 0 0 0-8.486.75.75 0 0 1 0-1.06ZM9.879 8.818a.75.75 0 0 1 0 1.06 3 3 0 0 0 0 4.243.75.75 0 1 1-1.061 1.061 4.5 4.5 0 0 1 0-6.364.75.75 0 0 1 1.06 0Zm4.242 0a.75.75 0 0 1 1.061 0 4.5 4.5 0 0 1 0 6.364.75.75 0 0 1-1.06-1.06 3 3 0 0 0 0-4.243.75.75 0 0 1 0-1.061ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
+            </svg>
           </div>
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#CB2A28" class="w-6 h-6 translate-y-[-2px]">

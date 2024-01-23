@@ -10,8 +10,8 @@ import WellBreathLogoVue from "../icons/WellBreathLogo.vue";
     </div>
     <div class="detail w-[180px] h-[220px] bg-white rounded-lg">
       <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center">
-        <div class="text-[#00B0F0] font-bold">WELL BREATH</div>
-        <div class="">
+        <div class="text-[#00B0F0] font-bold translate-x-[5px]">WELL BREATH</div>
+        <div class="translate-x-[20px]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#999999" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
           </svg>
@@ -20,7 +20,7 @@ import WellBreathLogoVue from "../icons/WellBreathLogo.vue";
       <div class="status-c m-auto w-[170px] h-[65px] bg-[#E5F6F7] mt-2 rounded-lg"> 
         <div class="flex">
           <div class="ml-1 mt-1">
-            <button class="btn-c rounded-full w-[40px] h-[40px]">
+            <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]">
               <div class="rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#00B0F0]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00B0F0" class="w-6 h-6 m-auto translate-y-[3px]">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />

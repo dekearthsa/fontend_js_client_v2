@@ -1,5 +1,13 @@
 <script setup>
 import LightForLifeIconVue from "../icons/LightForLifeLogo.vue";
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const haddleRouteLightForLife = () => {
+  router.push("/lightforlife")
+}
+
 </script>
 
 <template>
@@ -8,7 +16,7 @@ import LightForLifeIconVue from "../icons/LightForLifeLogo.vue";
       <LightForLifeIconVue class="m-auto"/>
     </div>
     <div class="detail w-[180px] h-[220px] bg-white rounded-lg">
-      <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center">
+      <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center" @click="haddleRouteLightForLife">
         <div class="text-[#D29500] font-bold translate-x-[5px]">LIGHT FOR LIFE</div>
         <div class="translate-x-[20px]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#999999" class="w-6 h-6">

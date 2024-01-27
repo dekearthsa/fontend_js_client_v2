@@ -1,5 +1,13 @@
 <script setup>
 import AlwayDryLogoVue from "../icons/AlwayDryLogo.vue";
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const haddleRouteAlwayDry = () => {
+  router.push("/alwaydry")
+}
+
 </script>
 
 <template>
@@ -8,7 +16,7 @@ import AlwayDryLogoVue from "../icons/AlwayDryLogo.vue";
       <AlwayDryLogoVue class="m-auto"/>
     </div>
     <div class="detail w-[180px] h-[220px] bg-white rounded-lg">
-      <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center">
+      <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center" @click="haddleRouteAlwayDry">
         <div class="text-[#ED7D31] font-bold translate-x-[5px]">ALWAYS DRY</div>
         <div class="translate-x-[20px]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#999999" class="w-6 h-6">

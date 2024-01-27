@@ -1,6 +1,14 @@
 <script setup>
 import FilterLogoVue from "../icons/FilterLogo.vue";
 import WellBreathLogoVue from "../icons/WellBreathLogo.vue";
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const haddleWellBreath = () => {
+  router.push("/wellbreath")
+}
+
 </script>
 
 <template>
@@ -9,7 +17,7 @@ import WellBreathLogoVue from "../icons/WellBreathLogo.vue";
       <WellBreathLogoVue class="m-auto"/>
     </div>
     <div class="detail w-[180px] h-[220px] bg-white rounded-lg">
-      <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center">
+      <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center" @click="haddleWellBreath">
         <div class="text-[#00B0F0] font-bold translate-x-[5px]">WELL BREATH</div>
         <div class="translate-x-[20px]">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#999999" class="w-6 h-6">

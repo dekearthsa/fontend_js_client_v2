@@ -3,6 +3,14 @@ import {ref, onMounted} from "vue";
 const currentDate = ref("n/a");
 const currentTiming = ref("n/a");
 
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const haddleRouteHome = () => {
+    router.push("/")
+}
+
 onMounted(() => {
   setInterval(() => {
     setDate();
@@ -82,7 +90,7 @@ const timing = () => {
 <template>
   <div class="header-home h-[74px] rounded-b-3xl">
     <div class="flex justify-between">
-      <div class="text-white mt-5 ml-5 font-bold">MY ROOM</div>
+      <div @click="haddleRouteHome" class="text-white mt-5 ml-5 font-bold">MY ROOM</div>
       <div class="text-white mt-1 mr-5 font-bold">
         <div class="">{{currentDate}}</div>
         <div class="text-end">{{currentTiming}}</div>

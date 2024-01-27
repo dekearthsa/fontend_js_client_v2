@@ -7,8 +7,13 @@ import PMLogoVue from "../components/icons/PMLogo.vue"
 import TempLogoVue from "../components/icons/TempLogo.vue"
 import VOCsLogoVue from "../components/icons/VOCsLogo.vue"
 import WellBreathLogoVue from "../components/icons/WellBreathLogo.vue"
+import LightLogoVue from "../components/icons/LightLogo.vue"
+import BatteryLowLogoVue from "../components/icons/BatteryLowLogo.vue"
+import SpotLogoVue from "../components/icons/SpotLogo.vue"
 
 import { useRouter } from 'vue-router';
+
+
 
 const router = useRouter();
 
@@ -23,20 +28,20 @@ const haddleRouteHome = () => {
     <div class="flex">
         <div class="w-[180px] h-[200px] ml-8">
             <div>
-                <WellBreathLogoVue class="m-auto absolute translate-y-[-75px] translate-x-[45px]"/>
+                <WellBreathLogoVue class="m-auto absolute translate-y-[-75px] translate-x-[45px]" />
             </div>
 
             <div class="card-c rounded-lg h-[215px]">
                 <div class="title-c text-center">
-                    <div class="text-[#00B0F0] font-bold">WELL BREATH</div>
+                    <div class="text-[#D29500]  font-bold">LIGHT FOR LIFE</div>
                 </div>
                 <div class="status-c bg-[#E5F6F7] rounded-lg w-[170px] h-[65px] mt-2 m-auto">
                     <div class="flex">
                         <div class="ml-1 mt-1">
-                            <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]">
-                                <div class="rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#00B0F0]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="#00B0F0" class="w-6 h-6 m-auto translate-y-[3px]">
+                            <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#FFEBBC]">
+                                <div class="rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#D29500]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="#D29500" class="w-6 h-6 m-auto translate-y-[3px]">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                                     </svg>
@@ -58,27 +63,40 @@ const haddleRouteHome = () => {
                     </div>
                 </div>
                 <div class="aqi-c bg-[#E5F6F7] rounded-lg w-[170px] h-[45px] mt-2 m-auto">
-                    <div class="">
-                        <div class="text-[10px] font-bold ml-1 mt-1">AQI</div>
-                    </div>
-                    <div class="flex justify-center">
-                        <div class="translate-y-[-5px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#F4B8B7" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="#CB2A28" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
+                    <div class="absolute flex ml-5 mt-4">
+                        <div class="mr-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-[12px] h-[12px]">
+                                <path
+                                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
                             </svg>
                         </div>
-                        <div class="text-[#CB2A28] text-[12px] font-bold">
-                            Unhealthy
+                        <div class="text-[9px]">
+                            50%
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="translate-y-[-8px] ml-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="#AA0000" class="w-[60px] h-[60px]">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
+                            </svg>
+                        </div>
+                        <div class="text-[8px] mt-3 ml-2 font-bold text-[#CB2A28]">
+                            Need replace new battery
                         </div>
                     </div>
                 </div>
                 <div class="battery-c bg-[#E5F6F7] rounded-lg w-[170px] h-[47px] mt-2 m-auto">
-                    <div class="text-[11px] font-bold mt-1 ml-1">Filter</div>
+                    <div class="text-[11px] font-bold mt-1 ml-1">Battery</div>
                     <div class="flex justify-around">
                         <div>
-                            <FilterLogoVue class="translate-y-[-3px]" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                            </svg>
                         </div>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#CB2A28"
@@ -98,98 +116,82 @@ const haddleRouteHome = () => {
         <div>
             <div class="detail-c w-[374px] h-[215px] rounded-lg ml-5">
                 <div class="h-[10px]"></div>
-                <div class="bg-[#E5F6F7] w-[361px] h-[140px] m-auto rounded-md">
-                    <div class="title-detail text-[#2A83B5] font-bold ml-2 text-[14px]">IAQ</div>
-                    <div class="text-[14px]">
-                        <div class="grid grid-cols-3 ml-3">
-                            <div>
-                                <div class="font-bold">Temperature</div>
-                                <div class="flex">
-                                    <div>
-                                        <TempLogoVue/>
-                                    </div>
-                                    <div>
-                                        <span class="font-bold">25.0</span>
-                                        <span style='font-size:15px;'>&#8451;</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-bold">PM2.5</div>
-                                <div class="flex">
-                                    <span><PMLogoVue/></span>
-                                    <span class="font-bold">115.0</span>
-                                    <span>µg/m3</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-bold">CO2</div>
-                                <div class="flex">
-                                    <span><CarbonLogoVue/></span>
-                                    <span class="font-bold">115</span>
-                                    <span>ppm</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 ml-3">
-                            <div>
-                                <div class="font-bold">VOCs</div>
-                                <div class="flex">
-                                    <span><VOCsLogoVue/></span>
-                                    <span class="font-bold">90</span>
-                                    <span>ppm</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-bold">Humidity</div>
-                                <div class="flex">
-                                    <span><HumidLogoVue/></span>
-                                    <span class="font-bold">70%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-
-                    </div>
-                </div>
-                <div class="w-[361px] h-[55px] bg-[#E5F6F7] mt-1 m-auto rounded-md">
-                    <div class="title-detail text-[#2A83B5] font-bold ml-2 text-[14px]">System</div>
-                    <div class="flex justify-around text-[14px]">
+                <div class="w-[361px] h-[189px] bg-[#E5F6F7] rounded-md m-auto">
+                    <div class="text-[#2A83B5] text-[14px] font-bold ml-1">System</div>
+                    <div class="grid grid-cols-2    ">
                         <div>
-                            <button class="btn-c rounded-full w-[20px] h-[20px] bg-[#C5F0FF]">
-                                <div class="rounded-full m-auto  w-[20px] h-[20px] border-2 border-[#00B0F0]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="#00B0F0" class="w-3 h-3 m-auto translate-y-[3px]">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
+                            <div class="text-[12px] ml-2 mt-5">Light Bedroom 1</div>
+                            <div class="flex">
+                                <div class="mr-2">
+                                    <LightLogoVue/>
+                                </div>
+                                <div class="translate-y-[10px] mr-3">
+                                    <BatteryLowLogoVue/>
+                                </div>
+                                <div class="text-red-700 font-bold text-[9px] translate-y-[10px]">
+                                    30% Charge!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="text-[12px] ml-2 mt-5">Light Bedroom 2</div>
+                            <div class="flex">
+                                <div class="mr-2">
+                                    <LightLogoVue/>
+                                </div>
+                                <div class="translate-y-[10px] mr-3">
+                                    <BatteryLowLogoVue/>
+                                </div>
+                                <div class="text-red-700 font-bold text-[9px] translate-y-[10px]">
+                                    30% Charge!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3">
+                        <div>
+                            <div class="text-[12px] ml-2 mt-5">Light Bathroom</div>
+                            <div class="flex">
+                                <div class="mr-2">
+                                    <LightLogoVue/>
+                                </div>
+                                <div class="translate-y-[5px] mr-3">
+                                    <div class="flex border-2 h-[25px] border-[#66B6AB] pl-2 pr-2  text-[#66B6AB] rounded-md">
+                                        <div class="translate-y-[2px] mr-1"><SpotLogoVue/></div>
+                                        <div class="translate-y-[3px] font-bold text-[10px]">ON</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-[12px] ml-2 mt-5">Sensor</div>
+                            <div class="flex">
+                                <div class="mr-2 translate-y-[5px]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                        <path fill-rule="evenodd" d="M5.636 4.575a.75.75 0 0 1 0 1.061 9 9 0 0 0 0 12.728.75.75 0 1 1-1.06 1.06c-4.101-4.1-4.101-10.748 0-14.849a.75.75 0 0 1 1.06 0Zm12.728 0a.75.75 0 0 1 1.06 0c4.101 4.1 4.101 10.75 0 14.85a.75.75 0 1 1-1.06-1.061 9 9 0 0 0 0-12.728.75.75 0 0 1 0-1.06ZM7.757 6.697a.75.75 0 0 1 0 1.06 6 6 0 0 0 0 8.486.75.75 0 0 1-1.06 1.06 7.5 7.5 0 0 1 0-10.606.75.75 0 0 1 1.06 0Zm8.486 0a.75.75 0 0 1 1.06 0 7.5 7.5 0 0 1 0 10.606.75.75 0 0 1-1.06-1.06 6 6 0 0 0 0-8.486.75.75 0 0 1 0-1.06ZM9.879 8.818a.75.75 0 0 1 0 1.06 3 3 0 0 0 0 4.243.75.75 0 1 1-1.061 1.061 4.5 4.5 0 0 1 0-6.364.75.75 0 0 1 1.06 0Zm4.242 0a.75.75 0 0 1 1.061 0 4.5 4.5 0 0 1 0 6.364.75.75 0 0 1-1.06-1.06 3 3 0 0 0 0-4.243.75.75 0 0 1 0-1.061ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                            </button>
-                        </div>
-                        <div>
-                            <div>Mode</div>
-                            <div>Night Mode</div>
-                        </div>
-                        <div>
-                            <div>Supply Fan</div>
-                            <div class="flex">
-                                <div>
-                                    <FanLogoVue/>
-                                </div>
-                                <div>
-                                    ON
+                                <div class="translate-y-[5px] mr-3">
+                                    <div class="flex">
+                                        <div class="translate-y-[2px] mr-1"><BatteryLowLogoVue/></div>
+                                        <div class="translate-y-[3px] font-bold text-[10px] text-red-700">30%</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <div>Exhaust Fan</div>
+                            <div class="text-[12px] ml-2 mt-5">Sensor</div>
                             <div class="flex">
-                                <div>
-                                    <FanLogoVue/>
+                                <div class="mr-2 translate-y-[5px]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                        <path fill-rule="evenodd" d="M5.636 4.575a.75.75 0 0 1 0 1.061 9 9 0 0 0 0 12.728.75.75 0 1 1-1.06 1.06c-4.101-4.1-4.101-10.748 0-14.849a.75.75 0 0 1 1.06 0Zm12.728 0a.75.75 0 0 1 1.06 0c4.101 4.1 4.101 10.75 0 14.85a.75.75 0 1 1-1.06-1.061 9 9 0 0 0 0-12.728.75.75 0 0 1 0-1.06ZM7.757 6.697a.75.75 0 0 1 0 1.06 6 6 0 0 0 0 8.486.75.75 0 0 1-1.06 1.06 7.5 7.5 0 0 1 0-10.606.75.75 0 0 1 1.06 0Zm8.486 0a.75.75 0 0 1 1.06 0 7.5 7.5 0 0 1 0 10.606.75.75 0 0 1-1.06-1.06 6 6 0 0 0 0-8.486.75.75 0 0 1 0-1.06ZM9.879 8.818a.75.75 0 0 1 0 1.06 3 3 0 0 0 0 4.243.75.75 0 1 1-1.061 1.061 4.5 4.5 0 0 1 0-6.364.75.75 0 0 1 1.06 0Zm4.242 0a.75.75 0 0 1 1.061 0 4.5 4.5 0 0 1 0 6.364.75.75 0 0 1-1.06-1.06 3 3 0 0 0 0-4.243.75.75 0 0 1 0-1.061ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
+                                    </svg>
                                 </div>
-                                <div>
-                                    ON
+                                <div class="translate-y-[5px] mr-3">
+                                    <div class="flex border-2 h-[25px] border-[#66B6AB] pl-2 pr-2  text-[#66B6AB] rounded-md">
+                                        <div class="translate-y-[2px] mr-1"><SpotLogoVue/></div>
+                                        <div class="translate-y-[3px] font-bold text-[10px]">ON</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -203,8 +205,10 @@ const haddleRouteHome = () => {
             <div class="flex">
                 <span class="mr-1">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                        <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
-                        <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+                        <path
+                            d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+                        <path
+                            d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
                     </svg>
                 </span>
                 <span>HOME</span>
@@ -214,11 +218,10 @@ const haddleRouteHome = () => {
 </template>
 
 <style scoped>
-.card-c{
+.card-c {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.detail-c{
+.detail-c {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-</style>
+}</style>

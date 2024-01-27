@@ -69,7 +69,6 @@ const haddleRouteLightForLife = () => {
             Need replace new battery
           </div>
         </div>
-        
       </div>
       <div class="qta-c m-auto bg-[#E5F6F7] w-[170px] h-[45px] mt-2 rounded-lg">
         <div class="text-[11px] font-bold mt-1 ml-1">Battery</div>

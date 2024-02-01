@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('./assets/SCG_OTF/SCG-Reg.otf') format('opentype');
+  }
+  
+  /* Optionally, apply the font to specific elements */
+  body {
+    font-family: 'CustomFont', sans-serif;
+  }

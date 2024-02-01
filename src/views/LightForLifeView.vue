@@ -6,6 +6,7 @@ import SpotLogoVue from "../components/icons/SpotLogo.vue"
 import {useStore} from "vuex"
 import { useRouter } from 'vue-router';
 import LightForLifeLogoVue from "@/components/icons/LightForLifeLogo.vue"
+
 const store = useStore();
 const router = useRouter();
 

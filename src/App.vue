@@ -13,6 +13,6 @@ import HeaderComponentsVue from "./components/HeaderComponents/HeaderComponents.
   
 </template>
 
-<style scoped>
-
+<style >
+@import  './styles.css';
 </style>

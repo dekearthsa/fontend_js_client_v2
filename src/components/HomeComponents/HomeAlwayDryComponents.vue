@@ -1,19 +1,36 @@
 <script setup>
-import AlwayDryLogoVue from "../icons/AlwayDryLogo.vue";
 import { useRouter } from 'vue-router';
+import {useStore} from "vuex"
+import AlwayDryLogoVue from '../icons/AlwayDryLogo.vue';
 
 const router = useRouter();
+const store = useStore();
 
 const haddleRouteAlwayDry = () => {
   router.push("/alwaydry")
 }
+
+const haddleBtnOnOff = () => {
+    if(store.state.alwayDryStte){
+      store.state.alwayDryBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
+      store.state.alwayDryDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
+      store.state.alwayDrySvg = "#FFFFFF";
+      store.state.alwayDryStte = false;
+    }else{
+      store.state.alwayDryBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]";
+      store.state.alwayDryDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]";
+      store.state.alwayDrySvg = "#ED7D31";
+      store.state.alwayDryStte = true;
+    }
+  }
 
 </script>
 
 <template>
   <div class="">
     <div class="icon ">
-      <AlwayDryLogoVue class="m-auto"/>
+      <!-- <AlwayDryLogoVue class="m-auto"/> -->
+      <img src="@/assets/ADlogo.png" class="m-auto"/>
     </div>
     <div class="detail w-[180px] h-[220px] bg-white rounded-lg">
       <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center" @click="haddleRouteAlwayDry">
@@ -24,12 +41,12 @@ const haddleRouteAlwayDry = () => {
           </svg>
         </div>
       </div>
-      <div class="status-c m-auto w-[170px] h-[65px] bg-[#E5F6F7] mt-2 rounded-lg"> 
+      <div class="status-c m-auto w-[170px] h-[65px] bg-[#F3F4F8] mt-2 rounded-lg"> 
         <div class="flex">
           <div class="ml-1 mt-1">
-            <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]">
-              <div class="rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ED7D31" class="w-6 h-6 m-auto translate-y-[3px]">
+            <button @click="haddleBtnOnOff" :class="store.state.alwayDryBtn">
+              <div :class="store.state.alwayDryDiv">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.alwayDrySvg" class="w-6 h-6 m-auto translate-y-[3px]">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                 </svg>
               </div>
@@ -48,7 +65,7 @@ const haddleRouteAlwayDry = () => {
           </div>
         </div>
       </div>
-      <div class="data-c m-auto bg-[#E5F6F7] w-[170px] h-[45px] mt-2 rounded-lg">
+      <div class="data-c m-auto bg-[#F3F4F8] w-[170px] h-[45px] mt-2 rounded-lg">
         <div class="set-timing font-bold flex justify-around">
           <div class="mt-1 text-[#36A090]">
             <div class="translate-x-[3px]">15</div>
@@ -59,7 +76,7 @@ const haddleRouteAlwayDry = () => {
           </div>
         </div>
       </div>
-      <div class="qta-c m-auto bg-[#E5F6F7] w-[170px] h-[45px] mt-2 rounded-lg">
+      <div class="qta-c m-auto bg-[#F3F4F8] w-[170px] h-[45px] mt-2 rounded-lg">
         <div class="text-[11px] font-bold mt-1 ml-1">Sensor</div>
         <div class="flex justify-around">
           <div>

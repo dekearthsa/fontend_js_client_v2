@@ -1,25 +1,32 @@
 <script setup>
-import CarbonLogoVue from "../components/icons/CarbonLogo.vue"
-import FanLogoVue from "../components/icons/FanLogo.vue"
-import FilterLogoVue from "../components/icons/FilterLogo.vue"
-import HumidLogoVue from "../components/icons/HumidLogo.vue"
-import PMLogoVue from "../components/icons/PMLogo.vue"
-import TempLogoVue from "../components/icons/TempLogo.vue"
-import VOCsLogoVue from "../components/icons/VOCsLogo.vue"
-import WellBreathLogoVue from "../components/icons/WellBreathLogo.vue"
+// import WellBreathLogoVue from "../components/icons/WellBreathLogo.vue"
 import LightLogoVue from "../components/icons/LightLogo.vue"
 import BatteryLowLogoVue from "../components/icons/BatteryLowLogo.vue"
 import SpotLogoVue from "../components/icons/SpotLogo.vue"
-
+import {useStore} from "vuex"
 import { useRouter } from 'vue-router';
-
-
-
+import LightForLifeLogoVue from "@/components/icons/LightForLifeLogo.vue"
+const store = useStore();
 const router = useRouter();
 
 const haddleRouteHome = () => {
     router.push("/")
 }
+
+const haddleBtnOnOff = () => {
+    if(store.state.lightForLifeState){
+      store.state.lightForLifeBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
+      store.state.lightForLifeDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
+      store.state.lightForLifeSvg = "#FFFFFF";
+      store.state.lightForLifeState = false;
+    }else{
+      store.state.lightForLifeBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]";
+      store.state.lightForLifeDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]";
+      store.state.lightForLifeSvg = "#ED7D31";
+      store.state.lightForLifeState = true;
+    }
+  }
+
 
 
 </script>
@@ -28,25 +35,23 @@ const haddleRouteHome = () => {
     <div class="flex">
         <div class="w-[180px] h-[200px] ml-8">
             <div>
-                <WellBreathLogoVue class="m-auto absolute translate-y-[-75px] translate-x-[45px]" />
+                <LightForLifeLogoVue class="m-auto absolute translate-y-[-75px] translate-x-[45px]" />
             </div>
 
             <div class="card-c rounded-lg h-[215px]">
                 <div class="title-c text-center">
                     <div class="text-[#D29500]  font-bold">LIGHT FOR LIFE</div>
                 </div>
-                <div class="status-c bg-[#E5F6F7] rounded-lg w-[170px] h-[65px] mt-2 m-auto">
+                <div class="status-c bg-[#F3F4F8] rounded-lg w-[170px] h-[65px] mt-2 m-auto">
                     <div class="flex">
                         <div class="ml-1 mt-1">
-                            <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#FFEBBC]">
-                                <div class="rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#D29500]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="#D29500" class="w-6 h-6 m-auto translate-y-[3px]">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
-                                    </svg>
+                            <button @click="haddleBtnOnOff" :class="store.state.lightForLifeBtn">
+                                <div :class="store.state.lightForLifeDiv">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.lightForLifeSvg" class="w-6 h-6 m-auto translate-y-[3px]">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
+                                  </svg>
                                 </div>
-                            </button>
+                              </button>
                             <div class="text-[10px] font-bold">
                                 ON/OFF
                             </div>
@@ -62,7 +67,7 @@ const haddleRouteHome = () => {
                         </div>
                     </div>
                 </div>
-                <div class="aqi-c bg-[#E5F6F7] rounded-lg w-[170px] h-[45px] mt-2 m-auto">
+                <div class="aqi-c bg-[#F3F4F8] rounded-lg w-[170px] h-[45px] mt-2 m-auto">
                     <div class="absolute flex ml-5 mt-4">
                         <div class="mr-1">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -88,7 +93,7 @@ const haddleRouteHome = () => {
                         </div>
                     </div>
                 </div>
-                <div class="battery-c bg-[#E5F6F7] rounded-lg w-[170px] h-[47px] mt-2 m-auto">
+                <div class="battery-c bg-[#F3F4F8] rounded-lg w-[170px] h-[47px] mt-2 m-auto">
                     <div class="text-[11px] font-bold mt-1 ml-1">Battery</div>
                     <div class="flex justify-around">
                         <div>
@@ -116,7 +121,7 @@ const haddleRouteHome = () => {
         <div>
             <div class="detail-c w-[374px] h-[215px] rounded-lg ml-5">
                 <div class="h-[10px]"></div>
-                <div class="w-[361px] h-[189px] bg-[#E5F6F7] rounded-md m-auto">
+                <div class="w-[361px] h-[189px] bg-[#F3F4F8] rounded-md m-auto">
                     <div class="text-[#2A83B5] text-[14px] font-bold ml-1">System</div>
                     <div class="grid grid-cols-2    ">
                         <div>

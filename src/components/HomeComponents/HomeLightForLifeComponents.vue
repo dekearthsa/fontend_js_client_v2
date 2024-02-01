@@ -1,19 +1,40 @@
 <script setup>
-import LightForLifeIconVue from "../icons/LightForLifeLogo.vue";
+// import LightForLifeLogoVue from "@/components/icons/LightForLifeLogo.vue"
 import { useRouter } from 'vue-router';
+import {useStore} from "vuex"
+import LightForLifeLogoVue from '../icons/LightForLifeLogo.vue';
 
 const router = useRouter();
+const store = useStore();
 
 const haddleRouteLightForLife = () => {
   router.push("/lightforlife")
 }
+
+
+const haddleBtnOnOff = () => {
+    if(store.state.lightForLifeState){
+      store.state.lightForLifeBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
+      store.state.lightForLifeDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
+      store.state.lightForLifeSvg = "#FFFFFF";
+      store.state.lightForLifeState = false;
+    }else{
+      store.state.lightForLifeBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]";
+      store.state.lightForLifeDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]";
+      store.state.lightForLifeSvg = "#ED7D31";
+      store.state.lightForLifeState = true;
+    }
+  }
+
+
 
 </script>
 
 <template>
   <div class="">
     <div class="icon ">
-      <LightForLifeIconVue class="m-auto"/>
+      <!-- <LightForLifeLogoVue class="m-auto"/> -->
+      <img src="@/assets/LLLogo.png" class="m-auto"/>
     </div>
     <div class="detail w-[180px] h-[220px] bg-white rounded-lg">
       <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center" @click="haddleRouteLightForLife">
@@ -24,12 +45,12 @@ const haddleRouteLightForLife = () => {
           </svg>
         </div>
       </div>
-      <div class="status-c m-auto w-[170px] h-[65px] bg-[#E5F6F7] mt-2 rounded-lg"> 
+      <div class="status-c m-auto w-[170px] h-[65px] bg-[#F3F4F8] mt-2 rounded-lg"> 
         <div class="flex">
           <div class="ml-1 mt-1">
-            <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#FFEBBC]">
-              <div class="rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#D29500]">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#D29500" class="w-6 h-6 m-auto translate-y-[3px]">
+            <button @click="haddleBtnOnOff" :class="store.state.lightForLifeBtn">
+              <div :class="store.state.lightForLifeDiv">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.lightForLifeSvg" class="w-6 h-6 m-auto translate-y-[3px]">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                 </svg>
               </div>
@@ -48,7 +69,7 @@ const haddleRouteLightForLife = () => {
           </div>
         </div>
       </div>
-      <div class="data-c m-auto bg-[#E5F6F7] w-[170px] h-[45px] mt-2 rounded-lg">
+      <div class="data-c m-auto bg-[#F3F4F8] w-[170px] h-[45px] mt-2 rounded-lg">
         <div class="absolute flex ml-5 mt-4">
           <div class="mr-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-[12px] h-[12px]">
@@ -70,7 +91,7 @@ const haddleRouteLightForLife = () => {
           </div>
         </div>
       </div>
-      <div class="qta-c m-auto bg-[#E5F6F7] w-[170px] h-[45px] mt-2 rounded-lg">
+      <div class="qta-c m-auto bg-[#F3F4F8] w-[170px] h-[45px] mt-2 rounded-lg">
         <div class="text-[11px] font-bold mt-1 ml-1">Battery</div>
         <div class="flex justify-around">
           <div>

@@ -101,7 +101,7 @@ const timing = () => {
 
 <style scoped>
 .header-home{
-  background: #2A83B5;
+  background: #2C82B3;
 
 }
 </style>

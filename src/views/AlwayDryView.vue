@@ -196,7 +196,7 @@ const haddleBtnOnOff = () => {
             </div>
         </div>
     </div>
-    <div class="text-center m-auto mt-2">
+    <div class="text-center m-auto mt-4">
         <button class="text-[#2A83B5]" @click="haddleRouteHome">
             <div class="flex">
                 <span class="mr-1">

@@ -86,6 +86,8 @@ const timing = () => {
 
   if(SET_INT.includes(isMin)){
     setMin = `0${isMin}`
+  }else{
+    setMin = isMin
   }
   // currentTiming.value = `${isHours}:${isMin}:${isSec}`;
   currentTiming.value = `${isHours}:${setMin}`;

@@ -5,14 +5,22 @@ import HeaderComponentsVue from "./components/HeaderComponents/HeaderComponents.
 </script>
 
 <template>
-  <div class="h-[350px] w-[640px] m-0 p-0">
-    <HeaderComponentsVue/>
-    <HeaderBlockComponentsVue class="rounded-lg translate-y-[-20px]"/>
-    <RouterView />
+  <div class=" m-0 p-0">
+    <div class="set-shadow  w-[660px] m-auto rounded-b-3xl">
+      <div class="h-[400px] w-[640px] m-auto ">
+        <HeaderComponentsVue/>
+        <HeaderBlockComponentsVue class="rounded-lg translate-y-[-20px]"/>
+        <RouterView />
+      </div>
+    </div>
   </div>
   
 </template>
 
 <style >
 @import  './styles.css';
+
+.set-shadow{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 </style>

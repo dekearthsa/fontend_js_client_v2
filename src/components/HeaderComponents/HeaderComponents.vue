@@ -77,12 +77,18 @@ const setDate = () => {
 
 const timing = () => {
   const date = new Date(); 
+  const SET_INT = [1,2,3,4,5,6,7,8,9]
   const isHours = date.getHours();
   const isMin = date.getMinutes();
-  const isSec = date.getSeconds();
+  let setMin;
+  // const isSec = date.getSeconds();
 
+
+  if(SET_INT.includes(isMin)){
+    setMin = `0${isMin}`
+  }
   // currentTiming.value = `${isHours}:${isMin}:${isSec}`;
-  currentTiming.value = `${isHours}:${isMin}`;
+  currentTiming.value = `${isHours}:${setMin}`;
 };
 
 </script>

@@ -1,0 +1,23 @@
+version: '3.7'
+
+volumes:
+  database:
+    external: true
+
+services:
+
+  frontend_client_mock_v2:
+    container_name:  frontend_client_mock_v2
+    restart: unless-stopped 
+    build:
+      context: "./"
+    ports:
+      - "5111:5111"
+    networks:
+      - net
+
+
+networks:
+  net:
+    external: true
+    driver: bridge

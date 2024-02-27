@@ -3,7 +3,7 @@
 import HumidLogoVue from "../components/icons/HumidLogo.vue"
 // import WellBreathLogoVue from "../components/icons/WellBreathLogo.vue"
 import SpotLogoVue from "../components/icons/SpotLogo.vue"
-import AlwayDryLogoVue from "@/components/icons/AlwayDryLogo.vue"
+import AlwayDryLogoADVue from "@/components/icons/AlwayDryLogoAD.vue"
 import { useRouter } from 'vue-router';
 import {useStore} from "vuex"
 import {onMounted} from 'vue'
@@ -41,7 +41,7 @@ const haddleBtnOnOff = () => {
     <div class="flex">
         <div class="w-[200px] h-[315px] ml-8">
             <div>
-                <AlwayDryLogoVue class="m-auto absolute translate-y-[-75px] translate-x-[45px]" />
+                <AlwayDryLogoADVue class="m-auto absolute translate-y-[-75px] translate-x-[55px]" />
             </div>
             <div class="card-c rounded-lg h-[315px]">
                 <div class="title-c text-center">

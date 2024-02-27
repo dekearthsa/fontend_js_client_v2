@@ -41,7 +41,7 @@ const haddleBtnOnOff = () => {
     <div class="flex">
         <div class="w-[200px] h-[315px] ml-8">
             <div>
-                <LightForLifeLogoVue class="m-auto absolute translate-y-[-75px] translate-x-[45px]" />
+                <LightForLifeLogoVue class="m-auto absolute translate-y-[-75px] translate-x-[55px]" />
             </div>
 
             <div class="card-c rounded-lg h-[315px]">

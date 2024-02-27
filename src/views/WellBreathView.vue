@@ -6,7 +6,7 @@ import HumidLogoVue from "../components/icons/HumidLogo.vue"
 import PMLogoVue from "../components/icons/PMLogo.vue"
 import TempLogoVue from "../components/icons/TempLogo.vue"
 import VOCsLogoVue from "../components/icons/VOCsLogo.vue"
-import WellBreathLogoVue from "../components/icons/WellBreathLogo.vue"
+import WellBreathLogoWBVue from "../components/icons/WellBreathLogoWB.vue"
 import NormalFaceIcon from "../components/icons/NormalFaceIcon.vue";
 
 // import { useRouter } from 'vue-router';
@@ -55,7 +55,7 @@ const haddleBtnOnOff = () => {
     <div class="flex">
         <div class="w-[200px] h-[315px] ml-8">
             <div>
-                <WellBreathLogoVue class="m-auto absolute translate-y-[-75px] translate-x-[45px]"/>
+                <WellBreathLogoWBVue class="m-auto absolute translate-y-[-75px] translate-x-[55px]"/>
             </div>
             <div class="card-c rounded-lg h-[315px]">
                 <div class="title-c text-center mt-3">

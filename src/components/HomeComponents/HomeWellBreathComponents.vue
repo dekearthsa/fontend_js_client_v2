@@ -3,7 +3,7 @@
   import WellBreathLogoVue from "../icons/WellBreathLogo.vue";
   import NormalFaceIcon from "../icons/NormalFaceIcon.vue";
   import { useRouter } from 'vue-router';
-  import {useStore} from "vuex"
+  import {useStore} from "vuex" 
 
 
   const router = useRouter();
@@ -46,7 +46,7 @@ const haddleBtnOnOff = () => {
     <div class="icon ">
       <WellBreathLogoVue class="m-auto"/>
     </div>
-    <div class="detail w-[180px] h-[220px] bg-white rounded-lg">
+    <div class="detail w-[240px] h-[290px] bg-white rounded-lg">
       <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center" @click="haddleWellBreath">
         <div class="text-[#00B0F0] font-bold translate-x-[5px]">WELL BREATHED</div>
         <div class="translate-x-[10px]">
@@ -55,9 +55,9 @@ const haddleBtnOnOff = () => {
           </svg>
         </div>
       </div>
-      <div class="status-c m-auto w-[170px] h-[65px] bg-[#F3F4F8] mt-2 rounded-lg"> 
+      <div class="status-c m-auto  w-[200px] h-[85px] bg-[#F3F4F8] mt-2 rounded-lg"> 
         <div class="flex">
-          <div class="ml-1 mt-1">
+          <div class="ml-5 mt-3">
             <button @click="haddleBtnOnOff" :class="store.state.wellBreathBtn">
               <div :class="store.state.wellBreathDiv">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.wellBreathSvg" class="w-6 h-6 m-auto translate-y-[3px]">
@@ -69,7 +69,7 @@ const haddleBtnOnOff = () => {
               ON/OFF
             </div>
           </div>
-          <div class="ml-4 mt-1">
+          <div class="ml-8 mt-3">
             <div class="font-bold text-[12px]">
               Status
             </div>
@@ -79,38 +79,36 @@ const haddleBtnOnOff = () => {
           </div>
         </div>
       </div>
-      <div class="data-c m-auto bg-[#F3F4F8] w-[170px] h-[45px] mt-2 rounded-lg">
+      <div class="data-c m-auto bg-[#F3F4F8] w-[200px] h-[65px] mt-2 rounded-lg">
         <div class="">
-          <div class="text-[10px] font-bold ml-1 mt-1">AQI</div>
+          <div class="text-[14px] font-bold ml-1 mt-1">AQI</div>
         </div>
         <div @click="haddleDebugIAQ">
 
           <div v-if="store.state.iaqParamState === 2" class="flex justify-center">
-            <div class="translate-y-[-5px] mr-2">
+            <div class="translate-y-[-3px] mr-5">
               <svg xmlns="http://www.w3.org/2000/svg" fill="#B8FAA0" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00C412" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
               </svg>
-              
             </div>
-            <div class="text-[#00C412] text-[12px] font-bold">
+            <div class="text-[#00C412] text-[14px] font-bold">
               Good
             </div>
           </div>
-
           <div v-if="store.state.iaqParamState === 1" class="flex justify-center">
-            <div class="translate-y-[-5px] mr-2">
+            <div class="translate-y-[-3px] mr-5">
               <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="#F4B8B7" viewBox="0 0 24 24" stroke-width="1.5" stroke="#CB2A28" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
               </svg> -->
               <NormalFaceIcon/>
             </div>
-            <div class="text-[#CDC100] text-[12px] font-bold">
+            <div class="text-[#CDC100] text-[14px] font-bold">
               Moderated
             </div>
           </div>
 
           <div  v-if="store.state.iaqParamState === 0" class="flex justify-center">
-            <div class="translate-y-[-5px] mr-2">
+            <div class="translate-y-[-3px] mr-5">
               <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="#F4B8B7" viewBox="0 0 24 24" stroke-width="1.5" stroke="#CB2A28" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
               </svg> -->
@@ -118,15 +116,15 @@ const haddleBtnOnOff = () => {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 16.318A4.486 4.486 0 0 0 12.016 15a4.486 4.486 0 0 0-3.198 1.318M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
             </svg>
             </div>
-            <div class="text-[#CB2A28] text-[12px] font-bold">
+            <div class="text-[#CB2A28] text-[14px] font-bold">
               Unhealthy
             </div>
           </div>
         </div>
       </div>
-      <div class="qta-c m-auto bg-[#F3F4F8] w-[170px] h-[45px] mt-2 rounded-lg">
-        <div class="text-[11px] font-bold mt-1 ml-1">Filter</div>
-        <div class="flex justify-around">
+      <div class="qta-c m-auto bg-[#F3F4F8] w-[200px] h-[65px] mt-2 rounded-lg">
+        <div class="text-[14px] font-bold mt-1 ml-1">Filter</div>
+        <div class="flex justify-around selection mt-2">
           <div>
             <FilterLogoVue class="translate-y-[-3px]"/>
           </div>

@@ -6,8 +6,8 @@ import HeaderComponentsVue from "./components/HeaderComponents/HeaderComponents.
 
 <template>
   <div class=" m-0 p-0">
-    <div class="set-shadow  w-[660px] m-auto rounded-b-3xl">
-      <div class="h-[400px] w-[640px] m-auto ">
+    <div class="">
+      <div class="h-[480px] w-[800px] m-auto ">
         <HeaderComponentsVue/>
         <HeaderBlockComponentsVue class="rounded-lg translate-y-[-20px]"/>
         <RouterView />

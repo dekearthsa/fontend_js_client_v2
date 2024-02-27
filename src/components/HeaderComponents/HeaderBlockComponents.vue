@@ -1,10 +1,33 @@
 <script setup>
+import { useRouter } from 'vue-router';
+import {useStore} from "vuex"
+
+
+const store = useStore();
+const router = useRouter();
+
+const haddleRouteHome = () => {
+    router.push("/")
+}
+
 
 </script>
 
 <template>
-  <div class="block-container text-center m-auto w-[570px] h-[60px] bg-white">
-     
+  <div class="block-container text-center m-auto w-[700px] h-[60px] bg-white">
+    <div class="flex justify-end translate-y-[17px] mr-5" v-if="!store.state.selectionHomePage">
+      <button class="flex" @click="haddleRouteHome" >
+        <div class="mr-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#2C82B3" class="w-5 h-5">
+            <path
+                d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
+            <path
+                d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
+          </svg>
+        </div>
+        <div class="text-[#2C82B3]">Home</div>
+      </button>
+    </div>
   </div>
 </template>
 

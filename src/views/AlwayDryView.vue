@@ -1,21 +1,24 @@
 <script setup>
-import FanLogoVue from "../components/icons/FanLogo.vue"
+// import FanLogoVue from "../components/icons/FanLogo.vue"
 import HumidLogoVue from "../components/icons/HumidLogo.vue"
-import WellBreathLogoVue from "../components/icons/WellBreathLogo.vue"
+// import WellBreathLogoVue from "../components/icons/WellBreathLogo.vue"
 import SpotLogoVue from "../components/icons/SpotLogo.vue"
 import AlwayDryLogoVue from "@/components/icons/AlwayDryLogo.vue"
-
-
 import { useRouter } from 'vue-router';
 import {useStore} from "vuex"
+import {onMounted} from 'vue'
 
 
 const router = useRouter();
 const store = useStore();
 
-const haddleRouteHome = () => {
-    router.push("/")
-}
+// const haddleRouteHome = () => {
+//     router.push("/")
+// }
+
+onMounted(() => {
+  store.state.selectionHomePage = false
+});
 
 
 const haddleBtnOnOff = () => {
@@ -36,54 +39,53 @@ const haddleBtnOnOff = () => {
 
 <template>
     <div class="flex">
-        <div class="w-[180px] h-[200px] ml-8">
+        <div class="w-[200px] h-[315px] ml-8">
             <div>
                 <AlwayDryLogoVue class="m-auto absolute translate-y-[-75px] translate-x-[45px]" />
             </div>
-
-            <div class="card-c rounded-lg h-[215px]">
+            <div class="card-c rounded-lg h-[315px]">
                 <div class="title-c text-center">
-                    <div class="text-[#ED7D31] font-bold">ALWAY DRY</div>
+                    <div class="text-[#ED7D31] font-bold translate-y-[25px]">ALWAY DRY</div>
                 </div>
-                <div class="status-c m-auto w-[170px] h-[65px] bg-[#F3F4F8] mt-2 rounded-lg">
+                <div class="status-c m-auto w-[180px] h-[85px] bg-[#F3F4F8] mt-10 rounded-lg">
                     <div class="flex">
-                        <div class="ml-1 mt-1">
+                        <div class="ml-4 mt-3">
                             <button @click="haddleBtnOnOff" :class="store.state.alwayDryBtn">
                                 <div :class="store.state.alwayDryDiv">
-                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.alwayDrySvg" class="w-6 h-6 m-auto translate-y-[3px]">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
-                                  </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.alwayDrySvg" class="w-6 h-6 m-auto translate-y-[3px]">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
+                                    </svg>
                                 </div>
-                              </button>
-                            <div class="text-[10px] font-bold">
+                            </button>
+                            <div class="text-[13px] font-bold">
                                 ON/OFF
                             </div>
                         </div>
-                        <div class="ml-4 mt-1">
-                            <div class="font-bold text-[12px]">
+                        <div class="ml-6 mt-3">
+                            <div class="font-bold text-[14px]">
                                 Status
                             </div>
                             <div
-                                class="border-2 border-[#36A090] w-[50px] text-[10px] font-bold text-center rounded-md text-[#36A090]">
+                                class="border-2 border-[#36A090] w-[56px] text-[14px] font-bold text-center rounded-md text-[#36A090]">
                                 Normal
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="data-c m-auto bg-[#F3F4F8] w-[170px] h-[45px] mt-2 rounded-lg">
+                <div class="data-c m-auto bg-[#F3F4F8] w-[180px] h-[65px] mt-2 rounded-lg">
                     <div class="set-timing font-bold flex justify-around">
-                        <div class="mt-1 text-[#36A090]">
+                        <div class="mt-3 text-[#36A090]">
                             <div class="translate-x-[3px]">15</div>
-                            <div class="translate-y-[-5px] text-[10px]">Mins</div>
+                            <div class="translate-y-[-5px] text-[14px]">Mins</div>
                         </div>
-                        <div class="text-[10px] mt-3 translate-y-[4px]">
+                        <div class="text-[14px] mt-4 translate-y-[4px]">
                             Time Remaining
                         </div>
                     </div>
                 </div>
-                <div class="qta-c m-auto bg-[#F3F4F8] w-[170px] h-[45px] mt-2 rounded-lg">
-                    <div class="text-[11px] font-bold mt-1 ml-1">Sensor</div>
-                    <div class="flex justify-around">
+                <div class="qta-c m-auto bg-[#F3F4F8] w-[180px] h-[65px] mt-2 rounded-lg">
+                    <div class="text-[14px] font-bold mt-1 ml-1">Sensor</div>
+                    <div class="flex justify-around mt-2">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                                 <path fill-rule="evenodd"
@@ -107,11 +109,11 @@ const haddleBtnOnOff = () => {
             </div>
         </div>
         <div>
-            <div class="detail-c w-[374px] h-[215px] rounded-lg ml-5">
+            <div class="detail-c w-[510px] h-[315px] rounded-lg ml-5">
                 <div class="h-[10px]"></div>
-                <div class="bg-[#F3F4F8] w-[361px] h-[75px] m-auto rounded-md">
-                    <div class="text-[#2A83B5] text-[14px] font-bold ml-2">Mode</div>
-                    <div class="flex justify-evenly">
+                <div class="bg-[#F3F4F8] w-[500px] h-[100px] m-auto rounded-md">
+                    <div class="text-[#2A83B5] text-[18px] font-bold ml-2">Mode</div>
+                    <div class="flex justify-evenly mt-3">
                         <div>
                             <div class="flex">
                                 <div>
@@ -126,7 +128,7 @@ const haddleBtnOnOff = () => {
                                     </button>
                                 </div>
                                 <div>
-                                    <div class="text-[10px] text-[#36A090] pl-2 pr-2 ml-3 rounded-md border-[2px] border-[#36A090] translate-y-[10px]">Normal</div>
+                                    <div class="text-[14px] text-[#36A090] pl-2 pr-2 ml-3 rounded-md border-[2px] border-[#36A090] translate-y-[10px]">Normal</div>
                                 </div>
                             </div>
                         </div>
@@ -144,50 +146,50 @@ const haddleBtnOnOff = () => {
                         </div>
                     </div>
                 </div>
-                <div class="w-[361px] h-[105px] bg-[#F3F4F8] mt-3 m-auto rounded-md">
-                    <div class="text-[#2A83B5] text-[14px] font-bold ml-2">System</div>
-                    <div class="grid grid-cols-3 mt-2 ml-2">
+                <div class="w-[500px] h-[185px] bg-[#F3F4F8] mt-3 m-auto rounded-md">
+                    <div class="text-[#2A83B5] text-[18px] font-bold ml-2">System</div>
+                    <div class="grid grid-cols-3 mt-10 ml-2">
                         <div>
-                            <div class="text-[12px]">circulation Fan</div>
-                            <div class="flex mt-1">
+                            <div class="text-[14px] ml-5">circulation Fan</div>
+                            <div class="flex mt-1 ml-5">
                                 <div class="mr-1 mt-1">
-                                    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg fill="#000000" width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.48154C7.29535 3.48154 3.48148 7.29541 3.48148 12.0001C3.48148 16.7047 7.29535 20.5186 12 20.5186C16.7046 20.5186 20.5185 16.7047 20.5185 12.0001C20.5185 7.29541 16.7046 3.48154 12 3.48154ZM2 12.0001C2 6.47721 6.47715 2.00006 12 2.00006C17.5228 2.00006 22 6.47721 22 12.0001C22 17.5229 17.5228 22.0001 12 22.0001C6.47715 22.0001 2 17.5229 2 12.0001Z"/>
                                         <path d="M12 11.3C11.8616 11.3 11.7262 11.3411 11.6111 11.418C11.496 11.4949 11.4063 11.6042 11.3533 11.7321C11.3003 11.86 11.2864 12.0008 11.3134 12.1366C11.3405 12.2724 11.4071 12.3971 11.505 12.495C11.6029 12.5929 11.7277 12.6596 11.8634 12.6866C11.9992 12.7136 12.14 12.6997 12.2679 12.6467C12.3958 12.5937 12.5051 12.504 12.582 12.3889C12.6589 12.2738 12.7 12.1385 12.7 12C12.7 11.8144 12.6262 11.6363 12.495 11.505C12.3637 11.3738 12.1857 11.3 12 11.3ZM12.35 5.00002C15.5 5.00002 15.57 7.49902 13.911 8.32502C13.6028 8.50778 13.3403 8.75856 13.1438 9.05822C12.9473 9.35787 12.8218 9.69847 12.777 10.054C13.1117 10.1929 13.4073 10.4116 13.638 10.691C16.2 9.29102 19 9.84401 19 12.35C19 15.5 16.494 15.57 15.675 13.911C15.4869 13.6029 15.232 13.341 14.9291 13.1448C14.6262 12.9485 14.283 12.8228 13.925 12.777C13.7844 13.1108 13.566 13.406 13.288 13.638C14.688 16.221 14.128 19 11.622 19C8.5 19 8.423 16.494 10.082 15.668C10.3852 15.4828 10.644 15.2332 10.84 14.9368C11.036 14.6404 11.1644 14.3046 11.216 13.953C10.8729 13.8188 10.5711 13.5967 10.341 13.309C7.758 14.695 5 14.149 5 11.65C5 8.50002 7.478 8.42302 8.304 10.082C8.48945 10.3888 8.74199 10.6496 9.04265 10.8448C9.34332 11.0399 9.68431 11.1645 10.04 11.209C10.1748 10.8721 10.3971 10.5772 10.684 10.355C9.291 7.80001 9.844 5.00002 12.336 5.00002H12.35Z"/>
                                     </svg>
                                 </div>
                                 <div class="flex border-2 border-[#66B6AB] pl-3 pr-3 text-[#66B6AB] rounded-md">
-                                    <div class="translate-y-[1px] mr-1"><SpotLogoVue/></div>
-                                    <div class="translate-y-[2px] font-bold text-[10px]">ON</div>
+                                    <div class="translate-y-[5px] mr-1"><SpotLogoVue/></div>
+                                    <div class="translate-y-[4px] font-bold text-[13px]">ON</div>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <div class="text-[12px]">circulation Fan</div>
-                            <div class="flex mt-1">
+                            <div class="text-[14px]  ml-5">circulation Fan</div>
+                            <div class="flex mt-1  ml-5">
                                 <div class="mr-1 mt-1">
-                                    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg fill="#000000" width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.48154C7.29535 3.48154 3.48148 7.29541 3.48148 12.0001C3.48148 16.7047 7.29535 20.5186 12 20.5186C16.7046 20.5186 20.5185 16.7047 20.5185 12.0001C20.5185 7.29541 16.7046 3.48154 12 3.48154ZM2 12.0001C2 6.47721 6.47715 2.00006 12 2.00006C17.5228 2.00006 22 6.47721 22 12.0001C22 17.5229 17.5228 22.0001 12 22.0001C6.47715 22.0001 2 17.5229 2 12.0001Z"/>
                                         <path d="M12 11.3C11.8616 11.3 11.7262 11.3411 11.6111 11.418C11.496 11.4949 11.4063 11.6042 11.3533 11.7321C11.3003 11.86 11.2864 12.0008 11.3134 12.1366C11.3405 12.2724 11.4071 12.3971 11.505 12.495C11.6029 12.5929 11.7277 12.6596 11.8634 12.6866C11.9992 12.7136 12.14 12.6997 12.2679 12.6467C12.3958 12.5937 12.5051 12.504 12.582 12.3889C12.6589 12.2738 12.7 12.1385 12.7 12C12.7 11.8144 12.6262 11.6363 12.495 11.505C12.3637 11.3738 12.1857 11.3 12 11.3ZM12.35 5.00002C15.5 5.00002 15.57 7.49902 13.911 8.32502C13.6028 8.50778 13.3403 8.75856 13.1438 9.05822C12.9473 9.35787 12.8218 9.69847 12.777 10.054C13.1117 10.1929 13.4073 10.4116 13.638 10.691C16.2 9.29102 19 9.84401 19 12.35C19 15.5 16.494 15.57 15.675 13.911C15.4869 13.6029 15.232 13.341 14.9291 13.1448C14.6262 12.9485 14.283 12.8228 13.925 12.777C13.7844 13.1108 13.566 13.406 13.288 13.638C14.688 16.221 14.128 19 11.622 19C8.5 19 8.423 16.494 10.082 15.668C10.3852 15.4828 10.644 15.2332 10.84 14.9368C11.036 14.6404 11.1644 14.3046 11.216 13.953C10.8729 13.8188 10.5711 13.5967 10.341 13.309C7.758 14.695 5 14.149 5 11.65C5 8.50002 7.478 8.42302 8.304 10.082C8.48945 10.3888 8.74199 10.6496 9.04265 10.8448C9.34332 11.0399 9.68431 11.1645 10.04 11.209C10.1748 10.8721 10.3971 10.5772 10.684 10.355C9.291 7.80001 9.844 5.00002 12.336 5.00002H12.35Z"/>
                                     </svg>
                                 </div>
                                 <div class="flex border-2 border-[#66B6AB] pl-3 pr-3 text-[#66B6AB] rounded-md">
-                                    <div class="translate-y-[1px] mr-1"><SpotLogoVue/></div>
-                                    <div class="translate-y-[2px] font-bold text-[10px]">ON</div>
+                                    <div class="translate-y-[5px] mr-1"><SpotLogoVue/></div>
+                                    <div class="translate-y-[4px] font-bold text-[13px]">ON</div>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <div class="text-[12px]">Sensor</div>
-                            <div class="flex mt-1">
+                            <div class="text-[14px]  ml-5">Sensor</div>
+                            <div class="flex mt-1  ml-5">
                                 <div class="mr-1 mt-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
                                         <path fill-rule="evenodd" d="M5.636 4.575a.75.75 0 0 1 0 1.061 9 9 0 0 0 0 12.728.75.75 0 1 1-1.06 1.06c-4.101-4.1-4.101-10.748 0-14.849a.75.75 0 0 1 1.06 0Zm12.728 0a.75.75 0 0 1 1.06 0c4.101 4.1 4.101 10.75 0 14.85a.75.75 0 1 1-1.06-1.061 9 9 0 0 0 0-12.728.75.75 0 0 1 0-1.06ZM7.757 6.697a.75.75 0 0 1 0 1.06 6 6 0 0 0 0 8.486.75.75 0 0 1-1.06 1.06 7.5 7.5 0 0 1 0-10.606.75.75 0 0 1 1.06 0Zm8.486 0a.75.75 0 0 1 1.06 0 7.5 7.5 0 0 1 0 10.606.75.75 0 0 1-1.06-1.06 6 6 0 0 0 0-8.486.75.75 0 0 1 0-1.06ZM9.879 8.818a.75.75 0 0 1 0 1.06 3 3 0 0 0 0 4.243.75.75 0 1 1-1.061 1.061 4.5 4.5 0 0 1 0-6.364.75.75 0 0 1 1.06 0Zm4.242 0a.75.75 0 0 1 1.061 0 4.5 4.5 0 0 1 0 6.364.75.75 0 0 1-1.06-1.06 3 3 0 0 0 0-4.243.75.75 0 0 1 0-1.061ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <div class="flex border-2 border-[#66B6AB] pl-3 pr-3 text-[#66B6AB] rounded-md">
-                                    <div class="translate-y-[1px] mr-1"><SpotLogoVue/></div>
-                                    <div class="translate-y-[2px] font-bold text-[10px]">ON</div>
+                                <div class="flex border-2 border-[#66B6AB] h-[33px] pl-3 pr-3 text-[#66B6AB] rounded-md">
+                                    <div class="translate-y-[5px] mr-1"><SpotLogoVue/></div>
+                                    <div class="translate-y-[3px] font-bold text-[13px]">ON</div>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +198,7 @@ const haddleBtnOnOff = () => {
             </div>
         </div>
     </div>
-    <div class="text-center m-auto mt-4">
+    <!-- <div class="text-center m-auto mt-4">
         <button class="text-[#2A83B5]" @click="haddleRouteHome">
             <div class="flex">
                 <span class="mr-1">
@@ -210,7 +212,7 @@ const haddleBtnOnOff = () => {
                 <span>HOME</span>
             </div>
         </button>
-    </div>
+    </div> -->
 </template>
 
 <style scoped>

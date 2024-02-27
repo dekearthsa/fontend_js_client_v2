@@ -17,5 +17,7 @@ export default createStore({
         lightForLifeDiv: "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#D29500]",
         lightForLifeSvg: "#D29500",
         lightForLifeState: true,
+
+        selectionHomePage: true 
     }
 })

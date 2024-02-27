@@ -9,15 +9,20 @@ import VOCsLogoVue from "../components/icons/VOCsLogo.vue"
 import WellBreathLogoVue from "../components/icons/WellBreathLogo.vue"
 import NormalFaceIcon from "../components/icons/NormalFaceIcon.vue";
 
-import { useRouter } from 'vue-router';
-import {useStore} from "vuex";
+// import { useRouter } from 'vue-router';
+import {useStore} from "vuex"
+import {onMounted} from 'vue'
 
 const store = useStore();
-const router = useRouter();
+// const router = useRouter();
 
-const haddleRouteHome = () => {
-    router.push("/")
-}
+// const haddleRouteHome = () => {
+//     router.push("/")
+// }
+
+onMounted(() => {
+    store.state.selectionHomePage = false
+})
 
 const haddleBtnOnOff = () => {
     if(store.state.wellBreathState){
@@ -48,18 +53,17 @@ const haddleBtnOnOff = () => {
 
 <template>
     <div class="flex">
-        <div class="w-[180px] h-[200px] ml-8">
+        <div class="w-[200px] h-[315px] ml-8">
             <div>
                 <WellBreathLogoVue class="m-auto absolute translate-y-[-75px] translate-x-[45px]"/>
             </div>
-
-            <div class="card-c rounded-lg h-[215px]">
-                <div class="title-c text-center">
-                    <div class="text-[#00B0F0] font-bold">WELL BREATHED</div>
+            <div class="card-c rounded-lg h-[315px]">
+                <div class="title-c text-center mt-3">
+                    <div class="text-[#00B0F0] font-bold translate-y-[25px]">WELL BREATHED</div>
                 </div>
-                <div class="status-c bg-[#F3F4F8] rounded-lg w-[170px] h-[65px] mt-2 m-auto">
+                <div class="status-c bg-[#F3F4F8] rounded-lg w-[180px] h-[85px] mt-10 m-auto">
                     <div class="flex">
-                        <div class="ml-1 mt-1">
+                        <div class="ml-4 mt-3">
                             <button @click="haddleBtnOnOff" :class="store.state.wellBreathBtn">
                                 <div :class="store.state.wellBreathDiv">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -69,24 +73,24 @@ const haddleBtnOnOff = () => {
                                     </svg>
                                 </div>
                             </button>
-                            <div class="text-[10px] font-bold">
+                            <div class="text-[13px] font-bold">
                                 ON/OFF
                             </div>
                         </div>
-                        <div class="ml-4 mt-1">
-                            <div class="font-bold text-[12px]">
+                        <div class="ml-6 mt-3">
+                            <div class="font-bold text-[14px]">
                                 Status
                             </div>
                             <div
-                                class="border-2 border-[#36A090] w-[50px] text-[10px] font-bold text-center rounded-md text-[#36A090]">
+                                class="border-2 border-[#36A090] w-[56px] text-[14px] font-bold text-center rounded-md text-[#36A090]">
                                 Normal
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="aqi-c bg-[#F3F4F8] rounded-lg w-[170px] h-[45px] mt-2 m-auto">
+                <div class="aqi-c bg-[#F3F4F8] rounded-lg w-[180px] h-[65px] mt-2 m-auto">
                     <div class="">
-                        <div class="text-[10px] font-bold ml-1 mt-1">AQI</div>
+                        <div class="text-[14px] font-bold ml-1 mt-1">AQI</div>
                     </div>
                     <div @click="haddleDebugIAQ">
 
@@ -129,8 +133,8 @@ const haddleBtnOnOff = () => {
                         </div>
                       </div>
                 </div>
-                <div class="battery-c bg-[#F3F4F8] rounded-lg w-[170px] h-[47px] mt-2 m-auto">
-                    <div class="text-[11px] font-bold mt-1 ml-1">Filter</div>
+                <div class="battery-c bg-[#F3F4F8] rounded-lg w-[180px] h-[67px] mt-2 m-auto">
+                    <div class="text-[14px] font-bold mt-1 ml-1">Filter</div>
                     <div class="flex justify-around">
                         <div>
                             <FilterLogoVue class="translate-y-[-3px]" />
@@ -151,12 +155,12 @@ const haddleBtnOnOff = () => {
             </div>
         </div>
         <div>
-            <div class="detail-c w-[374px] h-[215px] rounded-lg ml-5">
+            <div class="detail-c w-[510px] h-[315px] rounded-lg ml-5 mt-3">
                 <div class="h-[10px]"></div>
-                <div class="bg-[#F3F4F8] w-[361px] h-[140px] m-auto rounded-md">
+                <div class="bg-[#F3F4F8] w-[500px] h-[200px] m-auto rounded-md">
                     <div class="title-detail text-[#2A83B5] font-bold ml-2 text-[14px]">IAQ</div>
                     <div class="text-[14px]">
-                        <div class="grid grid-cols-3 ml-3">
+                        <div class="grid grid-cols-3 ml-3 mt-3">
                             <div>
                                 <div class="">Temperature</div>
                                 <div class="flex">
@@ -186,7 +190,7 @@ const haddleBtnOnOff = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-3 ml-3">
+                        <div class="grid grid-cols-3 ml-3 mt-8">
                             <div>
                                 <div class="">VOCs</div>
                                 <div class="flex">
@@ -208,14 +212,14 @@ const haddleBtnOnOff = () => {
 
                     </div>
                 </div>
-                <div class="w-[361px] h-[55px] bg-[#F3F4F8] mt-1 m-auto rounded-md">
+                <div class="w-[500px] h-[95px] bg-[#F3F4F8] mt-1 m-auto rounded-md">
                     <div class="title-detail text-[#2A83B5] font-bold ml-2 text-[14px]">System</div>
-                    <div class="flex justify-around text-[14px]">
-                        <div class="translate-y-[5px]">
-                            <button class="btn-c rounded-full w-[20px] h-[20px] bg-[#C5F0FF]">
-                                <div class="rounded-full m-auto  w-[20px] h-[20px] border-2 border-[#00B0F0]">
+                    <div class="flex justify-around text-[14px] mt-5">
+                        <div class="">
+                            <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]">
+                                <div class="rounded-full m-auto  w-[40px] h-[40px] border-2 border-[#00B0F0]">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="#00B0F0" class="w-3 h-3 m-auto translate-y-[3px]">
+                                        stroke="#00B0F0" class="w-7 h-7 m-auto translate-y-[3px]">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                                     </svg>
@@ -265,7 +269,7 @@ const haddleBtnOnOff = () => {
             </div>
         </div>
     </div>
-    <div class="text-center m-auto mt-4">
+    <!-- <div class="text-center m-auto mt-4">
         <button class="text-[#2A83B5]" @click="haddleRouteHome">
             <div class="flex">
                 <span class="mr-1">
@@ -277,7 +281,7 @@ const haddleBtnOnOff = () => {
                 <span>HOME</span>
             </div>
         </button>
-    </div>
+    </div> -->
 </template>
 
 <style scoped>

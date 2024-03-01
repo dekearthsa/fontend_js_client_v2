@@ -34,7 +34,7 @@ const haddleBtnOnOff = () => {
   <div class="">
     <div class="icon ">
       <!-- <LightForLifeLogoVue class="m-auto"/> -->
-      <img src="@/assets/LLLogo.png" class="m-auto w-[40%] h-[90px]"/>
+      <img src="@/assets/LLLogo.png" class="m-auto w-[40%] h-[90px] translate-y-[6px]"/>
     </div>
     <div class="detail w-[240px] h-[290px] bg-white rounded-lg">
       <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center" @click="haddleRouteLightForLife">
@@ -55,15 +55,15 @@ const haddleBtnOnOff = () => {
                 </svg>
               </div>
             </button>
-            <div class="text-[10px] font-bold">
+            <div class="text-[14px] font-bold">
               ON/OFF
             </div>
           </div>
           <div class="ml-8 mt-3">
-            <div class="font-bold text-[12px]">
+            <div class="font-bold text-[14px]">
               Status
             </div>
-            <div class="border-2 border-[#36A090] w-[50px] text-[10px] font-bold text-center rounded-md text-[#36A090]">
+            <div class="border-2 border-[#36A090] w-[70px] text-[14px] font-bold text-center rounded-md text-[#36A090]">
               Normal
             </div>
           </div>

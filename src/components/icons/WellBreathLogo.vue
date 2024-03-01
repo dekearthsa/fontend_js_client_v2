@@ -1,5 +1,5 @@
 <template>
-    <svg width="90" height="90" viewBox="0 0 79 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <svg width="100" height="100" viewBox="0 0 79 75" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <g filter="url(#filter0_d_88_330)">
         <rect x="1" width="75" height="70.9732" fill="url(#pattern0)" shape-rendering="crispEdges"/>
         </g>

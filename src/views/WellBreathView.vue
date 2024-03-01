@@ -55,7 +55,7 @@ const haddleBtnOnOff = () => {
     <div class="flex">
         <div class="w-[200px] h-[315px] ml-8">
             <div>
-                <WellBreathLogoWBVue class="m-auto absolute translate-y-[-75px] translate-x-[55px]"/>
+                <WellBreathLogoWBVue class="m-auto absolute translate-y-[-70px] translate-x-[55px]"/>
             </div>
             <div class="card-c rounded-lg h-[315px]">
                 <div class="title-c text-center mt-3">
@@ -167,7 +167,7 @@ const haddleBtnOnOff = () => {
                                     <div>
                                         <TempLogoVue/>
                                     </div>
-                                    <div class="text-[14px] translate-y-[10px]">
+                                    <div class="text-[14px] translate-y-[10px] ml-1">
                                         <span class="font-bold ">25.0</span>
                                         <span style='font-size:15px;'>&#8451;</span>
                                     </div>
@@ -177,16 +177,16 @@ const haddleBtnOnOff = () => {
                                 <div class="">PM2.5</div>
                                 <div class="flex">
                                     <span><PMLogoVue/></span>
-                                    <span class="font-bold text-[14px] translate-y-[10px]">115.0</span>
-                                    <span class="text-[14px] translate-y-[10px]">µg/m3</span>
+                                    <span class="font-bold text-[14px] translate-y-[10px] ml-1">115.0</span>
+                                    <span class="text-[14px] translate-y-[10px] ml-2">µg/m3</span>
                                 </div>
                             </div>
                             <div>
                                 <div class="">CO2</div>
                                 <div class="flex">
                                     <span><CarbonLogoVue/></span>
-                                    <span class="font-bold text-[14px] translate-y-[10px]">115</span>
-                                    <span class="text-[14px] translate-y-[10px]">ppm</span>
+                                    <span class="font-bold text-[14px] translate-y-[10px] ml-1">115</span>
+                                    <span class="text-[14px] translate-y-[10px] ml-2">ppm</span>
                                 </div>
                             </div>
                         </div>
@@ -195,7 +195,7 @@ const haddleBtnOnOff = () => {
                                 <div class="">VOCs</div>
                                 <div class="flex">
                                     <span><VOCsLogoVue/></span>
-                                    <span class="font-bold text-[14px] translate-y-[10px]">90</span>
+                                    <span class="font-bold text-[14px] translate-y-[10px] ml-1">90</span>
                                     <span class="text-[14px] translate-y-[10px]">ppm</span>
                                 </div>
                             </div>

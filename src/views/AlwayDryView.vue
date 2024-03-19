@@ -18,6 +18,7 @@ const store = useStore();
 
 onMounted(() => {
   store.state.selectionHomePage = false
+  store.state.pageNow = "ALWAYS DRY"
 });
 
 
@@ -112,15 +113,15 @@ const haddleBtnOnOff = () => {
             <div class="detail-c w-[510px] h-[315px] rounded-lg ml-5">
                 <div class="h-[10px]"></div>
                 <div class="bg-[#F3F4F8] w-[500px] h-[100px] m-auto rounded-md">
-                    <div class="text-[#2A83B5] text-[18px] font-bold ml-2">Mode</div>
+                    <div class="text-[#2A83B5] text-[18px] font-bold ml-2">Manual mode</div>
                     <div class="flex justify-evenly mt-3">
                         <div>
                             <div class="flex">
                                 <div>
-                                    <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]">
-                                        <div class="rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#00B0F0]">
+                                    <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]">
+                                        <div class="rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="#00B0F0" class="w-6 h-6 m-auto translate-y-[3px]">
+                                                stroke-width="1.5" stroke="#ED7D31" class="w-6 h-6 m-auto translate-y-[3px]">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                                             </svg>
@@ -128,11 +129,28 @@ const haddleBtnOnOff = () => {
                                     </button>
                                 </div>
                                 <div>
-                                    <div class="text-[14px] text-[#36A090] pl-2 pr-2 ml-3 rounded-md border-[2px] border-[#36A090] translate-y-[10px]">Normal</div>
+                                    <div class="text-[14px] text-[#36A090] pl-2 pr-2 ml-3 rounded-md border-[2px] border-[#36A090] translate-y-[6px]">Dry fan</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="border-l-2 border-blue-300 translate-y-[-20px]"></div>
+                        <div class="border-l-2 border-blue-300 h-[70px] translate-y-[-20px]"></div>
+                        <div class="flex">
+                            <div>
+                                <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]">
+                                    <div class="rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="#ED7D31" class="w-6 h-6 m-auto translate-y-[3px]">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                            <div>
+                                <div class="text-[14px] text-[#36A090] pl-2 pr-2 ml-3 rounded-md border-[2px] border-[#36A090] translate-y-[6px]">Exhaust fan</div>
+                            </div>
+                        </div>
+                        <div class="border-l-2 border-blue-300 h-[70px] translate-y-[-20px]"></div>
                         <div class="translate-y-[-15px]">
                             <div class="text-[14px]">Humidity</div>
                             <div class="flex translate-x-[-10px]">
@@ -150,7 +168,7 @@ const haddleBtnOnOff = () => {
                     <div class="text-[#2A83B5] text-[18px] font-bold ml-2">System</div>
                     <div class="grid grid-cols-3 mt-10 ml-2">
                         <div>
-                            <div class="text-[14px] ml-5">circulation Fan</div>
+                            <div class="text-[14px] ml-5">Exhaust fan</div>
                             <div class="flex mt-1 ml-5">
                                 <div class="">
                                     <svg fill="#000000" width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -165,7 +183,7 @@ const haddleBtnOnOff = () => {
                             </div>
                         </div>
                         <div>
-                            <div class="text-[14px]  ml-5">circulation Fan</div>
+                            <div class="text-[14px]  ml-5">Dry Fan</div>
                             <div class="flex mt-1  ml-5">
                                 <div class="">
                                     <svg fill="#000000" width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

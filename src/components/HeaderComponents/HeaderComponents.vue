@@ -4,9 +4,10 @@ const currentDate = ref("n/a");
 const currentTiming = ref("n/a");
 
 import { useRouter } from 'vue-router';
+import {useStore} from "vuex"
 
 const router = useRouter();
-
+const store = useStore();
 const haddleRouteHome = () => {
     router.push("/")
 }
@@ -98,10 +99,15 @@ const timing = () => {
 <template>
   <div class="header-home h-[74px] rounded-b-3xl">
     <div class="flex justify-between">
-      <div @click="haddleRouteHome" class="text-white mt-5 ml-5 font-bold">MY ROOM</div>
-      <div class="text-white mt-1 mr-5 font-bold">
+      <div @click="haddleRouteHome" class="text-white mt-3 ml-5 font-bold text-[24px] flex">
+        <div>MY ROOM</div>
+        <div class="border-l-[3px] ml-3 border-white" v-if="store.state.pageNow!== ''"></div>
+        <div class="ml-3" v-if="store.state.pageNow!== ''">{{ store.state.pageNow }}</div>
+      </div>
+      <div></div>
+      <div class="text-white mt-1 mr-5 font-bold text-[16px]">
         <div class="">{{currentDate}}</div>
-        <div class="text-end">{{currentTiming}}</div>
+        <div class="text-end ">{{currentTiming}}</div>
       </div>
     </div>
   </div>

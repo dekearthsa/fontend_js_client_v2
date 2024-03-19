@@ -18,6 +18,7 @@ export default createStore({
         lightForLifeSvg: "#D29500",
         lightForLifeState: true,
 
-        selectionHomePage: true 
+        selectionHomePage: true,
+        pageNow: "",
     }
 })

@@ -10,6 +10,7 @@ const store = useStore();
 
 onMounted(() => {
   store.state.selectionHomePage = true
+  store.state.pageNow = ""
 });
 
 </script>

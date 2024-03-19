@@ -17,6 +17,7 @@ const router = useRouter();
 
 onMounted(() => {
     store.state.selectionHomePage = false
+    store.state.pageNow = "LIGHT FOR LIFE"
 });
 
 const haddleBtnOnOff = () => {

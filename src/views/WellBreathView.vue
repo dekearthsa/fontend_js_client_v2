@@ -8,20 +8,89 @@ import TempLogoVue from "../components/icons/TempLogo.vue"
 import VOCsLogoVue from "../components/icons/VOCsLogo.vue"
 import WellBreathLogoWBVue from "../components/icons/WellBreathLogoWB.vue"
 import NormalFaceIcon from "../components/icons/NormalFaceIcon.vue";
-
-// import { useRouter } from 'vue-router';
 import {useStore} from "vuex"
 import {onMounted} from 'vue'
+import {ref} from "vue"
 
 const store = useStore();
-// const router = useRouter();
+const selectPageWB = ref(1);
+const menuPage = ref('IAQ');
+const cssBtnWBParam = ref('bg-zinc-400 w-[15px] h-[15px] rounded-full');
+const cssBtnWBController = ref('bg-zinc-300 w-[15px] h-[15px] rounded-full');
+const cssControllerChange = ref('bg-[#F3F4F8] w-[500px] h-[180px] m-auto rounded-md');
+const cssStatusExhaustFan = ref('text-red-600')
+const cssLowSpeedFan = ref('text-red-600')
+const cssHighSpeedFan = ref('text-red-600')
 
-// const haddleRouteHome = () => {
-//     router.push("/")
-// }
+const cssCardExhaustFan = ref('border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status')
+const cssCardSupplyFanLow = ref('border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status');
+const cssCardSupplyFanHigh =  ref('border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status')
+
+const haddleExhaustStatus = ref('off');
+const haddleSupplyStatusLow = ref('off');
+const haddleSupplyStatusHigh = ref('off');
+
+const haddleSelectPage = (evt) => {
+    if(evt === 1){
+        selectPageWB.value = 1;
+        menuPage.value = 'IAQ'
+        cssBtnWBParam.value = "bg-zinc-400 w-[15px] h-[15px] rounded-full";
+        cssBtnWBController.value = "bg-zinc-300 w-[15px] h-[15px] rounded-full";
+        cssControllerChange.value = 'bg-[#F3F4F8] w-[500px] h-[180px] m-auto rounded-md';
+    }else{
+        selectPageWB.value = 2;
+        menuPage.value = 'Manual Control panel'
+        cssBtnWBParam.value = "bg-zinc-300 w-[15px] h-[15px] rounded-full";
+        cssBtnWBController.value = "bg-zinc-400 w-[15px] h-[15px] rounded-full";
+        cssControllerChange.value = 'bg-[#F3F4F8] w-[500px] h-[270px] m-auto rounded-md'
+    }
+}
+
+const haddleExhasutFan = () => {
+    if(haddleExhaustStatus.value === 'off'){
+        haddleExhaustStatus.value = 'on'
+        cssCardExhaustFan.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-on-status'
+        cssStatusExhaustFan.value = 'text-[#00B0F0]'
+    }else{  
+        haddleExhaustStatus.value = 'off'
+        cssCardExhaustFan.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status'
+        cssStatusExhaustFan.value = 'text-red-600'
+    }
+}
+
+const haddleSupplyFan = (evt) => {
+    if(evt === 'low'){
+        if(haddleSupplyStatusLow.value === 'off'){
+            haddleSupplyStatusLow.value = 'on';
+            cssLowSpeedFan.value = 'text-[#00B0F0]'
+            haddleSupplyStatusHigh.value = 'off'
+            cssHighSpeedFan.value = 'text-red-600'
+            cssCardSupplyFanLow.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-on-status';
+            cssCardSupplyFanHigh.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status'
+        }else{
+            haddleSupplyStatusLow.value = 'off';
+            cssLowSpeedFan.value = 'text-red-600'
+            cssCardSupplyFanLow.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status';
+        }
+    }else{
+        if(haddleSupplyStatusHigh.value === 'off'){
+            haddleSupplyStatusLow.value = 'off';
+            cssLowSpeedFan.value = 'text-red-600'
+            haddleSupplyStatusHigh.value = 'on'
+            cssHighSpeedFan.value = 'text-[#00B0F0]'
+            cssCardSupplyFanLow.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status';
+            cssCardSupplyFanHigh.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-on-status';
+        }else{
+            haddleSupplyStatusHigh.value = 'off';
+            cssHighSpeedFan.value = 'text-red-600'
+            cssCardSupplyFanHigh.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status';
+        }
+    }
+}
 
 onMounted(() => {
     store.state.selectionHomePage = false
+    store.state.pageNow = "WELL BREATHED"
 })
 
 const haddleBtnOnOff = () => {
@@ -157,9 +226,61 @@ const haddleBtnOnOff = () => {
         <div>
             <div class="detail-c w-[510px] h-[315px] rounded-lg ml-5 mt-3">
                 <div class="h-[10px]"></div>
-                <div class="bg-[#F3F4F8] w-[500px] h-[200px] m-auto rounded-md">
-                    <div class="title-detail text-[#2A83B5] font-bold ml-2 text-[14px]">IAQ</div>
-                    <div class="text-[14px]">
+                <div :class="cssControllerChange">
+                    <div class="flex justify-between title-detail text-[#2A83B5] font-bold ml-2 text-[18px]">
+                        <div>{{menuPage}}</div>
+                        <div class="mr-3">{{selectPageWB}}/2</div>
+                    </div>
+
+                    <div  v-if="menuPage === 'Manual Control panel'">
+                        <div class="grid grid-cols-3 mt-5">
+                            <div :class="cssCardExhaustFan">
+                                <div class="text-center">Exhaust Fan</div>
+                                <div>
+                                    <img class="m-auto" src="../assets/exhaust_fan.png" width="100px" height="100px"/>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex justify-around">
+                                        <div class="text-green-700">Status</div>
+                                        <div :class="cssStatusExhaustFan">{{haddleExhaustStatus}}</div>
+                                    </div>
+                                    <div class="mt-3 text-center">
+                                        <button class="border-[1px] w-[90%] bg-[#00B0F0] text-white font-bold rounded-lg" @click="haddleExhasutFan">ON</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div :class="cssCardSupplyFanLow">
+                                <div class="text-center">Supply Fan low</div>
+                                <div>
+                                    <img class="m-auto" src="../assets/supply_fan-modified.png" width="80px" height="80px"/>
+                                </div>
+                                <div class="text-center">Low Speed</div>
+                                <div class="flex justify-around">
+                                    <div class="text-green-700">Status</div>
+                                    <div :class="cssLowSpeedFan">{{haddleSupplyStatusLow}}</div>
+                                </div>
+                                <div class="mt-3 text-center">
+                                    <button class="border-[1px] w-[90%] bg-[#00B0F0] text-white font-bold rounded-lg" @click="haddleSupplyFan('low')">ON</button>
+                                </div>
+                            </div>
+                            <div :class="cssCardSupplyFanHigh">
+                                <div class="text-center">Supply Fan High</div>
+                                <div>
+                                    <img class="m-auto" src="../assets/supply_fan-modified.png" width="80px" height="80px"/>
+                                </div>
+                                <div class="text-center">High Speed</div>
+                                <div class="flex justify-around">
+                                    <div class="text-green-700">Status</div>
+                                    <div :class="cssHighSpeedFan">{{haddleSupplyStatusHigh}}</div>
+                                </div>
+                                <div class="mt-3 text-center">
+                                    <button class="border-[1px] w-[90%] bg-[#00B0F0] text-white font-bold rounded-lg"  @click="haddleSupplyFan('high')">ON</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-[14px]" v-if="menuPage === 'IAQ'">
                         <div class="grid grid-cols-3 ml-3 mt-3">
                             <div>
                                 <div class="">Temperature</div>
@@ -190,7 +311,7 @@ const haddleBtnOnOff = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-3 ml-3 mt-8">
+                        <div class="grid grid-cols-3 ml-3 mt-4">
                             <div>
                                 <div class="">VOCs</div>
                                 <div class="flex">
@@ -211,26 +332,28 @@ const haddleBtnOnOff = () => {
                     <div>
 
                     </div>
-                </div>
-                <div class="w-[500px] h-[95px] bg-[#F3F4F8] mt-1 m-auto rounded-md">
-                    <div class="title-detail text-[#2A83B5] font-bold ml-2 text-[14px]">System</div>
-                    <div class="flex justify-around text-[14px] mt-5">
-                        <div class="">
-                            <button class="btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]">
-                                <div class="rounded-full m-auto  w-[40px] h-[40px] border-2 border-[#00B0F0]">
+                </div>  <!-- IAQ -->
+
+                
+                <div class="w-[500px] h-[85px] bg-[#F3F4F8] mt-1 m-auto rounded-md" v-if="menuPage === 'IAQ'">
+                    <div class="title-detail text-[#2A83B5] font-bold ml-2 text-[18px]">System</div>
+                    <div class="flex justify-around text-[14px] mt-3">
+                        <div class="translate-y-[-5px] translate-x-[20px]">
+                            <button class="btn-c rounded-full w-[30px] h-[30px] bg-[#C5F0FF]">
+                                <div class="rounded-full m-auto  w-[30px] h-[30px] border-2 border-[#00B0F0]">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="#00B0F0" class="w-7 h-7 m-auto translate-y-[3px]">
+                                        stroke="#00B0F0" class="w-5 h-5 m-auto translate-y-[3px]">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                                     </svg>
                                 </div>
                             </button>
                         </div>
-                        <div class="translate-y-[-10px]">
+                        <div class="translate-y-[-15px] translate-x-[-20px]">
                             <div>Mode</div>
-                            <div class="border-[2px] border-[#699BF7] pl-1 pr-1 rounded-md text-[#699BF7] font-bold text-[10px]">Night Mode</div>
+                            <div class="border-[2px] border-[#699BF7] pl-1 pr-1 rounded-md text-[#699BF7] font-bold text-[13px]">Night Mode</div>
                         </div>
-                        <div class="translate-y-[-10px]">
+                        <div class="translate-y-[-15px]">
                             <div>Supply Fan</div>
                             <div class="flex">
                                 <div class="mr-2">
@@ -247,7 +370,7 @@ const haddleBtnOnOff = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="translate-y-[-10px]">
+                        <div class="translate-y-[-15px]">
                             <div>Exhaust Fan</div>
                             <div class="flex">
                                 <div class="mr-2">
@@ -264,6 +387,14 @@ const haddleBtnOnOff = () => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div> <!-- System -->
+                <div class="flex justify-center mt-2">
+                    <div class="mr-1">
+                        <button :class="cssBtnWBParam" @click="haddleSelectPage(1)"></button>
+                    </div>
+                    <div class="ml-1">
+                        <button :class="cssBtnWBController" @click="haddleSelectPage(2)"></button>
                     </div>
                 </div>
             </div>
@@ -291,5 +422,15 @@ const haddleBtnOnOff = () => {
 
 .detail-c{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.set-off-status{
+    background: rgb(250,250,250);
+    background: linear-gradient(45deg, rgba(250,250,250,1) 57%, rgba(247,34,34,1) 100%);
+}
+
+.set-on-status{
+    background: rgb(250,250,250);
+    background: linear-gradient(45deg, rgba(250,250,250,1) 57%, rgba(34,202,247,1) 100%);
 }
 </style>

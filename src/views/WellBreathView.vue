@@ -18,20 +18,16 @@ const menuPage = ref('IAQ');
 const cssBtnWBParam = ref('bg-zinc-400 w-[15px] h-[15px] rounded-full');
 const cssBtnWBController = ref('bg-zinc-300 w-[15px] h-[15px] rounded-full');
 const cssControllerChange = ref('bg-[#F3F4F8] w-[500px] h-[180px] m-auto rounded-md');
-const cssStatusExhaustFan = ref('text-red-600')
-const csssStatusSpplyFan = ref('text-red-800 font-bold')
-// const cssLowSpeedFan = ref('text-red-600')
-// const cssHighSpeedFan = ref('text-red-600')
+const cssStatusExhaustFan = ref('text-red-600');
+const csssStatusSpplyFan = ref('text-red-800 font-bold');
 
-const cssCardExhaustFan = ref('border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status')
-const cssCardSupplyFan = ref('border-[1px] border-zinc-400 rounded-md set-off-status')
-// const cssCardSupplyFanLow = ref('border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status');
-// const cssCardSupplyFanHigh =  ref('border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status')
+const cssBtnSupplyHigh = ref('bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn');
+const cssBtnSupplyLow = ref('bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn');
+const cssBtnOff = ref('bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn');
 
 const haddleExhaustStatus = ref('off');
-const haddleSupplyFan = ref('off')
-// const haddleSupplyStatusLow = ref('off');
-// const haddleSupplyStatusHigh = ref('off');
+const haddleSupplyFan = ref('off');
+const btnExhaustFan = ref('On');
 
 const haddleSelectPage = (evt) => {
     if(evt === 1){
@@ -52,11 +48,11 @@ const haddleSelectPage = (evt) => {
 const haddleExhasutFan = () => {
     if(haddleExhaustStatus.value === 'off'){
         haddleExhaustStatus.value = 'on'
-        cssCardExhaustFan.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-on-status'
-        cssStatusExhaustFan.value = 'text-[#00B0F0]'
+        btnExhaustFan.value = 'Off'
+        cssStatusExhaustFan.value = 'text-[#2A83B5]'
     }else{  
         haddleExhaustStatus.value = 'off'
-        cssCardExhaustFan.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status'
+        btnExhaustFan.value = 'On'
         cssStatusExhaustFan.value = 'text-red-600'
     }
 }
@@ -64,16 +60,22 @@ const haddleExhasutFan = () => {
 const haddleSupplyFans = (evt) => {
     if(evt === 'off'){
         csssStatusSpplyFan.value = 'text-red-800 font-bold'
-        cssCardSupplyFan.value = 'border-[1px] border-zinc-400 rounded-md set-off-status'
         haddleSupplyFan.value = 'off'
+        cssBtnOff.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
+        cssBtnSupplyLow.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
+        cssBtnSupplyHigh.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
     }else if(evt === 'low'){
-        csssStatusSpplyFan.value = 'text-blue-800 font-bold'
-        cssCardSupplyFan.value = 'border-[1px] border-zinc-400 rounded-md set-on-status'
+        csssStatusSpplyFan.value = 'text-[#2A83B5] font-bold'
         haddleSupplyFan.value = 'low speed'
+        cssBtnOff.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
+        cssBtnSupplyLow.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
+        cssBtnSupplyHigh.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
     }else if(evt === 'high'){
-        csssStatusSpplyFan.value = 'text-blue-800 font-bold'
-        cssCardSupplyFan.value = 'border-[1px] border-zinc-400 rounded-md set-on-status'
+        csssStatusSpplyFan.value = 'text-[#2A83B5] font-bold'
         haddleSupplyFan.value = 'high speed'
+        cssBtnOff.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
+        cssBtnSupplyLow.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
+        cssBtnSupplyHigh.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
     }
 }
 
@@ -274,10 +276,10 @@ const haddleBtnOnOff = () => {
 
                     <div  v-if="menuPage === 'Manual Control panel'">
                         <div class="set-manual-con mt-5">
-                            <div :class="cssCardExhaustFan">
+                            <div class="border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px]">
                                 <div class="text-center">Exhaust Fan</div>
                                 <div>
-                                    <img class="m-auto" src="../assets/exhaust_fan.png" width="100px" height="100px"/>
+                                    <img class="m-auto" src="../assets/ex_fan.png" width="100px" height="100px"/>
                                 </div>
                                 <div class="mt-4">
                                     <div class="flex justify-around">
@@ -285,15 +287,15 @@ const haddleBtnOnOff = () => {
                                         <div :class="cssStatusExhaustFan">{{haddleExhaustStatus}}</div>
                                     </div>
                                     <div class="mt-3 text-center">
-                                        <button class="border-[1px] w-[90%] bg-[#00B0F0] text-white font-bold rounded-l selection-non-btn" @click="haddleExhasutFan">ON</button>
+                                        <button class="border-[1px] w-[90%] bg-[#00B0F0] text-white font-bold rounded-md selection-non-btn" @click="haddleExhasutFan">{{btnExhaustFan}}</button>
                                     </div>
                                 </div>
                             </div>
-                            <div :class="cssCardSupplyFan">
+                            <div class="border-[1px] border-zinc-400 rounded-md">
                                 <div class="text-center">Supply Fan</div>
                                 <div class="grid grid-cols-2">
                                     <div>
-                                        <img class="mt-4 ml-4" src="../assets/supply_fan-modified.png" width="100" height="100"/>
+                                        <img class="mt-4 ml-4 translate-y-3" src="../assets/sp_fan.png" width="110" height="110"/>
                                     </div>
                                     <div>
                                         <div class="mt-3 flex justify-around">
@@ -301,13 +303,13 @@ const haddleBtnOnOff = () => {
                                             <div :class="csssStatusSpplyFan">{{haddleSupplyFan}}</div>
                                         </div>
                                         <div class="mt-5 text-center">
-                                            <button class="bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn" @click="haddleSupplyFans('low')">Low speed</button>
+                                            <button :class="cssBtnSupplyLow" @click="haddleSupplyFans('low')">Low speed</button>
                                         </div>
                                         <div class="mt-5 text-center">
-                                            <button class="bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn"  @click="haddleSupplyFans('high')">High speed</button>
+                                            <button :class="cssBtnSupplyHigh"  @click="haddleSupplyFans('high')">High speed</button>
                                         </div>
                                         <div class="mt-5 text-center">
-                                            <button class="bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn"  @click="haddleSupplyFans('off')">Off</button>
+                                            <button :class="cssBtnOff"  @click="haddleSupplyFans('off')">Off</button>
                                         </div>
                                     </div>
                                 </div>
@@ -487,15 +489,6 @@ const haddleBtnOnOff = () => {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.set-off-status{
-    background: rgb(250,250,250);
-    background: linear-gradient(45deg, rgba(250,250,250,1) 57%, rgba(247,34,34,1) 100%);
-}
-
-.set-on-status{
-    background: rgb(250,250,250);
-    background: linear-gradient(45deg, rgba(250,250,250,1) 57%, rgba(34,202,247,1) 100%);
-}
 
 .selection-speed-fan{
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;

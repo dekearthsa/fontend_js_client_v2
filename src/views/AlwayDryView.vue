@@ -150,7 +150,7 @@ const haddleBtnOnOff = () => {
                                 <div class="text-[14px] text-[#36A090] pl-2 pr-2 ml-3 rounded-md border-[2px] border-[#36A090] translate-y-[6px]">Exhaust fan</div>
                             </div>
                         </div>
-                        <div class="border-l-2 border-blue-300 h-[70px] translate-y-[-20px]"></div>
+                        <!-- <div class="border-l-2 border-blue-300 h-[70px] translate-y-[-20px]"></div>
                         <div class="translate-y-[-15px]">
                             <div class="text-[14px]">Humidity</div>
                             <div class="flex translate-x-[-10px]">
@@ -161,7 +161,7 @@ const haddleBtnOnOff = () => {
                                     60%
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="w-[500px] h-[185px] bg-[#F3F4F8] mt-3 m-auto rounded-md">

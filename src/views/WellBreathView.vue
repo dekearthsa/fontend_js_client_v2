@@ -15,8 +15,8 @@ import {ref} from "vue"
 const store = useStore();
 const selectPageWB = ref(1);
 const menuPage = ref('IAQ');
-const cssBtnWBParam = ref('bg-zinc-400 w-[15px] h-[15px] rounded-full');
-const cssBtnWBController = ref('bg-zinc-300 w-[15px] h-[15px] rounded-full');
+const cssBtnWBParam = ref('bg-zinc-400 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg');
+const cssBtnWBController = ref('bg-zinc-300 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg');
 const cssControllerChange = ref('bg-[#F3F4F8] w-[500px] h-[180px] m-auto rounded-md');
 const cssStatusExhaustFan = ref('text-red-600');
 const csssStatusSpplyFan = ref('text-red-800 font-bold');
@@ -35,14 +35,14 @@ const haddleSelectPage = (evt) => {
     if(evt === 1){
         selectPageWB.value = 1;
         menuPage.value = 'IAQ'
-        cssBtnWBParam.value = "bg-zinc-400 w-[15px] h-[15px] rounded-full";
-        cssBtnWBController.value = "bg-zinc-300 w-[15px] h-[15px] rounded-full";
+        cssBtnWBParam.value = "bg-zinc-400 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg";
+        cssBtnWBController.value = "bg-zinc-300 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg";
         cssControllerChange.value = 'bg-[#F3F4F8] w-[500px] h-[180px] m-auto rounded-md';
     }else{
         selectPageWB.value = 2;
         menuPage.value = 'Control panel'
-        cssBtnWBParam.value = "bg-zinc-300 w-[15px] h-[15px] rounded-full";
-        cssBtnWBController.value = "bg-zinc-400 w-[15px] h-[15px] rounded-full";
+        cssBtnWBParam.value = "bg-zinc-300 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg";
+        cssBtnWBController.value = "bg-zinc-400 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg";
         cssControllerChange.value = 'bg-[#F3F4F8] w-[500px] h-[270px] m-auto rounded-md'
     }
 }
@@ -183,14 +183,16 @@ const haddleBtnOnOff = () => {
                 <div class="status-c bg-[#F3F4F8] rounded-lg w-[180px] h-[85px] mt-10 m-auto">
                     <div class="flex">
                         <div class="ml-4 mt-3">
-                            <button @click="haddleBtnOnOff" :class="store.state.wellBreathBtn">
-                                <div :class="store.state.wellBreathDiv">
+                            <button @click="haddleBtnOnOff" >
+                                <!-- <div :class="store.state.wellBreathDiv">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     :stroke="store.state.wellBreathSvg" class="w-6 h-6 m-auto translate-y-[3px]">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                                     </svg>
-                                </div>
+                                </div> -->
+                                <img v-if="store.state.wellBreathState" src="@/assets/btn_on_wb.png" width="38" height="38"/>
+                                <img v-if="!store.state.wellBreathState" src="@/assets/btn_off.png" width="38" height="38"/>
                             </button>
                             <div class="text-[13px] setbold">
                                 ON/OFF
@@ -285,7 +287,7 @@ const haddleBtnOnOff = () => {
                     <div class="mt-[30px]" v-if="menuPage === 'Control panel'">
                         <div class="set-manual-con mt-5">
                             <div class="border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px]">
-                                <div class="text-center">Exhaust Fan</div>
+                                <div class="text-center translate-y-[5px]">Exhaust Fan</div>
                                 <div class="translate-y-[24px]">
                                     <img class="m-auto" src="../assets/ex_fan.png" width="110" height="110"/>
                                 </div>
@@ -303,7 +305,7 @@ const haddleBtnOnOff = () => {
                                 </div>
                             </div>
                             <div class="border-[1px] border-zinc-400 rounded-md">
-                                <div class="text-center">Supply Fan</div>
+                                <div class="text-center translate-y-[5px]">Supply Fan</div>
                                 <div class="grid grid-cols-2">
                                     <div>
                                         <img class="mt-4 ml-4 translate-y-3" src="../assets/sp_fan.png" width="110" height="110"/>
@@ -441,12 +443,12 @@ const haddleBtnOnOff = () => {
                         </div>
                     </div>
                 </div> <!-- System -->
-                <div class="flex justify-center mt-2">
+                <div class="flex justify-center mt-2 translate-y-[-3px]">
                     <div class="mr-1">
-                        <button :class="cssBtnWBParam" @click="haddleSelectPage(1)"></button>
+                        <button :class="cssBtnWBParam" @click="haddleSelectPage(1)">IAQ</button>
                     </div>
                     <div class="ml-1">
-                        <button :class="cssBtnWBController" @click="haddleSelectPage(2)"></button>
+                        <button :class="cssBtnWBController" @click="haddleSelectPage(2)">Control panel</button>
                     </div>
                 </div>
             </div>

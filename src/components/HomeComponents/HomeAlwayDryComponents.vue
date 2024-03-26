@@ -1,10 +1,13 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import {useStore} from "vuex"
-import AlwayDryLogoVue from '../icons/AlwayDryLogo.vue';
+// import AlwayDryLogoVue from '../icons/AlwayDryLogo.vue';
+import {ref} from "vue"
+
 
 const router = useRouter();
 const store = useStore();
+const percentBattery = ref(100);
 
 const haddleRouteAlwayDry = () => {
   router.push("/alwaydry")
@@ -71,26 +74,30 @@ const haddleBtnOnOff = () => {
             <div class="translate-x-[3px] text-[16px]">15</div>
             <div class="translate-y-[-5px] text-[14px]">Mins</div>
           </div>
-          <div class="text-[14px] mt-5 translate-y-[2px]">
-            Time Remaining
+          <div class="text-[12px] mt-3 translate-y-[2px] translate-x-[-5px]">
+            <div>Time</div>
+            <div>Remaining</div>
           </div>
         </div>
       </div>
       <div class="qta-c m-auto bg-[#F3F4F8] w-[200px] h-[65px] mt-2 rounded-lg">
         <div class="text-[14px] font-bold mt-3 ml-1">Sensor</div>
         <div class="flex justify-around mt-2  ">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <div class="translate-y-[-5px]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
               <path fill-rule="evenodd" d="M5.636 4.575a.75.75 0 0 1 0 1.061 9 9 0 0 0 0 12.728.75.75 0 1 1-1.06 1.06c-4.101-4.1-4.101-10.748 0-14.849a.75.75 0 0 1 1.06 0Zm12.728 0a.75.75 0 0 1 1.06 0c4.101 4.1 4.101 10.75 0 14.85a.75.75 0 1 1-1.06-1.061 9 9 0 0 0 0-12.728.75.75 0 0 1 0-1.06ZM7.757 6.697a.75.75 0 0 1 0 1.06 6 6 0 0 0 0 8.486.75.75 0 0 1-1.06 1.06 7.5 7.5 0 0 1 0-10.606.75.75 0 0 1 1.06 0Zm8.486 0a.75.75 0 0 1 1.06 0 7.5 7.5 0 0 1 0 10.606.75.75 0 0 1-1.06-1.06 6 6 0 0 0 0-8.486.75.75 0 0 1 0-1.06ZM9.879 8.818a.75.75 0 0 1 0 1.06 3 3 0 0 0 0 4.243.75.75 0 1 1-1.061 1.061 4.5 4.5 0 0 1 0-6.364.75.75 0 0 1 1.06 0Zm4.242 0a.75.75 0 0 1 1.061 0 4.5 4.5 0 0 1 0 6.364.75.75 0 0 1-1.06-1.06 3 3 0 0 0 0-4.243.75.75 0 0 1 0-1.061ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
             </svg>
           </div>
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#CB2A28" class="w-6 h-6 translate-y-[-2px]">
-              <path fill-rule="evenodd" d="M.75 9.75a3 3 0 0 1 3-3h15a3 3 0 0 1 3 3v.038c.856.173 1.5.93 1.5 1.837v2.25c0 .907-.644 1.664-1.5 1.838v.037a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3v-6Zm19.5 0a1.5 1.5 0 0 0-1.5-1.5h-15a1.5 1.5 0 0 0-1.5 1.5v6a1.5 1.5 0 0 0 1.5 1.5h15a1.5 1.5 0 0 0 1.5-1.5v-6Z" clip-rule="evenodd" />
-            </svg>
-          </div>
-          <div class="text-[#CB2A28] text-[14px] font-bold">
-            30%
+          <div class="flex translate-x-[8px] ">
+            <div>
+                <img v-if="percentBattery > 60" class="" src="@/assets/bat_max.png" width="35" height="35"/>
+                <img v-if="percentBattery <= 60 && percentBattery > 50" class="translate-y-[3px]" src="@/assets/bat_max_low.png" width="35" height="35"/>
+                <img v-if="percentBattery <= 50 && percentBattery > 30" class="translate-y-[3px]" src="@/assets/bat_low.png" width="35" height="35"/>
+                <img v-if="percentBattery <= 30 && percentBattery >= 0" class="translate-y-[3px]" src="@/assets/bat_empty.png" width="35" height="35"/>
+            </div>
+            <div class="text-[#008E29] ml-2 translate-y-[-3px] text-[14px] font-bold">
+                100%
+            </div>
           </div>
         </div>
       </div>

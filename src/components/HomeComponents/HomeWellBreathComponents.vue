@@ -62,11 +62,15 @@ const haddleBtnOnOff = () => {
       <div class="status-c m-auto  w-[200px] h-[85px] bg-[#F3F4F8] mt-2 rounded-lg"> 
         <div class="flex">
           <div class="ml-5 mt-3">
-            <button @click="haddleBtnOnOff" :class="store.state.wellBreathBtn">
-              <div :class="store.state.wellBreathDiv">
+            <button @click="haddleBtnOnOff">
+              <!-- <div :class="store.state.wellBreathDiv">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.wellBreathSvg" class="w-6 h-6 m-auto translate-y-[3px]">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                 </svg>
+              </div> -->
+              <div class="translate-x-[3px]" >
+                <img v-if="store.state.wellBreathState" src="@/assets/btn_on_wb.png" width="38" height="38"/>
+                <img v-if="!store.state.wellBreathState" src="@/assets/btn_off.png" width="38" height="38"/>
               </div>
             </button>
             <div class="text-[14px] font-bold">
@@ -142,7 +146,7 @@ const haddleBtnOnOff = () => {
             <div class="text-[#008E29] ml-2 translate-y-[-1px] text-[14px] font-bold">
                 100%
             </div>
-        </div>
+          </div>
         </div>
       </div>
     </div>

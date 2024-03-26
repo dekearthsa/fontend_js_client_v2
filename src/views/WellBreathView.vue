@@ -277,12 +277,12 @@ const haddleBtnOnOff = () => {
             <div class="detail-c w-[510px] h-[315px] rounded-lg ml-5 mt-3">
                 <div class="h-[10px]"></div>
                 <div :class="cssControllerChange">
-                    <div class="flex justify-between title-detail text-[#2A83B5] setbold ml-2 text-[14px]">
+                    <div class="flex justify-between title-detail text-[#2A83B5] setbold ml-2 text-[14px] translate-y-[13px]">
                         <div>{{menuPage}}</div>
                         <div class="mr-3">{{selectPageWB}}/2</div>
                     </div>
 
-                    <div  v-if="menuPage === 'Control panel'">
+                    <div class="mt-[30px]" v-if="menuPage === 'Control panel'">
                         <div class="set-manual-con mt-5">
                             <div class="border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px]">
                                 <div class="text-center">Exhaust Fan</div>
@@ -336,7 +336,7 @@ const haddleBtnOnOff = () => {
                     </div>
 
                     <div class="text-[14px]" v-if="menuPage === 'IAQ'">
-                        <div class="grid grid-cols-3 ml-3 mt-3">
+                        <div class="grid grid-cols-3 ml-3 mt-6">
                             <div>
                                 <div class="">Temperature</div>
                                 <div class="flex">
@@ -366,7 +366,7 @@ const haddleBtnOnOff = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-3 ml-3 mt-4">
+                        <div class="grid grid-cols-3 ml-3 mt-3">
                             <div>
                                 <div class="">VOCs</div>
                                 <div class="flex">

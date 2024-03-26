@@ -1,9 +1,18 @@
 @font-face {
     font-family: 'CustomFont';
-    src: url('./assets/SCG_OTF/SCG-Reg.otf') format('opentype');
+    src: url('./assets/SCG_OTF/SCG-Bol.otf') format('opentype');
   }
+
+@font-face {
+  font-family: 'scgFontReg';
+  src: url('./assets/SCG_OTF/SCG-Reg.otf');
+}
   
   /* Optionally, apply the font to specific elements */
-  body {
+  .setbold {
     font-family: 'CustomFont', sans-serif;
+  }
+
+  .setreg {
+    font-family: 'scgFontReg', sans-serif;
   }

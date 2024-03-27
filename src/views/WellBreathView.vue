@@ -371,12 +371,12 @@ const haddleBtnOnOff = () => {
                         <div class="translate-y-[-8px] translate-x-[-20px]">
                             <div>Mode</div>
                             
-                            <div class="flex border-[2px] border-[#699BF7] pl-8 pr-3 pt-1 pb-1 rounded-md">
+                            <div class="flex border-[2px] border-[#699BF7] pl-3 pr-3 pt-1 pb-1 rounded-md">
                                 
-                                <div class="absolute translate-x-[-30px] translate-y-[-3px]">
+                                <!-- <div class="absolute translate-x-[-30px] translate-y-[-3px]">
                                     <img src="@/assets/Night_mode.png" width="35" height="35" />
-                                </div>
-                                <div class=" text-[#699BF7] font-bold text-[13px]">Night Mode</div>
+                                </div> -->
+                                <div class=" text-[#699BF7] font-bold text-[13px]">Fresh Mode</div>
                             </div>
                             
                         </div>

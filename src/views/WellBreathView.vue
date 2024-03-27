@@ -23,12 +23,57 @@ const csssStatusSpplyFan = ref('text-red-800 font-bold');
 const cssBtnSupplyHigh = ref('bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn');
 const cssBtnSupplyLow = ref('bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn');
 const cssBtnOff = ref('bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn');
-
-const haddleExhaustStatus = ref('off');
-const haddleSupplyFan = ref('off');
-const btnExhaustFan = ref('On');
-
+const cssBtnForceExhaustFan = ref("flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md");
+const cssBtnForceDryFan = ref("flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md");
+const haddleSupplyFan = ref('OFF');
 const percentBattery = ref(100);
+
+
+const haddleForceExhaust = () => {
+    if(store.state.haddleBtnExhaustStatus === "OFF"){
+        store.state.haddleBtnExhaustStatus = "ON";
+        cssBtnForceExhaustFan.value = "flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md";
+    }else{
+        store.state.haddleBtnExhaustStatus = "OFF";
+        cssBtnForceExhaustFan.value = "flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md";
+    }
+}
+
+const haddleSupplyFans = (evt) => {
+    // console.log(evt)
+    if(evt === 'OFF'){
+        if(store.state.cssBtnSpplyFanStatus === 'OFF'){
+            alert("Select low speed or high speed to trun on spply fan.")
+        }else{
+            csssStatusSpplyFan.value = 'text-[#777777] font-bold'
+            haddleSupplyFan.value = 'OFF'
+            store.state.cssBtnSpplyFanStatus = 'OFF'
+            cssBtnForceDryFan.value = 'flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md'
+            cssBtnOff.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
+            cssBtnSupplyLow.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
+            cssBtnSupplyHigh.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
+        }
+
+    }else if(evt === 'low'){
+        csssStatusSpplyFan.value = 'text-[#2A83B5] font-bold'
+        haddleSupplyFan.value = 'low speed'
+        store.state.cssBtnSpplyFanStatus = 'ON'
+        cssBtnForceDryFan.value = 'flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md'
+        cssBtnOff.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
+        cssBtnSupplyLow.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
+        cssBtnSupplyHigh.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
+    }else if(evt === 'high'){
+        csssStatusSpplyFan.value = 'text-[#2A83B5] font-bold'
+        haddleSupplyFan.value = 'high speed'
+        store.state.cssBtnSpplyFanStatus = 'ON'
+        cssBtnForceDryFan.value = 'flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md'
+        cssBtnOff.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
+        cssBtnSupplyLow.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
+        cssBtnSupplyHigh.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
+    }
+}
+
+
 
 const haddleSelectPage = (evt) => {
     if(evt === 1){
@@ -48,27 +93,7 @@ const haddleSelectPage = (evt) => {
 
 
 
-const haddleSupplyFans = (evt) => {
-    if(evt === 'off'){
-        csssStatusSpplyFan.value = 'text-red-800 font-bold'
-        haddleSupplyFan.value = 'off'
-        cssBtnOff.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
-        cssBtnSupplyLow.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-        cssBtnSupplyHigh.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-    }else if(evt === 'low'){
-        csssStatusSpplyFan.value = 'text-[#2A83B5] font-bold'
-        haddleSupplyFan.value = 'low speed'
-        cssBtnOff.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-        cssBtnSupplyLow.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
-        cssBtnSupplyHigh.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-    }else if(evt === 'high'){
-        csssStatusSpplyFan.value = 'text-[#2A83B5] font-bold'
-        haddleSupplyFan.value = 'high speed'
-        cssBtnOff.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-        cssBtnSupplyLow.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-        cssBtnSupplyHigh.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
-    }
-}
+
 
 
 
@@ -235,10 +260,15 @@ const haddleBtnOnOff = () => {
                                     <div class="mt-3 text-center flex justify-center">
                                         <div class="w-[45%]">
                                             <div>
-                                                <div class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
-                                                    <div class="mr-1"><SpotLogoVue/></div>
-                                                    <div class="translate-y-[2px] font-bold text-[10px]">ON</div>
-                                                </div>
+                                                <button :class="cssBtnForceExhaustFan" @click="haddleForceExhaust">
+                                                    <div class="mr-1">
+                                                        <img v-if="store.state.haddleBtnExhaustStatus === 'OFF'" src="@/assets/spot_off.png" height="15" width="15" />
+                                                        <img v-if="store.state.haddleBtnExhaustStatus === 'ON'" src="@/assets/spot_on.png" height="15" width="15"/>
+                                                    </div>
+                                                    <div class="font-bold text-[10px]">
+                                                        {{store.state.haddleBtnExhaustStatus}}
+                                                    </div>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -264,10 +294,13 @@ const haddleBtnOnOff = () => {
                                         <div class="mt-[2.6rem] text-center flex justify-center">
                                             <div class="w-[45%]">
                                                 <div>
-                                                    <div class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
-                                                        <div class="mr-1"><SpotLogoVue/></div>
-                                                        <div class="translate-y-[2px] font-bold text-[10px]">ON</div>
-                                                    </div>
+                                                    <button :class="cssBtnForceDryFan" @click="haddleSupplyFans('OFF')">
+                                                        <div class="mr-1" >
+                                                            <img v-if="store.state.cssBtnSpplyFanStatus === 'OFF'" src="@/assets/spot_off.png" height="15" width="15" />
+                                                            <img v-if="store.state.cssBtnSpplyFanStatus === 'ON'" src="@/assets/spot_on.png" height="15" width="15"/>
+                                                        </div>
+                                                        <div class="font-bold text-[10px]">{{store.state.cssBtnSpplyFanStatus}}</div>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -357,9 +390,17 @@ const haddleBtnOnOff = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <div class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
-                                        <div class="mr-1"><SpotLogoVue/></div>
-                                        <div class="translate-y-[2px] font-bold text-[10px]">ON</div>
+                                    <div  v-if="store.state.cssBtnSpplyFanStatus === 'OFF'" class="flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md">
+                                        <div class="mr-1">
+                                            <img src="@/assets/spot_off.png" height="20" width="20" />
+                                        </div>
+                                        <div class="translate-y-[2px] font-bold text-[10px]">{{store.state.cssBtnSpplyFanStatus}}</div>
+                                    </div>
+                                    <div  v-if="store.state.cssBtnSpplyFanStatus === 'ON'" class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
+                                        <div class="mr-1">
+                                            <img src="@/assets/spot_on.png" height="20" width="20"/>
+                                        </div>
+                                        <div class="translate-y-[2px] font-bold text-[10px]">{{store.state.cssBtnSpplyFanStatus}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -374,9 +415,17 @@ const haddleBtnOnOff = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <div class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
-                                        <div class="mr-1"><SpotLogoVue/></div>
-                                        <div class="translate-y-[2px] font-bold text-[10px]">ON</div>
+                                    <div  v-if="store.state.haddleBtnExhaustStatus === 'OFF'" class="flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md">
+                                        <div class="mr-1">
+                                            <img src="@/assets/spot_off.png" height="20" width="20" />
+                                        </div>
+                                        <div class="translate-y-[2px] font-bold text-[10px]">{{store.state.haddleBtnExhaustStatus}}</div>
+                                    </div>
+                                    <div  v-if="store.state.haddleBtnExhaustStatus === 'ON'" class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
+                                        <div class="mr-1">
+                                            <img src="@/assets/spot_on.png" height="20" width="20"/>
+                                        </div>
+                                        <div class="translate-y-[2px] font-bold text-[10px]">{{store.state.haddleBtnExhaustStatus}}</div>
                                     </div>
                                 </div>
                             </div>

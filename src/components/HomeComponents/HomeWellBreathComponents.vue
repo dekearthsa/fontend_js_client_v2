@@ -73,7 +73,7 @@ const haddleBtnOnOff = () => {
                 <img v-if="!store.state.wellBreathState" src="@/assets/btn_off.png" width="38" height="38"/>
               </div>
             </button>
-            <div class="text-[14px] font-bold">
+            <div class="text-[14px] translate-x-[-5px] font-bold">
               ON/OFF
             </div>
           </div>
@@ -134,7 +134,7 @@ const haddleBtnOnOff = () => {
         <div class="text-[14px] font-bold mt-1 ml-1">Filter</div>
         <div class="flex justify-around selection mt-2">
           <div>
-            <FilterLogoVue  class="translate-y-[-10px] translate-x-[8px]"/>
+            <FilterLogoVue  class="translate-y-[-10px] translate-x-[10px]"/>
           </div>
           <div class="flex translate-x-[8px]">
             <div>

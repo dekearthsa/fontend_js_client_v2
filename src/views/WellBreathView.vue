@@ -9,8 +9,7 @@ import VOCsLogoVue from "../components/icons/VOCsLogo.vue"
 import WellBreathLogoWBVue from "../components/icons/WellBreathLogoWB.vue"
 import NormalFaceIcon from "../components/icons/NormalFaceIcon.vue";
 import {useStore} from "vuex"
-import {onMounted} from 'vue'
-import {ref} from "vue"
+import {onMounted, ref} from 'vue'
 
 const store = useStore();
 const selectPageWB = ref(1);
@@ -47,17 +46,7 @@ const haddleSelectPage = (evt) => {
     }
 }
 
-const haddleExhasutFan = () => {
-    if(haddleExhaustStatus.value === 'off'){
-        haddleExhaustStatus.value = 'on'
-        btnExhaustFan.value = 'Off'
-        cssStatusExhaustFan.value = 'text-[#2A83B5]'
-    }else{  
-        haddleExhaustStatus.value = 'off'
-        btnExhaustFan.value = 'On'
-        cssStatusExhaustFan.value = 'text-red-600'
-    }
-}
+
 
 const haddleSupplyFans = (evt) => {
     if(evt === 'off'){
@@ -81,56 +70,7 @@ const haddleSupplyFans = (evt) => {
     }
 }
 
-// const haddleSupplyFan = (evt) => {
-//     if(evt === 'low'){
-//         if(haddleSupplyStatusLow.value === 'off'){
-//             if(haddleSupplyStatusHigh.value === 'on'){
-//                 alert("Supply fan high speed will change to low speed.")
-//                 haddleSupplyStatusLow.value = 'on';
-//                 cssLowSpeedFan.value = 'text-[#00B0F0]'
-//                 haddleSupplyStatusHigh.value = 'off'
-//                 cssHighSpeedFan.value = 'text-red-600'
-//                 cssCardSupplyFanLow.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-on-status';
-//                 cssCardSupplyFanHigh.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status'
-//             }else{
-//                 haddleSupplyStatusLow.value = 'on';
-//                 cssLowSpeedFan.value = 'text-[#00B0F0]'
-//                 haddleSupplyStatusHigh.value = 'off'
-//                 cssHighSpeedFan.value = 'text-red-600'
-//                 cssCardSupplyFanLow.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-on-status';
-//                 cssCardSupplyFanHigh.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status'
-//             }
-//         }else{
-//             haddleSupplyStatusLow.value = 'off';
-//             cssLowSpeedFan.value = 'text-red-600'
-//             cssCardSupplyFanLow.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status';
-//         }
-//     }else{
-//         if(haddleSupplyStatusHigh.value === 'off'){
-//             if(haddleSupplyStatusLow.value === 'on'){
-//                 alert("Supply fan low speed will change to high speed.")
-//                 haddleSupplyStatusLow.value = 'off';
-//                 cssLowSpeedFan.value = 'text-red-600'
-//                 haddleSupplyStatusHigh.value = 'on'
-//                 cssHighSpeedFan.value = 'text-[#00B0F0]'
-//                 cssCardSupplyFanLow.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status';
-//                 cssCardSupplyFanHigh.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-on-status';
-//             }else{
-//                 haddleSupplyStatusLow.value = 'off';
-//                 cssLowSpeedFan.value = 'text-red-600'
-//                 haddleSupplyStatusHigh.value = 'on'
-//                 cssHighSpeedFan.value = 'text-[#00B0F0]'
-//                 cssCardSupplyFanLow.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status';
-//                 cssCardSupplyFanHigh.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-on-status';
-//             }
-            
-//         }else{
-//             haddleSupplyStatusHigh.value = 'off';
-//             cssHighSpeedFan.value = 'text-red-600'
-//             cssCardSupplyFanHigh.value = 'border-[1px] border-zinc-400 rounded-md h-[210px] w-[150px] m-auto set-off-status';
-//         }
-//     }
-// }
+
 
 onMounted(() => {
     store.state.selectionHomePage = false
@@ -194,7 +134,7 @@ const haddleBtnOnOff = () => {
                                 <img v-if="store.state.wellBreathState" src="@/assets/btn_on_wb.png" width="38" height="38"/>
                                 <img v-if="!store.state.wellBreathState" src="@/assets/btn_off.png" width="38" height="38"/>
                             </button>
-                            <div class="text-[13px] setbold">
+                            <div class="text-[13px] translate-x-[-3px] setbold">
                                 ON/OFF
                             </div>
                         </div>
@@ -454,19 +394,6 @@ const haddleBtnOnOff = () => {
             </div>
         </div>
     </div>
-    <!-- <div class="text-center m-auto mt-4">
-        <button class="text-[#2A83B5]" @click="haddleRouteHome">
-            <div class="flex">
-                <span class="mr-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                        <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
-                        <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
-                    </svg>
-                </span>
-                <span>HOME</span>
-            </div>
-        </button>
-    </div> -->
 </template>
 
 <style scoped>

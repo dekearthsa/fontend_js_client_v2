@@ -1,11 +1,13 @@
 <script setup>
 // import LightForLifeLogoVue from "@/components/icons/LightForLifeLogo.vue"
 import { useRouter } from 'vue-router';
-import {useStore} from "vuex"
+import { useStore } from "vuex"
 import LightForLifeLogoVue from '../icons/LightForLifeLogo.vue';
-
+import { onMounted, ref } from 'vue'
 const router = useRouter();
 const store = useStore();
+// const store.state.mainPageBatteryPercent = ref(60);
+
 
 const haddleRouteLightForLife = () => {
   router.push("/lightforlife")
@@ -13,18 +15,18 @@ const haddleRouteLightForLife = () => {
 
 
 const haddleBtnOnOff = () => {
-    if(store.state.lightForLifeState){
-      store.state.lightForLifeBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
-      store.state.lightForLifeDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
-      store.state.lightForLifeSvg = "#FFFFFF";
-      store.state.lightForLifeState = false;
-    }else{
-      store.state.lightForLifeBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]";
-      store.state.lightForLifeDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]";
-      store.state.lightForLifeSvg = "#ED7D31";
-      store.state.lightForLifeState = true;
-    }
+  if (store.state.lightForLifeState) {
+    // store.state.lightForLifeBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
+    // store.state.lightForLifeDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
+    // store.state.lightForLifeSvg = "#FFFFFF";
+    store.state.lightForLifeState = false;
+  } else {
+    // store.state.lightForLifeBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]";
+    // store.state.lightForLifeDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]";
+    // store.state.lightForLifeSvg = "#ED7D31";
+    store.state.lightForLifeState = true;
   }
+}
 
 
 
@@ -34,28 +36,31 @@ const haddleBtnOnOff = () => {
   <div class="">
     <div class="icon ">
       <!-- <LightForLifeLogoVue class="m-auto"/> -->
-      <img src="@/assets/LLLogo.png" class="m-auto w-[40%] h-[90px] translate-y-[6px]"/>
+      <img src="@/assets/LLLogo.png" class="m-auto w-[40%] h-[90px] translate-y-[6px]" />
     </div>
     <div class="detail w-[240px] h-[290px] bg-white rounded-lg">
       <div class="title flex m-auto mt-1 pb-1 pt-2 text-center justify-center" @click="haddleRouteLightForLife">
         <div class="text-[#D29500] font-bold translate-x-[5px]">LIGHT FOR LIFE</div>
         <div class="translate-x-[20px]">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#999999" class="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#999999"
+            class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
           </svg>
         </div>
       </div>
-      <div class="status-c m-auto w-[200px] h-[85px] bg-[#F3F4F8] mt-2 rounded-lg"> 
+      <div class="status-c m-auto w-[200px] h-[85px] bg-[#F3F4F8] mt-2 rounded-lg">
         <div class="flex">
           <div class="ml-5 mt-3">
-            <button @click="haddleBtnOnOff" :class="store.state.lightForLifeBtn">
-              <div :class="store.state.lightForLifeDiv">
+            <button @click="haddleBtnOnOff">
+              <!-- <div :class="store.state.lightForLifeDiv">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.lightForLifeSvg" class="w-6 h-6 m-auto translate-y-[3px]">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                 </svg>
-              </div>
+              </div> -->
+              <img v-if="store.state.lightForLifeState" src="@/assets/btn_on_lfl.png" width="38" height="38" />
+              <img v-if="!store.state.lightForLifeState" src="@/assets/btn_off.png" width="38" height="38" />
             </button>
-            <div class="text-[14px] font-bold">
+            <div class="text-[14px] translate-x-[-5px] font-bold">
               ON/OFF
             </div>
           </div>
@@ -73,28 +78,62 @@ const haddleBtnOnOff = () => {
         <div class="translate-y-[5px]">
           <div class="absolute flex ml-5 mt-4">
             <div class="mr-1">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-[12px] h-[12px]">
-                <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+              <svg v-if="store.state.mainPageBatteryPercent <= 50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                fill="currentColor" class="w-[12px] h-[12px]">
+                <path
+                  d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+              </svg>
+              <svg v-if="store.state.mainPageBatteryPercent <= 79 && store.state.mainPageBatteryPercent > 50" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24" fill="currentColor" class="w-[12px] h-[12px]">
+                <path
+                  d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+              </svg>
+              <svg v-if="store.state.mainPageBatteryPercent > 79" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                fill="currentColor" class="w-[12px] h-[12px]">
+                <path
+                  d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
               </svg>
             </div>
             <div class="text-[10px]">
-              50%
+              {{ store.state.mainPageBatteryPercent }}%
             </div>
-        </div>
-        <div class="flex">
-          <div class="translate-y-[-8px] ml-3">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#AA0000" class="w-[60px] h-[60px]">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
-            </svg>
           </div>
-          <div class="text-[12px] mt-3 ml-2 font-bold text-[#CB2A28]">
-            Need replace new battery
+          <div class="flex">
+            <div class="translate-y-[-8px] ml-3">
+              <svg v-if="store.state.mainPageBatteryPercent <= 50" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="#AA0000" class="w-[60px] h-[60px]">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
+              </svg>
+              <svg v-if="store.state.mainPageBatteryPercent <= 79 && store.state.mainPageBatteryPercent > 50" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#D29500" class="w-[60px] h-[60px]">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
+              </svg>
+              <svg v-if="store.state.mainPageBatteryPercent > 79" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="#36A090" class="w-[60px] h-[60px]">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
+              </svg>
+            </div>
+            <div class="text-[11px] translate-x-[24px] mt-3 ml-2 font-bold text-[#CB2A28]">
+              <div v-if="store.state.mainPageBatteryPercent <= 50" class="text-[#CB2A28]">
+                <div>Need replace</div>
+                <div>new battery</div>
+              </div>
+              <div v-if="store.state.mainPageBatteryPercent <= 79 && store.state.mainPageBatteryPercent > 50" class="text-[#D29500]">
+                <div>Your battery</div>
+                <div>health is Fair</div>
+              </div>
+              <div v-if="store.state.mainPageBatteryPercent > 79" class="text-[#36A090]">
+                <div>Your battery</div>
+                <div>health is Good</div>
+              </div>
+            </div>
           </div>
         </div>
-        </div>
-          
       </div>
-      <div class="qta-c m-auto bg-[#F3F4F8] w-[200px] h-[65px] mt-2 rounded-lg">
+      <!-- <div class="qta-c m-auto bg-[#F3F4F8] w-[200px] h-[65px] mt-2 rounded-lg">
         <div class="text-[11px] font-bold mt-1 ml-1">Battery</div>
         <div class="flex justify-around mt-3">
           <div>
@@ -111,17 +150,17 @@ const haddleBtnOnOff = () => {
             30%
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <style scoped>
-.btn-c{
+.btn-c {
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
-.detail{
+.detail {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 </style>

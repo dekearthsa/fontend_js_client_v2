@@ -15,14 +15,14 @@ const haddleRouteAlwayDry = () => {
 
 const haddleBtnOnOff = () => {
     if(store.state.alwayDryStte){
-      store.state.alwayDryBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
-      store.state.alwayDryDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
-      store.state.alwayDrySvg = "#FFFFFF";
+      // store.state.alwayDryBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
+      // store.state.alwayDryDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
+      // store.state.alwayDrySvg = "#FFFFFF";
       store.state.alwayDryStte = false;
     }else{
-      store.state.alwayDryBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]";
-      store.state.alwayDryDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]";
-      store.state.alwayDrySvg = "#ED7D31";
+      // store.state.alwayDryBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]";
+      // store.state.alwayDryDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]";
+      // store.state.alwayDrySvg = "#ED7D31";
       store.state.alwayDryStte = true;
     }
   }
@@ -47,14 +47,16 @@ const haddleBtnOnOff = () => {
       <div class="status-c m-auto w-[200px] h-[85px] bg-[#F3F4F8] mt-2 rounded-lg"> 
         <div class="flex">
           <div class="ml-5 mt-3">
-            <button @click="haddleBtnOnOff" :class="store.state.alwayDryBtn">
-              <div :class="store.state.alwayDryDiv">
+            <button @click="haddleBtnOnOff" >
+              <!-- <div :class="store.state.alwayDryDiv">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.alwayDrySvg" class="w-6 h-6 m-auto translate-y-[3px]">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                 </svg>
-              </div>
+              </div> -->
+              <img v-if="store.state.alwayDryStte" src="@/assets/btn_on_ad.png" width="38" height="38"/>
+              <img v-if="!store.state.alwayDryStte" src="@/assets/btn_off.png" width="38" height="38"/>
             </button>
-            <div class="text-[14px] font-bold">
+            <div class="text-[14px] translate-x-[-5px] font-bold">
               ON/OFF
             </div>
           </div>
@@ -83,7 +85,7 @@ const haddleBtnOnOff = () => {
       <div class="qta-c m-auto bg-[#F3F4F8] w-[200px] h-[65px] mt-2 rounded-lg">
         <div class="text-[14px] font-bold mt-3 ml-1">Sensor</div>
         <div class="flex justify-around mt-2  ">
-          <div class="translate-y-[-5px]">
+          <div class="translate-y-[-5px] translate-x-[5px]">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
               <path fill-rule="evenodd" d="M5.636 4.575a.75.75 0 0 1 0 1.061 9 9 0 0 0 0 12.728.75.75 0 1 1-1.06 1.06c-4.101-4.1-4.101-10.748 0-14.849a.75.75 0 0 1 1.06 0Zm12.728 0a.75.75 0 0 1 1.06 0c4.101 4.1 4.101 10.75 0 14.85a.75.75 0 1 1-1.06-1.061 9 9 0 0 0 0-12.728.75.75 0 0 1 0-1.06ZM7.757 6.697a.75.75 0 0 1 0 1.06 6 6 0 0 0 0 8.486.75.75 0 0 1-1.06 1.06 7.5 7.5 0 0 1 0-10.606.75.75 0 0 1 1.06 0Zm8.486 0a.75.75 0 0 1 1.06 0 7.5 7.5 0 0 1 0 10.606.75.75 0 0 1-1.06-1.06 6 6 0 0 0 0-8.486.75.75 0 0 1 0-1.06ZM9.879 8.818a.75.75 0 0 1 0 1.06 3 3 0 0 0 0 4.243.75.75 0 1 1-1.061 1.061 4.5 4.5 0 0 1 0-6.364.75.75 0 0 1 1.06 0Zm4.242 0a.75.75 0 0 1 1.061 0 4.5 4.5 0 0 1 0 6.364.75.75 0 0 1-1.06-1.06 3 3 0 0 0 0-4.243.75.75 0 0 1 0-1.061ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
             </svg>

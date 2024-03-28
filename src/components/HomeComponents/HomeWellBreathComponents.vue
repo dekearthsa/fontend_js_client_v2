@@ -21,14 +21,14 @@
 
 const haddleBtnOnOff = () => {
     if(store.state.wellBreathState){
-      store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
-      store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
-      store.state.wellBreathSvg = "#FFFFFF";
+      // store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
+      // store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
+      // store.state.wellBreathSvg = "#FFFFFF";
       store.state.wellBreathState = false;
     }else{
-      store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]";
-      store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#00B0F0]";
-      store.state.wellBreathSvg = "#00B0F0";
+      // store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]";
+      // store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#00B0F0]";
+      // store.state.wellBreathSvg = "#00B0F0";
       store.state.wellBreathState = true;
     }
   }
@@ -69,8 +69,8 @@ const haddleBtnOnOff = () => {
                 </svg>
               </div> -->
               <div class="translate-x-[3px]" >
-                <img v-if="store.state.wellBreathState" src="@/assets/btn_on_wb.png" width="38" height="38"/>
-                <img v-if="!store.state.wellBreathState" src="@/assets/btn_off.png" width="38" height="38"/>
+                <img v-if="store.state.dataWB.isOn" src="@/assets/btn_on_wb.png" width="38" height="38"/>
+                <img v-if="!store.state.dataWB.isOn" src="@/assets/btn_off.png" width="38" height="38"/>
               </div>
             </button>
             <div class="text-[14px] translate-x-[-5px] font-bold">
@@ -91,9 +91,9 @@ const haddleBtnOnOff = () => {
         <div class="">
           <div class="text-[14px] font-bold ml-1 mt-1">AQI</div>
         </div>
-        <div @click="haddleDebugIAQ">
+        <div >
 
-          <div v-if="store.state.iaqParamState === 2" class="flex justify-center">
+          <div v-if="store.state.dataWB.iaq === 'Good'" class="flex justify-center">
             <div class="translate-x-[-30px] mr-5">
               <svg xmlns="http://www.w3.org/2000/svg" fill="#B8FAA0" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00C412" class="w-9 h-9">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
@@ -103,7 +103,7 @@ const haddleBtnOnOff = () => {
               Good
             </div>
           </div>
-          <div v-if="store.state.iaqParamState === 1" class="flex justify-center">
+          <div v-if="store.state.dataWB.iaq === 'Moderated'" class="flex justify-center">
             <div class="translate-x-[-8px] mr-5">
               <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="#F4B8B7" viewBox="0 0 24 24" stroke-width="1.5" stroke="#CB2A28" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
@@ -115,7 +115,7 @@ const haddleBtnOnOff = () => {
             </div>
           </div>
 
-          <div  v-if="store.state.iaqParamState === 0" class="flex justify-center">
+          <div   v-if="store.state.dataWB.iaq === 'Unhealthy'" class="flex justify-center">
             <div class="translate-x-[-15px] mr-2">
               <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="#F4B8B7" viewBox="0 0 24 24" stroke-width="1.5" stroke="#CB2A28" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
@@ -138,13 +138,13 @@ const haddleBtnOnOff = () => {
           </div>
           <div class="flex translate-x-[8px]">
             <div>
-                <img v-if="percentBattery > 60" class="translate-y-[3px]" src="@/assets/bat_max.png" width="35" height="35"/>
-                <img v-if="percentBattery <= 60 && percentBattery > 50" class="translate-y-[3px]" src="@/assets/bat_max_low.png" width="35" height="35"/>
-                <img v-if="percentBattery <= 50 && percentBattery > 30" class="translate-y-[3px]" src="@/assets/bat_low.png" width="35" height="35"/>
-                <img v-if="percentBattery <= 30 && percentBattery >= 0" class="translate-y-[3px]" src="@/assets/bat_empty.png" width="35" height="35"/>
+                <img v-if="store.state.dataWB.pressure > 60" class="translate-y-[3px]" src="@/assets/bat_max.png" width="35" height="35"/>
+                <img v-if="store.state.dataWB.pressure <= 60 && store.state.dataWB.pressure > 50" class="translate-y-[3px]" src="@/assets/bat_max_low.png" width="35" height="35"/>
+                <img v-if="store.state.dataWB.pressure <= 50 && store.state.dataWB.pressure > 30" class="translate-y-[3px]" src="@/assets/bat_low.png" width="35" height="35"/>
+                <img v-if="store.state.dataWB.pressure <= 30 && store.state.dataWB.pressure >= 0" class="translate-y-[3px]" src="@/assets/bat_empty.png" width="35" height="35"/>
             </div>
             <div class="text-[#008E29] ml-2 translate-y-[-1px] text-[14px] font-bold">
-                100%
+                {{store.state.dataWB.pressure}}%
             </div>
           </div>
         </div>

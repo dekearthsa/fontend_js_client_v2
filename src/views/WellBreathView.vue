@@ -110,14 +110,14 @@ onMounted(() => {
 
 const haddleBtnOnOff = () => {
     if(store.state.wellBreathState){
-      store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
-      store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
-      store.state.wellBreathSvg = "#FFFFFF";
+    //   store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
+    //   store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
+    //   store.state.wellBreathSvg = "#FFFFFF";
       store.state.wellBreathState = false;
     }else{
-      store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]";
-      store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#00B0F0]";
-      store.state.wellBreathSvg = "#00B0F0";
+    //   store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]";
+    //   store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#00B0F0]";
+    //   store.state.wellBreathSvg = "#00B0F0";
       store.state.wellBreathState = true;
     }
   }
@@ -149,15 +149,8 @@ const haddleBtnOnOff = () => {
                     <div class="flex">
                         <div class="ml-4 mt-3">
                             <button @click="haddleBtnOnOff" >
-                                <!-- <div :class="store.state.wellBreathDiv">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    :stroke="store.state.wellBreathSvg" class="w-6 h-6 m-auto translate-y-[3px]">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
-                                    </svg>
-                                </div> -->
-                                <img v-if="store.state.wellBreathState" src="@/assets/btn_on_wb.png" width="38" height="38"/>
-                                <img v-if="!store.state.wellBreathState" src="@/assets/btn_off.png" width="38" height="38"/>
+                                <img v-if="store.state.dataWB.isOn" src="@/assets/btn_on_wb.png" width="38" height="38"/>
+                                <img v-if="!store.state.dataWB.isOn" src="@/assets/btn_off.png" width="38" height="38"/>
                             </button>
                             <div class="text-[13px] translate-x-[-3px] setbold">
                                 ON/OFF
@@ -178,9 +171,9 @@ const haddleBtnOnOff = () => {
                     <div class="">
                         <div class="text-[14px] setbold ml-1 mt-1 text-[#545454]">AQI</div>
                     </div>
-                    <div @click="haddleDebugIAQ">
+                    <div >
 
-                        <div v-if="store.state.iaqParamState === 2" class="flex justify-center">
+                        <div v-if="store.state.dataWB.iaq === 'Good'" class="flex justify-center">
                           <div class="translate-x-[-30px]  mr-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#B8FAA0" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00C412" class="w-9 h-9">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
@@ -188,11 +181,11 @@ const haddleBtnOnOff = () => {
                             
                           </div>
                           <div class="translate-y-[5px] translate-x-[8px] text-[#00C412] text-[13px] font-bold">
-                            Good
+                            {{store.state.dataWB.iaq}}
                           </div>
                         </div>
               
-                        <div v-if="store.state.iaqParamState === 1" class="flex justify-center">
+                        <div v-if="store.state.dataWB.iaq === 'Moderated'" class="flex justify-center">
                           <div class="translate-x-[-13px]  mr-2">
                             <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="#F4B8B7" viewBox="0 0 24 24" stroke-width="1.5" stroke="#CB2A28" class="w-6 h-6">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
@@ -200,11 +193,11 @@ const haddleBtnOnOff = () => {
                             <NormalFaceIcon/>
                           </div>
                           <div class="translate-y-[5px] translate-x-[8px] text-[#CDC100] text-[13px] font-bold">
-                            Moderated
+                            {{ store.state.dataWB.iaq }}
                           </div>
                         </div>
               
-                        <div  v-if="store.state.iaqParamState === 0" class="flex justify-center">
+                        <div  v-if="store.state.dataWB.iaq === 'Unhealthy'" class="flex justify-center">
                           <div class=" translate-x-[-15px]  mr-2">
                             <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="#F4B8B7" viewBox="0 0 24 24" stroke-width="1.5" stroke="#CB2A28" class="w-6 h-6">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
@@ -214,7 +207,7 @@ const haddleBtnOnOff = () => {
                             </svg>
                           </div>
                           <div class="translate-y-[5px] translate-x-[8px] text-[#CB2A28] text-[13px] font-bold">
-                            Unhealthy
+                            {{ store.state.dataWB.iaq }}
                           </div>
                         </div>
                       </div>
@@ -227,13 +220,13 @@ const haddleBtnOnOff = () => {
                         </div>
                         <div class="flex translate-x-[8px]">
                             <div>
-                                <img v-if="percentBattery > 60" class="translate-y-[10px]" src="@/assets/bat_max.png" width="35" height="35"/>
-                                <img v-if="percentBattery <= 60 && percentBattery > 50" class="translate-y-[10px]" src="@/assets/bat_max_low.png" width="35" height="35"/>
-                                <img v-if="percentBattery <= 50 && percentBattery > 30" class="translate-y-[10px]" src="@/assets/bat_low.png" width="35" height="35"/>
-                                <img v-if="percentBattery <= 30 && percentBattery >= 0" class="translate-y-[10px]" src="@/assets/bat_empty.png" width="35" height="35"/>
+                                <img v-if="store.state.dataWB.pressure > 60" class="translate-y-[10px]" src="@/assets/bat_max.png" width="35" height="35"/>
+                                <img v-if="store.state.dataWB.pressure <= 60 && store.state.dataWB.pressure > 50" class="translate-y-[10px]" src="@/assets/bat_max_low.png" width="35" height="35"/>
+                                <img v-if="store.state.dataWB.pressure <= 50 && store.state.dataWB.pressure > 30" class="translate-y-[10px]" src="@/assets/bat_low.png" width="35" height="35"/>
+                                <img v-if="store.state.dataWB.pressure <= 30 && store.state.dataWB.pressure >= 0" class="translate-y-[10px]" src="@/assets/bat_empty.png" width="35" height="35"/>
                             </div>
                             <div class="text-[#008E29] ml-2 translate-y-[8px] text-[14px] font-bold">
-                                100%
+                                {{store.state.dataWB.pressure}}%
                             </div>
                         </div>
                     </div>
@@ -319,7 +312,7 @@ const haddleBtnOnOff = () => {
                                         <TempLogoVue/>
                                     </div>
                                     <div class="text-[14px] translate-y-[10px] ml-1">
-                                        <span class="font-bold ">25.0</span>
+                                        <span class="font-bold ">{{store.state.dataWB.temp}}</span>
                                         <span style='font-size:15px;'>&#8451;</span>
                                     </div>
                                 </div>
@@ -328,7 +321,7 @@ const haddleBtnOnOff = () => {
                                 <div class="">PM2.5</div>
                                 <div class="flex">
                                     <span><PMLogoVue/></span>
-                                    <span class="font-bold text-[14px] translate-y-[10px] ml-1">115.0</span>
+                                    <span class="font-bold text-[14px] translate-y-[10px] ml-1">{{store.state.dataWB.pm25}}</span>
                                     <span class="text-[14px] translate-y-[10px] ml-2">µg/m3</span>
                                 </div>
                             </div>
@@ -336,7 +329,7 @@ const haddleBtnOnOff = () => {
                                 <div class="">CO2</div>
                                 <div class="flex">
                                     <span><CarbonLogoVue/></span>
-                                    <span class="font-bold text-[14px] translate-y-[10px] ml-1">115</span>
+                                    <span class="font-bold text-[14px] translate-y-[10px] ml-1">{{store.state.dataWB.co2}}</span>
                                     <span class="text-[14px] translate-y-[10px] ml-2">ppm</span>
                                 </div>
                             </div>
@@ -346,7 +339,7 @@ const haddleBtnOnOff = () => {
                                 <div class="">VOCs</div>
                                 <div class="flex">
                                     <span><VOCsLogoVue/></span>
-                                    <span class="font-bold text-[14px] translate-y-[10px] ml-1">90</span>
+                                    <span class="font-bold text-[14px] translate-y-[10px] ml-1">{{store.state.dataWB.voc}}</span>
                                     <span class="text-[14px] translate-y-[10px]">ppm</span>
                                 </div>
                             </div>
@@ -354,7 +347,7 @@ const haddleBtnOnOff = () => {
                                 <div class="">Humidity</div>
                                 <div class="flex translate-y-[5px]" >
                                     <span class="translate-y-[-10px]"><HumidLogoVue/></span>
-                                    <span class="font-bold text-[14px] translate-y-[5px]">70%</span>
+                                    <span class="font-bold text-[14px] translate-y-[5px]">{{store.state.dataWB.humid}}%</span>
                                 </div>
                             </div>
                         </div>
@@ -370,15 +363,15 @@ const haddleBtnOnOff = () => {
                     <div class="flex justify-around text-[14px] mt-3">
                         <div class="translate-y-[-8px] translate-x-[-20px]">
                             <div>Mode</div>
-                            
-                            <div class="flex border-[2px] border-[#699BF7] pl-3 pr-3 pt-1 pb-1 rounded-md">
-                                
-                                <!-- <div class="absolute translate-x-[-30px] translate-y-[-3px]">
-                                    <img src="@/assets/Night_mode.png" width="35" height="35" />
-                                </div> -->
+                            <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan') && store.state.dataWB.arrayDeviceOn.includes('Supply low')"  class="flex border-[2px] border-[#699BF7] pl-3 pr-3 pt-1 pb-1 rounded-md">
                                 <div class=" text-[#699BF7] font-bold text-[13px]">Fresh Mode</div>
                             </div>
-                            
+                            <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan') && store.state.dataWB.arrayDeviceOn.includes('Supply high')"  class="flex border-[2px] border-[#36A090] pl-3 pr-3 pt-1 pb-1 rounded-md">
+                                <div  class=" text-[#36A090] font-bold text-[13px]">Flush Mode</div>
+                            </div>
+                            <div  v-if="store.state.dataWB.arrayDeviceOn.length < 2 "  class="flex border-[2px] border-[#777777] pl-3 pr-3 pt-1 pb-1 rounded-md">
+                                <div  class=" text-[#777777] font-bold text-[13px]">Stand by</div>
+                            </div>
                         </div>
                         <div class="translate-y-[-8px] translate-x-[-31px]">
                             <div>Supply Fan</div>
@@ -390,13 +383,13 @@ const haddleBtnOnOff = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <div  v-if="store.state.cssBtnSpplyFanStatus === 'OFF'" class="flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md">
+                                    <div  v-if="store.state.dataWB.arrayDeviceOn.includes('n/a') ||  store.state.dataWB.arrayDeviceOn.length === 0" class="flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md">
                                         <div class="mr-1">
                                             <img src="@/assets/spot_off.png" height="20" width="20" />
                                         </div>
                                         <div class="translate-y-[2px] font-bold text-[10px]">{{store.state.cssBtnSpplyFanStatus}}</div>
                                     </div>
-                                    <div  v-if="store.state.cssBtnSpplyFanStatus === 'ON'" class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
+                                    <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Supply low') || store.state.dataWB.arrayDeviceOn.includes('Supply high')" class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
                                         <div class="mr-1">
                                             <img src="@/assets/spot_on.png" height="20" width="20"/>
                                         </div>
@@ -415,13 +408,13 @@ const haddleBtnOnOff = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <div  v-if="store.state.haddleBtnExhaustStatus === 'OFF'" class="flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md">
+                                    <div  v-if="store.state.dataWB.arrayDeviceOn.includes('n/a') ||  store.state.dataWB.arrayDeviceOn.length === 0" class="flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md">
                                         <div class="mr-1">
                                             <img src="@/assets/spot_off.png" height="20" width="20" />
                                         </div>
                                         <div class="translate-y-[2px] font-bold text-[10px]">{{store.state.haddleBtnExhaustStatus}}</div>
                                     </div>
-                                    <div  v-if="store.state.haddleBtnExhaustStatus === 'ON'" class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
+                                    <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')" class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
                                         <div class="mr-1">
                                             <img src="@/assets/spot_on.png" height="20" width="20"/>
                                         </div>

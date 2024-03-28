@@ -192,22 +192,26 @@ const haddleBtnOnOff = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-3 mt-10">
-                        <div>
-                            <div class="text-[14px] ml-2 mt-5">Light Bathroom</div>
+                    <div class="grid grid-cols-3 mt-10 ">
+                         
+                        <div class=" w-[200px]">
+                            <div class="text-[14px] ml-2 mt-5">Light Bathroom 3</div>
                             <div class="flex mt-3">
                                 <div class="mr-2">
                                     <img src="@/assets/lfl_on_light.png" width="40" height="40"/>
                                 </div>
-                                <div class="translate-y-[5px] mr-3">
-                                    <div class="flex border-2 translate-y-[3px] h-[25px] border-[#66B6AB] pl-2 pr-2  text-[#66B6AB] rounded-md">
-                                        <div class="translate-y-[2px] mr-1"><SpotLogoVue/></div>
-                                        <div class="translate-y-[3px] font-bold text-[10px]">ON</div>
-                                    </div>
+                                <div class="translate-y-[10px] mr-3">
+                                    <img v-if="percentBattery > 60"  src="@/assets/bat_max.png" width="40" height="40"/>
+                                    <img v-if="percentBattery <= 60 && percentBattery > 50"  src="@/assets/bat_max_low.png" width="40" height="40"/>
+                                    <img v-if="percentBattery <= 50 && percentBattery > 30"  src="@/assets/bat_low.png" width="40" height="40"/>
+                                    <img v-if="percentBattery <= 30 && percentBattery >= 0"  src="@/assets/bat_empty.png" width="40" height="40"/>
+                                </div>
+                                <div class="text-red-700 font-bold text-[13px] translate-y-[10px]">
+                                    30% Charge!
                                 </div>
                             </div>
                         </div>
-                        <div class="translate-x-[40px]">
+                        <!-- <div class="translate-x-[40px]">
                             <div class="text-[14px] ml-2 mt-5">Sensor</div>
                             <div class="flex mt-3">
                                 <div class="mr-3 translate-y-[-3px]">
@@ -227,8 +231,8 @@ const haddleBtnOnOff = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="translate-x-[50px]">
+                        </div> -->
+                        <!-- <div class="translate-x-[50px]">
                             <div class="text-[14px] ml-2 mt-5">Sensor</div>
                             <div class="flex mt-3">
                                 <div class="mr-2 translate-y-[-3px]">
@@ -245,7 +249,7 @@ const haddleBtnOnOff = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

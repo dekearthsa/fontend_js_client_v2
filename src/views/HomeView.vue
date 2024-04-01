@@ -73,6 +73,7 @@ const fetchLoopFunction =  () => {
 
     try{
       const onSetDataLFL = await axios.post(`http://localhost:8088/api/send/battery`, command);
+      console.log(onSetDataLFL.data)
       store.state.dataLFL.lowBattery = onSetDataLFL.data.lowBattery
       store.state.dataLFL.arrayBattery = onSetDataLFL.data.batteryData[0]?onSetDataLFL.data.batteryData:["n/a"]
       store.state.dataLFL.isLightOn = onSetDataLFL.data.status?onSetDataLFL.data.status:false
@@ -87,7 +88,7 @@ const fetchLoopFunction =  () => {
 onMounted(() => {
   store.state.selectionHomePage = true
   store.state.pageNow = ""
-  fetchLoopFunction();
+  // fetchLoopFunction();
 });
 
 </script>

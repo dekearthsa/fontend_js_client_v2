@@ -123,13 +123,20 @@ const haddleBtnOnOff = () => {
       <div class="data-c m-auto bg-[#F3F4F8] w-[200px] h-[65px] mt-2 rounded-lg">
         <div class="set-timing font-bold flex justify-around">
           <div class="mt-3 text-[#36A090]">
-            <div v-if="stopTime !== 'StandBy'" class="translate-x-[3px]">{{stopTime}}</div>
-            <div v-if="stopTime !== 'StandBy'" class="translate-y-[-5px] text-[14px]">Mins</div>
-            <div v-if="stopTime === 'StandBy'" class="mt-2 text-[14px]">StandBy</div>
+            <div>15</div>
+            <div class="translate-y-[-5px] text-[14px]">Mins</div>
+            <!-- <div v-if="stopTime !== 'StandBy'" class="translate-x-[3px]">{{stopTime}}</div> -->
+            <!-- <div v-if="stopTime !== 'StandBy'" class="translate-y-[-5px] text-[14px]">Mins</div> -->
+            <!-- <div v-if="stopTime === 'StandBy'" class="mt-2 text-[14px]">StandBy</div> -->
           </div>
-          <div class="text-[12px] mt-3 translate-y-[2px] translate-x-[-5px]">
-            <div>Time</div>
-            <div>Remaining</div>
+          <div class="flex text-[11px] mt-3 translate-y-[2px] translate-x-[9px]">
+            <div class="mt-2">
+                <img height="25" width="25" src="@/assets/TimeRe.png"/>
+            </div>
+            <div class="ml-3">
+                <div>Time</div>
+                <div>Remaining</div>
+            </div>
           </div>
         </div>
       </div>

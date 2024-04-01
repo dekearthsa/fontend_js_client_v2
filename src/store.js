@@ -1,11 +1,11 @@
-import {createStore} from 'vuex'
+import { createStore } from 'vuex'
 
 export default createStore({
-    state:{
+    state: {
         cssBtnSpplyFanStatus: 'OFF',
         haddleBtnExhaustStatus: 'OFF',
         wellBreathState: true,
-        iaqParamState: 0, 
+        iaqParamState: 0,
 
 
         cssBtnADExhaustFan: 'OFF',
@@ -21,7 +21,7 @@ export default createStore({
         pageNow: "",
         mainPageBatteryPercent: 30,
 
-        dataWB:{
+        dataWB: {
             onloadData: true,
             temp: "30",
             pressure: "100",
@@ -34,7 +34,7 @@ export default createStore({
             humid: "55",
             arrayDeviceOn: ["Exhaust fan", "Supply low"]
         },
-        dataAD:{
+        dataAD: {
             onloadData: true,
             system: "n/a",
             subSystem: "n/a",
@@ -49,11 +49,46 @@ export default createStore({
             isAuto: false,
             isOn: true,
         },
-        dataLFL:{
+        dataLFL: {
             onloadData: true,
             isLightOn: false,
-            lowBattery: 0,
-            arrayBattery: [],
+            lowBattery: {
+                Battery: 77,
+                DeviceId: "lfl-2",
+                DeviceName: "-",
+                DeviceType: "LFL",
+                Subsystem: "LFL_LIGHT_BEDROOM",
+                System: "zone1",
+                TimeStamp: 1711601383356
+            },
+            arrayBattery: [{
+                system: "zone1",
+                subSystem: "LFL_LIGHT_BEDROOM",
+                deviceId: "lfl-1",
+                deviceType: "LFL",
+                battery: 100,
+                timeStamp: 1711601378465,
+                isRunning: true
+            },
+            {
+                system: "zone1",
+                subSystem: "LFL_LIGHT_BEDROOM",
+                deviceId: "lfl-2",
+                deviceType: "LFL",
+                battery: 77,
+                timeStamp: 1711601383356,
+                isRunning: true
+            },
+            {
+                system: "zone1",
+                subSystem: "LFL_LIGHT_BEDROOM",
+                deviceId: "lfl-3",
+                deviceType: "LFL",
+                battery: 100,
+                timeStamp: 1711601386897,
+                isRunning: true
+            }
+            ],
         }
     }
 })

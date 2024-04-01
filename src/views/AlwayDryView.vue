@@ -1,20 +1,32 @@
 <script setup>
-// import FanLogoVue from "../components/icons/FanLogo.vue"
-import HumidLogoVue from "../components/icons/HumidLogo.vue"
-// import WellBreathLogoVue from "../components/icons/WellBreathLogo.vue"
-import SpotLogoVue from "../components/icons/SpotLogo.vue"
 import AlwayDryLogoADVue from "@/components/icons/AlwayDryLogoAD.vue"
 import { useRouter } from 'vue-router';
 import {useStore} from "vuex"
-import {onMounted, ref} from 'vue'
-
+import {onMounted, ref, computed} from 'vue'
+import axios from "axios";
 
 const router = useRouter();
 const store = useStore();
 
-// const haddleRouteHome = () => {
-//     router.push("/")
-// }
+const stopTime = ref("StandBy")
+const isloadingIsOn = ref(false);
+const millisToMinutesAndSeconds = (millis) => {
+    const minutes = Math.floor(millis / 60000);
+    const seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
+
+onMounted(() => {
+  setInterval(() => {
+    const date = new Date();
+    const ms = date.getTime();
+    stopTime.value = store.state.dataAD.stopTime - ms <= 0?'StandBy':millisToMinutesAndSeconds(store.state.dataAD.stopTime - ms)
+  }, 2000);
+})
+
+
+
 const percentBattery = ref(100);
 
 onMounted(() => {
@@ -22,39 +34,56 @@ onMounted(() => {
     store.state.pageNow = "ALWAYS DRY"
 });
 
-const haddleForceExaust = () => {
-    if(!store.state.alwayDryExhaustFan){
-        store.state.alwayDryExhaustFan = true
-        store.state.cssBtnADExhaustFan = 'ON'
-    }else{
-        store.state.alwayDryExhaustFan = false
-        store.state.cssBtnADExhaustFan = 'OFF'
-    }
-}
 
-const haddleForceDryFan = () => {
-    if(!store.state.alwayDryDryFanState){
-        store.state.alwayDryDryFanState = true
-        store.state.cssBtnADDryFan = 'ON'
-    }else{
-        store.state.alwayDryDryFanState = false
-        store.state.cssBtnADDryFan = 'OFF'
-    }
-}
 
 const haddleBtnOnOff = () => {
     if(store.state.alwayDryStte){
-    //   store.state.alwayDryBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
-    //   store.state.alwayDryDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
-    //   store.state.alwayDrySvg = "#FFFFFF";
       store.state.alwayDryStte = false;
     }else{
-    //   store.state.alwayDryBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]";
-    //   store.state.alwayDryDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]";
-    //   store.state.alwayDrySvg = "#ED7D31";
       store.state.alwayDryStte = true;
     }
   }
+
+
+  const haddleOnOff = async (command) => {
+    isloadingIsOn.value = true
+    console.log(command)
+    if(command){
+        const warp = {
+            system: 'zone1',
+            command: false
+        }
+        const status = await axios.post(`http://localhost:8090/api/update/ad/onOff`, warp);
+        if(status.data === 'ok'){
+            setTimeout(() => {
+                isloadingIsOn.value = false
+            }, 1500);
+        }else{
+            console.log("err => ",status.data)
+            setTimeout(() => {
+                isloadingIsOn.value = false
+            }, 1500);
+        }
+    }else{
+        const warp = {
+            system: 'zone1',
+            command: true
+        }
+        const status = await axios.post(`http://localhost:8090/api/update/ad/onOff`, warp);
+        if(status.data === 'ok'){
+            setTimeout(() => {
+                isloadingIsOn.value = false
+            }, 1500);
+        }else{
+            console.log("err => ",status.data)
+            setTimeout(() => {
+                isloadingIsOn.value = false
+            }, 1500);
+        }
+
+    }
+}
+
 
 </script>
 
@@ -71,14 +100,9 @@ const haddleBtnOnOff = () => {
                 <div class="status-c m-auto w-[180px] h-[85px] bg-[#F3F4F8] mt-10 rounded-lg">
                     <div class="flex">
                         <div class="ml-4 mt-3">
-                            <button @click="haddleBtnOnOff" >
-                                <!-- <div :class="store.state.alwayDryDiv">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.alwayDrySvg" class="w-6 h-6 m-auto translate-y-[3px]">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
-                                    </svg>
-                                </div> -->
-                                <img v-if="store.state.alwayDryStte" src="@/assets/btn_on_ad.png" width="38" height="38"/>
-                                <img v-if="!store.state.alwayDryStte" src="@/assets/btn_off.png" width="38" height="38"/>
+                            <button @click="haddleOnOff(store.state.dataAD.isOn)" >
+                                <img v-if="store.state.dataAD.isOn"  src="@/assets/btn_on_ad.png" width="38" height="38"/>
+                                <img v-if="!store.state.dataAD.isOn" src="@/assets/btn_off.png" width="38" height="38"/>
                             </button>
                             <div class="text-[13px] font-bold translate-x-[-3px]">
                                 ON/OFF
@@ -98,8 +122,9 @@ const haddleBtnOnOff = () => {
                 <div class="data-c m-auto bg-[#F3F4F8] w-[180px] h-[65px] mt-2 rounded-lg">
                     <div class="set-timing font-bold flex justify-around">
                         <div class="mt-3 text-[#36A090]">
-                            <div class="translate-x-[3px]">15</div>
-                            <div class="translate-y-[-5px] text-[14px]">Mins</div>
+                            <div v-if="stopTime !== 'StandBy'" class="translate-x-[3px]">{{stopTime}}</div>
+                            <div v-if="stopTime !== 'StandBy'" class="translate-y-[-5px] text-[14px]">Mins</div>
+                            <div v-if="stopTime === 'StandBy'" class="mt-2 text-[14px]">StandBy</div>
                         </div>
                         <div class="text-[12px] mt-2 translate-y-[4px]">
                             <div>Time</div>
@@ -135,7 +160,86 @@ const haddleBtnOnOff = () => {
         <div>
             <div class="detail-c w-[510px] h-[315px] rounded-lg ml-5">
                 <div class="h-[10px]"></div>
-                <div class="bg-[#F3F4F8] w-[500px] h-[100px] m-auto rounded-md">
+                <div class="bg-[#F3F4F8] w-[500px] h-[295px] m-auto rounded-md">
+                    <div class="translate-y-[13px] ml-2 CustomFont font-bold text-[14px] text-[#2A83B5]">Control panel</div>
+                    <div class="grid grid-cols-3">  
+                        <div class="mt-[30px] ml-2 border-[1px] border-zinc-500 rounded-lg h-[230px]">
+                            <div class="text-center mt-3 font-bold text-[14px]">
+                                <div>Exhaust Fan</div>
+                            </div>
+                            <div class="flex justify-center mt-4">
+                                <img src="@/assets/ex_fan.png" width="130" height="130"/>
+                            </div>
+                            <div>
+                                <div class="mt-2">
+                                    <div>
+                                        <button v-if="!store.state.dataAD.arrayDeviceActive.includes('Exhaust Fan')" class="flex justify-center m-auto border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md" @click="haddleExhaustFan">
+                                            <div class="mr-1" >
+                                                <img  src="@/assets/spot_off.png" height="15" width="15" />
+                                            </div>
+                                            <div class="font-bold text-[10px]">OFF</div>
+                                        </button>
+                                        <button  v-if="store.state.dataAD.arrayDeviceActive.includes('Exhaust Fan')" class="flex justify-center m-auto border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" @click="haddleExhaustFan">
+                                            <div class="mr-1" >
+                                                <img src="@/assets/spot_on.png" height="15" width="15"/>
+                                            </div>
+                                            <div class="font-bold text-[10px]">ON</div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-[30px] ml-2 mr-2 border-[1px] border-zinc-500 rounded-lg h-[230px]">
+                            <div class="text-center mt-3 font-bold text-[14px]">
+                                <div>Dry Fan</div>
+                                <div class="flex justify-center mt-4">
+                                    <img src="@/assets/sp_fan.png" width="125" height="125"/>
+                                </div>
+                                <div>
+                                    <div class="mt-3">
+                                        <div>
+                                            <button v-if="!store.state.dataAD.arrayDeviceActive.includes('Dry Fan')" class="flex justify-center m-auto border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md" @click="haddleExhaustFan">
+                                                <div class="mr-1" >
+                                                    <img  src="@/assets/spot_off.png" height="15" width="15" />
+                                                </div>
+                                                <div class="font-bold text-[10px]">OFF</div>
+                                            </button>
+                                            <button  v-if="store.state.dataAD.arrayDeviceActive.includes('Dry Fan')" class="flex justify-center m-auto border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" @click="haddleExhaustFan">
+                                                <div class="mr-1" >
+                                                    <img src="@/assets/spot_on.png" height="15" width="15"/>
+                                                </div>
+                                                <div class="font-bold text-[10px]">ON</div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-[30px] mr-2 border-[1px] border-zinc-500 rounded-lg h-[230px]">
+                            <div class="text-center mt-3 font-bold text-[14px]">
+                                <div>SENSOR</div>
+                                <div class="flex justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-[130] h-[130px]">
+                                        <path fill-rule="evenodd" d="M5.636 4.575a.75.75 0 0 1 0 1.061 9 9 0 0 0 0 12.728.75.75 0 1 1-1.06 1.06c-4.101-4.1-4.101-10.748 0-14.849a.75.75 0 0 1 1.06 0Zm12.728 0a.75.75 0 0 1 1.06 0c4.101 4.1 4.101 10.75 0 14.85a.75.75 0 1 1-1.06-1.061 9 9 0 0 0 0-12.728.75.75 0 0 1 0-1.06ZM7.757 6.697a.75.75 0 0 1 0 1.06 6 6 0 0 0 0 8.486.75.75 0 0 1-1.06 1.06 7.5 7.5 0 0 1 0-10.606.75.75 0 0 1 1.06 0Zm8.486 0a.75.75 0 0 1 1.06 0 7.5 7.5 0 0 1 0 10.606.75.75 0 0 1-1.06-1.06 6 6 0 0 0 0-8.486.75.75 0 0 1 0-1.06ZM9.879 8.818a.75.75 0 0 1 0 1.06 3 3 0 0 0 0 4.243.75.75 0 1 1-1.061 1.061 4.5 4.5 0 0 1 0-6.364.75.75 0 0 1 1.06 0Zm4.242 0a.75.75 0 0 1 1.061 0 4.5 4.5 0 0 1 0 6.364.75.75 0 0 1-1.06-1.06 3 3 0 0 0 0-4.243.75.75 0 0 1 0-1.061ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="mt-5 translate-y-[3px]">
+                                        <div>
+                                            <button class="flex justify-center m-auto border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" @click="haddleExhaustFan">
+                                                <div class="mr-1" >
+                                                    <img src="@/assets/spot_on.png" height="15" width="15"/>
+                                                </div>
+                                                <div class="font-bold text-[10px]">ON</div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="bg-[#F3F4F8] w-[500px] h-[100px] m-auto rounded-md">
                     <div class="text-[#2A83B5] text-[14px] font-bold ml-2">Manual mode</div>
                     <div class="flex justify-evenly mt-3">
                         <div>
@@ -164,8 +268,8 @@ const haddleBtnOnOff = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-[500px] h-[185px] bg-[#F3F4F8] mt-3 m-auto rounded-md">
+                </div> -->
+                <!-- <div class="w-[500px] h-[185px] bg-[#F3F4F8] mt-3 m-auto rounded-md">
                     <div class="text-[#2A83B5] text-[14px] font-bold ml-2">System</div>
                     <div class="grid grid-cols-3 mt-10 ml-2">
                         <div>
@@ -231,7 +335,7 @@ const haddleBtnOnOff = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

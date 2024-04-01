@@ -1,6 +1,5 @@
 <script setup>
 import CarbonLogoVue from "../components/icons/CarbonLogo.vue"
-import SpotLogoVue from "../components/icons/SpotLogo.vue"
 import FilterLogoVue from "../components/icons/FilterLogo.vue"
 import HumidLogoVue from "../components/icons/HumidLogo.vue"
 import PMLogoVue from "../components/icons/PMLogo.vue"
@@ -10,14 +9,14 @@ import WellBreathLogoWBVue from "../components/icons/WellBreathLogoWB.vue"
 import NormalFaceIcon from "../components/icons/NormalFaceIcon.vue";
 import {useStore} from "vuex"
 import {onMounted, ref} from 'vue'
+import axios from "axios";
 
 const store = useStore();
 const selectPageWB = ref(1);
 const menuPage = ref('IAQ');
-const cssBtnWBParam = ref('bg-zinc-400 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg');
-const cssBtnWBController = ref('bg-zinc-300 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg');
-const cssControllerChange = ref('bg-[#F3F4F8] w-[500px] h-[180px] m-auto rounded-md');
-const cssStatusExhaustFan = ref('text-red-600');
+const cssBtnWBParam = ref('bg-zinc-400 text-white font-bold text-[14px] w-[200px] h-[22px] rounded-lg');
+const cssBtnWBController = ref('bg-zinc-300 text-white font-bold text-[14px] w-[200px] h-[22px] rounded-lg');
+const cssControllerChange = ref('bg-[#F3F4F8] w-[490px] h-[180px] m-auto rounded-md mb-2');
 const csssStatusSpplyFan = ref('text-red-800 font-bold');
 
 const cssBtnSupplyHigh = ref('bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn');
@@ -26,9 +25,8 @@ const cssBtnOff = ref('bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-
 const cssBtnForceExhaustFan = ref("flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md");
 const cssBtnForceDryFan = ref("flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md");
 const haddleSupplyFan = ref('OFF');
-const percentBattery = ref(100);
 
-
+const isloadingIsOn = ref(false);
 const haddleForceExhaust = () => {
     if(store.state.haddleBtnExhaustStatus === "OFF"){
         store.state.haddleBtnExhaustStatus = "ON";
@@ -79,22 +77,17 @@ const haddleSelectPage = (evt) => {
     if(evt === 1){
         selectPageWB.value = 1;
         menuPage.value = 'IAQ'
-        cssBtnWBParam.value = "bg-zinc-400 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg";
-        cssBtnWBController.value = "bg-zinc-300 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg";
-        cssControllerChange.value = 'bg-[#F3F4F8] w-[500px] h-[180px] m-auto rounded-md';
+        cssBtnWBParam.value = "bg-zinc-400 text-white font-bold text-[14px] w-[200px] h-[22px] rounded-lg";
+        cssBtnWBController.value = "bg-zinc-300 text-white font-bold text-[14px] w-[200px] h-[22px] rounded-lg";
+        cssControllerChange.value = 'bg-[#F3F4F8] w-[490px] h-[180px] m-auto rounded-md';
     }else{
         selectPageWB.value = 2;
         menuPage.value = 'Control panel'
-        cssBtnWBParam.value = "bg-zinc-300 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg";
-        cssBtnWBController.value = "bg-zinc-400 text-white font-bold text-[14px] w-[200px] h-[25px] rounded-lg";
-        cssControllerChange.value = 'bg-[#F3F4F8] w-[500px] h-[270px] m-auto rounded-md'
+        cssBtnWBParam.value = "bg-zinc-300 text-white font-bold text-[14px] w-[200px] h-[22px] rounded-lg";
+        cssBtnWBController.value = "bg-zinc-400 text-white font-bold text-[14px] w-[200px] h-[22px] rounded-lg";
+        cssControllerChange.value = 'bg-[#F3F4F8] w-[490px] h-[270px] m-auto rounded-md'
     }
 }
-
-
-
-
-
 
 
 onMounted(() => {
@@ -102,37 +95,60 @@ onMounted(() => {
     store.state.pageNow = "WELL BREATHED"
 })
 
-// const haddlePercentBattery = () => {
-//     if(percentBattery.value >= 100){
-
-//     }
-// }
 
 const haddleBtnOnOff = () => {
     if(store.state.wellBreathState){
-    //   store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
-    //   store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
-    //   store.state.wellBreathSvg = "#FFFFFF";
-      store.state.wellBreathState = false;
+        store.state.dataWB.isOn = false
     }else{
-    //   store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]";
-    //   store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#00B0F0]";
-    //   store.state.wellBreathSvg = "#00B0F0";
-      store.state.wellBreathState = true;
+        store.state.dataWB.isOn = true
     }
   }
+  const haddleOnMode = async (data) => {
+    // console.log(data)
+    isloadingIsOn.value = true
+    try{
+        if(data === true){
+            const command = {
+                selection: "isOn",
+                system: "zone1",
+                command: false
+            }
+            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            if(status === "ok"){
+                setTimeout(() => {
+                    isloadingIsOn.value = false
+                }, 1500);
+                
+            }else{
+                setTimeout(() => {
+                    isloadingIsOn.value = false
+                    // isErrorLoading.value = true
+                }, 1500);
+                
+            }
 
-  const haddleDebugIAQ = () => {
-    if(store.state.iaqParamState === 0){
-      store.state.iaqParamState = 1;
-    }else if(store.state.iaqParamState === 1){
-      store.state.iaqParamState = 2;
-    }else if(store.state.iaqParamState === 2){
-      store.state.iaqParamState = 0;
+        }else if(data === false){
+            const command = {
+                selection: "isOn",
+                system: "zone1",
+                command: true
+            }
+            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            if(status === "ok"){
+                setTimeout(() => {
+                    isloadingIsOn.value = false
+                }, 1500)
+            }else{
+                setTimeout(() => {
+                    isloadingIsOn.value = false
+                    isErrorLoading.value = true
+                }, 1500)
+            }
+        }
+    }catch(err){
+        console.log(err);
     }
-  }
-
-
+}
 </script>
 
 <template>
@@ -148,7 +164,7 @@ const haddleBtnOnOff = () => {
                 <div class="status-c bg-[#F3F4F8] rounded-lg w-[180px] h-[85px] mt-10 m-auto">
                     <div class="flex">
                         <div class="ml-4 mt-3">
-                            <button @click="haddleBtnOnOff" >
+                            <button @click="haddleOnMode(store.state.dataWB.isOn)" >
                                 <img v-if="store.state.dataWB.isOn" src="@/assets/btn_on_wb.png" width="38" height="38"/>
                                 <img v-if="!store.state.dataWB.isOn" src="@/assets/btn_off.png" width="38" height="38"/>
                             </button>
@@ -237,9 +253,9 @@ const haddleBtnOnOff = () => {
             <div class="detail-c w-[510px] h-[315px] rounded-lg ml-5 mt-3">
                 <div class="h-[10px]"></div>
                 <div :class="cssControllerChange">
-                    <div class="flex justify-between title-detail text-[#2A83B5] setbold ml-2 text-[14px] translate-y-[13px]">
+                    <div class=" title-detail text-[#2A83B5] setbold ml-2 text-[14px] translate-y-[13px]">
                         <div>{{menuPage}}</div>
-                        <div class="mr-3">{{selectPageWB}}/2</div>
+                        <!-- <div class="mr-3">{{selectPageWB}}/2</div> --> 
                     </div>
 
                     <div class="mt-[30px]" v-if="menuPage === 'Control panel'">
@@ -253,13 +269,20 @@ const haddleBtnOnOff = () => {
                                     <div class="mt-3 text-center flex justify-center">
                                         <div class="w-[45%]">
                                             <div>
-                                                <button :class="cssBtnForceExhaustFan" @click="haddleForceExhaust">
+                                                <button v-if="!store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')" class="flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md" @click="haddleForceExhaust">
                                                     <div class="mr-1">
-                                                        <img v-if="store.state.haddleBtnExhaustStatus === 'OFF'" src="@/assets/spot_off.png" height="15" width="15" />
-                                                        <img v-if="store.state.haddleBtnExhaustStatus === 'ON'" src="@/assets/spot_on.png" height="15" width="15"/>
+                                                        <img  src="@/assets/spot_off.png" height="15" width="15" />
                                                     </div>
-                                                    <div class="font-bold text-[10px]">
-                                                        {{store.state.haddleBtnExhaustStatus}}
+                                                    <div class="font-bold text-[10px]"> 
+                                                        OFF
+                                                    </div>
+                                                </button>
+                                                <button  v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')" class="flex border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" @click="haddleForceExhaust">
+                                                    <div class="mr-1">
+                                                        <img src="@/assets/spot_on.png" height="15" width="15"/>
+                                                    </div>
+                                                    <div class="font-bold text-[10px]" v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')"> 
+                                                        ON
                                                     </div>
                                                 </button>
                                             </div>
@@ -274,25 +297,46 @@ const haddleBtnOnOff = () => {
                                         <img class="mt-4 ml-4 translate-y-3" src="../assets/sp_fan.png" width="110" height="110"/>
                                     </div>
                                     <div class="mt-3">
-                                        <!-- <div class="mt-3 flex justify-around">
-                                            <div class="text-green-700">Status</div>
-                                            <div :class="csssStatusSpplyFan">{{haddleSupplyFan}}</div>
-                                        </div> -->
                                         <div class="mt-5 text-center">
-                                            <button :class="cssBtnSupplyLow" @click="haddleSupplyFans('low')">Low speed</button>
+                                            <button v-if="!store.state.dataWB.arrayDeviceOn.includes('Supply low')" class="bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn" @click="haddleSupplyFans('low')">Low speed</button>
+                                            <button v-if="store.state.dataWB.arrayDeviceOn.includes('Supply low')" class="bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn" @click="haddleSupplyFans('low')">Low speed</button>
                                         </div>
                                         <div class="mt-5 -translate-y-[-8px] text-center">
-                                            <button :class="cssBtnSupplyHigh"  @click="haddleSupplyFans('high')">High speed</button>
+                                            <button  v-if="!store.state.dataWB.arrayDeviceOn.includes('Supply high')" class="bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn"  @click="haddleSupplyFans('high')">High speed</button>
+                                            <button  v-if="store.state.dataWB.arrayDeviceOn.includes('Supply high')" class="bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn"  @click="haddleSupplyFans('high')">High speed</button>
                                         </div>
                                         <div class="mt-[2.6rem] text-center flex justify-center">
                                             <div class="w-[45%]">
-                                                <div>
-                                                    <button :class="cssBtnForceDryFan" @click="haddleSupplyFans('OFF')">
+                                                <div v-if="!store.state.dataWB.arrayDeviceOn.includes('Supply low') && !store.state.dataWB.arrayDeviceOn.includes('Supply high')">
+                                                    <button class="flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md" >
                                                         <div class="mr-1" >
-                                                            <img v-if="store.state.cssBtnSpplyFanStatus === 'OFF'" src="@/assets/spot_off.png" height="15" width="15" />
-                                                            <img v-if="store.state.cssBtnSpplyFanStatus === 'ON'" src="@/assets/spot_on.png" height="15" width="15"/>
+                                                            <img  src="@/assets/spot_off.png" height="15" width="15" />
                                                         </div>
-                                                        <div class="font-bold text-[10px]">{{store.state.cssBtnSpplyFanStatus}}</div>
+                                                        <div  class="font-bold text-[10px]">OFF</div>
+                                                    </button>
+                                                </div>
+                                                <!-- <div v-if="!store.state.dataWB.arrayDeviceOn.includes('Supply high')">
+                                                    <button class="flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md" >
+                                                        <div class="mr-1" >
+                                                            <img  src="@/assets/spot_off.png" height="15" width="15" />
+                                                        </div>
+                                                        <div  class="font-bold text-[10px]">OFF</div>
+                                                    </button>
+                                                </div> -->
+                                                <div v-if="store.state.dataWB.arrayDeviceOn.includes('Supply low')">
+                                                    <button class="flex border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" >
+                                                        <div class="mr-1" >
+                                                            <img src="@/assets/spot_on.png" height="15" width="15"/>
+                                                        </div>
+                                                        <div  class="font-bold text-[10px]">ON</div>
+                                                    </button>
+                                                </div>
+                                                <div v-if="store.state.dataWB.arrayDeviceOn.includes('Supply high')">
+                                                    <button class="flex border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" >
+                                                        <div class="mr-1" >
+                                                            <img src="@/assets/spot_on.png" height="15" width="15"/>
+                                                        </div>
+                                                        <div  class="font-bold text-[10px]">ON</div>
                                                     </button>
                                                 </div>
                                             </div>
@@ -303,7 +347,7 @@ const haddleBtnOnOff = () => {
                         </div>
                     </div>
 
-                    <div class="text-[14px]" v-if="menuPage === 'IAQ'">
+                    <div class="text-[14px] " v-if="menuPage === 'IAQ'">
                         <div class="grid grid-cols-3 ml-3 mt-6">
                             <div>
                                 <div class="">Temperature</div>
@@ -313,7 +357,7 @@ const haddleBtnOnOff = () => {
                                     </div>
                                     <div class="text-[14px] translate-y-[10px] ml-1">
                                         <span class="font-bold ">{{store.state.dataWB.temp}}</span>
-                                        <span style='font-size:15px;'>&#8451;</span>
+                                        <span class="ml-1" style='font-size:15px;'>&#8451;</span>
                                     </div>
                                 </div>
                             </div>
@@ -321,8 +365,8 @@ const haddleBtnOnOff = () => {
                                 <div class="">PM2.5</div>
                                 <div class="flex">
                                     <span><PMLogoVue/></span>
-                                    <span class="font-bold text-[14px] translate-y-[10px] ml-1">{{store.state.dataWB.pm25}}</span>
-                                    <span class="text-[14px] translate-y-[10px] ml-2">µg/m3</span>
+                                    <span class="font-bold text-[14px] translate-y-[10px] ml-3">{{store.state.dataWB.pm25}}</span>
+                                    <span class="text-[14px] translate-y-[10px] ml-1 ">µg/m3</span>
                                 </div>
                             </div>
                             <div>
@@ -339,8 +383,8 @@ const haddleBtnOnOff = () => {
                                 <div class="">VOCs</div>
                                 <div class="flex">
                                     <span><VOCsLogoVue/></span>
-                                    <span class="font-bold text-[14px] translate-y-[10px] ml-1">{{store.state.dataWB.voc}}</span>
-                                    <span class="text-[14px] translate-y-[10px]">ppm</span>
+                                    <span class="font-bold text-[14px] translate-y-[10px] ml-3">{{store.state.dataWB.voc}}</span>
+                                    <span class="text-[14px] translate-y-[10px] ml-1">ppm</span>
                                 </div>
                             </div>
                             <div>
@@ -358,22 +402,22 @@ const haddleBtnOnOff = () => {
                 </div>  <!-- IAQ -->
 
                 
-                <div class="w-[500px] h-[85px] bg-[#F3F4F8] mt-1 m-auto rounded-md" v-if="menuPage === 'IAQ'">
+                <div class="w-[490px] h-[80px] bg-[#F3F4F8] mt-2 m-auto rounded-md" v-if="menuPage === 'IAQ'">
                     <div class="title-detail setbold text-[#2A83B5] ml-2 text-[14px]">System</div>
                     <div class="flex justify-around text-[14px] mt-3">
                         <div class="translate-y-[-8px] translate-x-[-20px]">
                             <div>Mode</div>
-                            <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan') && store.state.dataWB.arrayDeviceOn.includes('Supply low')"  class="flex border-[2px] border-[#699BF7] pl-3 pr-3 pt-1 pb-1 rounded-md">
+                            <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan') && store.state.dataWB.arrayDeviceOn.includes('Supply low')"  class="flex border-[2px] border-[#699BF7] pl-3 pr-3 rounded-md">
                                 <div class=" text-[#699BF7] font-bold text-[13px]">Fresh Mode</div>
                             </div>
-                            <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan') && store.state.dataWB.arrayDeviceOn.includes('Supply high')"  class="flex border-[2px] border-[#36A090] pl-3 pr-3 pt-1 pb-1 rounded-md">
+                            <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan') && store.state.dataWB.arrayDeviceOn.includes('Supply high')"  class="flex border-[2px] border-[#36A090] pl-3 pr-3 rounded-md">
                                 <div  class=" text-[#36A090] font-bold text-[13px]">Flush Mode</div>
                             </div>
-                            <div  v-if="store.state.dataWB.arrayDeviceOn.length < 2 "  class="flex border-[2px] border-[#777777] pl-3 pr-3 pt-1 pb-1 rounded-md">
+                            <div  v-if="store.state.dataWB.arrayDeviceOn.length < 2 "  class="flex border-[2px] border-[#777777] pl-3 pr-3 rounded-md">
                                 <div  class=" text-[#777777] font-bold text-[13px]">Stand by</div>
                             </div>
                         </div>
-                        <div class="translate-y-[-8px] translate-x-[-31px]">
+                        <div class="translate-y-[-8px] translate-x-[-20px]">
                             <div>Supply Fan</div>
                             <div class="flex">
                                 <div class="mr-2">
@@ -383,17 +427,17 @@ const haddleBtnOnOff = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <div  v-if="store.state.dataWB.arrayDeviceOn.includes('n/a') ||  store.state.dataWB.arrayDeviceOn.length === 0" class="flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md">
+                                    <div  v-if="store.state.dataWB.arrayDeviceOn.includes('n/a') ||  store.state.dataWB.arrayDeviceOn.length === 0" class="flex border-2 border-[#777777] pl-2 pr-2  text-[#777777] rounded-md">
                                         <div class="mr-1">
                                             <img src="@/assets/spot_off.png" height="20" width="20" />
                                         </div>
-                                        <div class="translate-y-[2px] font-bold text-[10px]">{{store.state.cssBtnSpplyFanStatus}}</div>
+                                        <div class="translate-y-[2px] font-bold text-[10px]">OFF</div>
                                     </div>
-                                    <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Supply low') || store.state.dataWB.arrayDeviceOn.includes('Supply high')" class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
+                                    <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Supply low') || store.state.dataWB.arrayDeviceOn.includes('Supply high')" class="flex border-2 border-[#66B6AB] pl-2 pr-2  text-[#66B6AB] rounded-md">
                                         <div class="mr-1">
                                             <img src="@/assets/spot_on.png" height="20" width="20"/>
                                         </div>
-                                        <div class="translate-y-[2px] font-bold text-[10px]">{{store.state.cssBtnSpplyFanStatus}}</div>
+                                        <div class="translate-y-[2px] font-bold text-[10px]">ON</div>
                                     </div>
                                 </div>
                             </div>
@@ -408,17 +452,17 @@ const haddleBtnOnOff = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <div  v-if="store.state.dataWB.arrayDeviceOn.includes('n/a') ||  store.state.dataWB.arrayDeviceOn.length === 0" class="flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md">
+                                    <div  v-if="!store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')" class="flex border-2 border-[#777777] pl-2 pr-2  text-[#777777] rounded-md">
                                         <div class="mr-1">
                                             <img src="@/assets/spot_off.png" height="20" width="20" />
                                         </div>
-                                        <div class="translate-y-[2px] font-bold text-[10px]">{{store.state.haddleBtnExhaustStatus}}</div>
+                                        <div class="translate-y-[2px] font-bold text-[10px]">OFF</div>
                                     </div>
-                                    <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')" class="flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md">
+                                    <div  v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')" class="flex border-2 border-[#66B6AB] pl-2 pr-2  text-[#66B6AB] rounded-md">
                                         <div class="mr-1">
                                             <img src="@/assets/spot_on.png" height="20" width="20"/>
                                         </div>
-                                        <div class="translate-y-[2px] font-bold text-[10px]">{{store.state.haddleBtnExhaustStatus}}</div>
+                                        <div class="translate-y-[2px] font-bold text-[10px]">ON</div>
                                     </div>
                                 </div>
                             </div>
@@ -427,10 +471,10 @@ const haddleBtnOnOff = () => {
                 </div> <!-- System -->
                 <div class="flex justify-center mt-2 translate-y-[-3px]">
                     <div class="mr-1">
-                        <button :class="cssBtnWBParam" @click="haddleSelectPage(1)">IAQ</button>
+                        <button :class="cssBtnWBParam" @click="haddleSelectPage(1)">Data Page 1/2</button>
                     </div>
                     <div class="ml-1">
-                        <button :class="cssBtnWBController" @click="haddleSelectPage(2)">Control panel</button>
+                        <button :class="cssBtnWBController" @click="haddleSelectPage(2)">Control panel Page 2/2</button>
                     </div>
                 </div>
             </div>

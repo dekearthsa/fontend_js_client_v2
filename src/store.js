@@ -23,16 +23,16 @@ export default createStore({
 
         dataWB:{
             onloadData: true,
-            temp: "n/a",
-            pressure: "n/a",
-            co2: "n/a",
-            pm25: "n/a",
-            voc: "n/a",
-            isOn: false,
+            temp: "30",
+            pressure: "100",
+            co2: "200",
+            pm25: "20",
+            voc: "10",
+            isOn: true,
             isAuto: false,
-            iaq: "n/a",
-            humid: "n/a",
-            arrayDeviceOn: ["n/a"]
+            iaq: "Good",
+            humid: "55",
+            arrayDeviceOn: ["Exhaust fan", "Supply low"]
         },
         dataAD:{
             onloadData: true,
@@ -43,16 +43,17 @@ export default createStore({
             alwaydry_2_start: "n/a",
             alwaydry_2active: "n/a",
             lightActive: "n/a",
-            arrayDeviceActive: ["n/a"],
+            arrayDeviceActive: [],
             stopTime: "n/a",
             endSystem: true,
             isAuto: false,
-            isOn: false,
+            isOn: true,
         },
         dataLFL:{
             onloadData: true,
             isLightOn: false,
-            arrayBattery: []
+            lowBattery: 0,
+            arrayBattery: [],
         }
     }
 })

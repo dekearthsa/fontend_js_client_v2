@@ -2,13 +2,13 @@
 // import LightForLifeLogoVue from "@/components/icons/LightForLifeLogo.vue"
 import { useRouter } from 'vue-router';
 import { useStore } from "vuex"
-import LightForLifeLogoVue from '../icons/LightForLifeLogo.vue';
-import { onMounted, ref } from 'vue'
+import {  ref } from 'vue'
+import axios from "axios";
 const router = useRouter();
 const store = useStore();
 // const store.state.mainPageBatteryPercent = ref(60);
 
-
+const isloadingIsOn = ref(false);
 const haddleRouteLightForLife = () => {
   router.push("/lightforlife")
 }
@@ -27,6 +27,30 @@ const haddleBtnOnOff = () => {
     store.state.lightForLifeState = true;
   }
 }
+
+const haddleOnOff = async (command) => {
+    isloadingIsOn.value = true
+    if(command){
+        const warp = {
+            system: "zone1",
+            command:false
+        }
+        await axios.post(`http://localhost:8090/api/update/lfl/onOff`, warp);
+        setTimeout(() => {
+            isloadingIsOn.value = false
+        }, 1500);
+    }else{
+        const warp = {
+            system: "zone1",
+            command:true
+        }
+        await axios.post(`http://localhost:8090/api/update/lfl/onOff`, warp);
+        setTimeout(() => {
+            isloadingIsOn.value = false
+        }, 1500);
+    }
+}
+
 
 
 
@@ -51,14 +75,14 @@ const haddleBtnOnOff = () => {
       <div class="status-c m-auto w-[200px] h-[85px] bg-[#F3F4F8] mt-2 rounded-lg">
         <div class="flex">
           <div class="ml-5 mt-3">
-            <button @click="haddleBtnOnOff">
+            <button @click="haddleOnOff(store.state.dataLFL.isLightOn)">
               <!-- <div :class="store.state.lightForLifeDiv">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.lightForLifeSvg" class="w-6 h-6 m-auto translate-y-[3px]">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
                 </svg>
               </div> -->
-              <img v-if="store.state.lightForLifeState" src="@/assets/btn_on_lfl.png" width="38" height="38" />
-              <img v-if="!store.state.lightForLifeState" src="@/assets/btn_off.png" width="38" height="38" />
+              <img  v-if="store.state.dataLFL.isLightOn" src="@/assets/btn_on_lfl.png" width="38" height="38" />
+              <img  v-if="!store.state.dataLFL.isLightOn" src="@/assets/btn_off.png" width="38" height="38" />
             </button>
             <div class="text-[14px] translate-x-[-5px] font-bold">
               ON/OFF
@@ -78,54 +102,54 @@ const haddleBtnOnOff = () => {
         <div class="translate-y-[5px]">
           <div class="absolute flex ml-5 mt-4">
             <div class="mr-1">
-              <svg v-if="store.state.mainPageBatteryPercent <= 50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                fill="currentColor" class="w-[12px] h-[12px]">
+              <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                fill="currentColor" class="w-[12px] h-[12px] translate-y-[2px]">
                 <path
                   d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
               </svg>
-              <svg v-if="store.state.mainPageBatteryPercent <= 79 && store.state.mainPageBatteryPercent > 50" xmlns="http://www.w3.org/2000/svg"
+              <!-- <svg v-if="store.state.dataLFL.lowBattery.Battery <= 79 && store.state.dataLFL.lowBattery.Battery > 50" xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24" fill="currentColor" class="w-[12px] h-[12px]">
                 <path
                   d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
               </svg>
-              <svg v-if="store.state.mainPageBatteryPercent > 79" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+              <svg v-if="store.state.dataLFL.lowBattery.Battery > 79" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                 fill="currentColor" class="w-[12px] h-[12px]">
                 <path
                   d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
-              </svg>
+              </svg> -->
             </div>
             <div class="text-[10px]">
-              {{ store.state.mainPageBatteryPercent }}%
+              {{ store.state.dataLFL.lowBattery.Battery }}%
             </div>
           </div>
           <div class="flex">
             <div class="translate-y-[-8px] ml-3">
-              <svg v-if="store.state.mainPageBatteryPercent <= 50" xmlns="http://www.w3.org/2000/svg" fill="none"
+              <svg v-if="store.state.dataLFL.lowBattery.Battery <= 50" xmlns="http://www.w3.org/2000/svg" fill="none"
                 viewBox="0 0 24 24" stroke-width="1.5" stroke="#AA0000" class="w-[60px] h-[60px]">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
               </svg>
-              <svg v-if="store.state.mainPageBatteryPercent <= 79 && store.state.mainPageBatteryPercent > 50" xmlns="http://www.w3.org/2000/svg"
+              <svg v-if="store.state.dataLFL.lowBattery.Battery <= 79 && store.state.dataLFL.lowBattery.Battery > 50" xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#D29500" class="w-[60px] h-[60px]">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
               </svg>
-              <svg v-if="store.state.mainPageBatteryPercent > 79" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              <svg v-if="store.state.dataLFL.lowBattery.Battery > 79" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="#36A090" class="w-[60px] h-[60px]">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M21 10.5h.375c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125H21M3.75 18h15A2.25 2.25 0 0 0 21 15.75v-6a2.25 2.25 0 0 0-2.25-2.25h-15A2.25 2.25 0 0 0 1.5 9.75v6A2.25 2.25 0 0 0 3.75 18Z" />
               </svg>
             </div>
             <div class="text-[11px] translate-x-[24px] mt-3 ml-2 font-bold text-[#CB2A28]">
-              <div v-if="store.state.mainPageBatteryPercent <= 50" class="text-[#CB2A28]">
+              <div v-if="store.state.dataLFL.lowBattery.Battery <= 50" class="text-[#CB2A28]">
                 <div>Need replace</div>
                 <div>new battery</div>
               </div>
-              <div v-if="store.state.mainPageBatteryPercent <= 79 && store.state.mainPageBatteryPercent > 50" class="text-[#D29500]">
+              <div v-if="store.state.dataLFL.lowBattery.Battery <= 79 && store.state.dataLFL.lowBattery.Battery > 50" class="text-[#D29500]">
                 <div>Your battery</div>
                 <div>health is Fair</div>
               </div>
-              <div v-if="store.state.mainPageBatteryPercent > 79" class="text-[#36A090]">
+              <div v-if="store.state.dataLFL.lowBattery.Battery > 79" class="text-[#36A090]">
                 <div>Your battery</div>
                 <div>health is Good</div>
               </div>

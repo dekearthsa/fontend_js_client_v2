@@ -7,14 +7,16 @@ import HomeLightForLifeComponents from "../components/HomeComponents/HomeLightFo
 import axios from 'axios'
 
 const store = useStore();
+
 const fetchLoopFunction =  () => {
+
   const command = {
     'system': 'zone1'
   }
+
   setInterval(async () => {
     try{
       const onSetDataWB = await axios.post(`http://localhost:8088/api/send/wb`,command);
-      // console.log(onSetDataWB.data)
       store.state.dataWB.temp = onSetDataWB.data.data.temperature?onSetDataWB.data.data.temperature:"n/a"
       store.state.dataWB.pressure = onSetDataWB.data.data.pressure?parseFloat(onSetDataWB.data.data.pressure):"n/a"
       store.state.dataWB.co2 = onSetDataWB.data.data.co2?onSetDataWB.data.data.co2:"n/a"
@@ -71,7 +73,7 @@ const fetchLoopFunction =  () => {
 
     try{
       const onSetDataLFL = await axios.post(`http://localhost:8088/api/send/battery`, command);
-      // console.log(onSetDataLFL.data)
+      store.state.dataLFL.lowBattery = onSetDataLFL.data.lowBattery
       store.state.dataLFL.arrayBattery = onSetDataLFL.data.batteryData[0]?onSetDataLFL.data.batteryData:["n/a"]
       store.state.dataLFL.isLightOn = onSetDataLFL.data.status?onSetDataLFL.data.status:false
     }catch(err){

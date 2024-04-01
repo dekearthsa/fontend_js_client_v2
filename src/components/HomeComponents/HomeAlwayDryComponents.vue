@@ -2,7 +2,28 @@
 import { useRouter } from 'vue-router';
 import {useStore} from "vuex"
 // import AlwayDryLogoVue from '../icons/AlwayDryLogo.vue';
-import {ref} from "vue"
+import {onMounted,ref, computed} from 'vue'
+import axios from "axios";
+
+const stopTime = ref("StandBy")
+const isloadingIsOn = ref(false);
+
+const millisToMinutesAndSeconds = (millis) => {
+    const minutes = Math.floor(millis / 60000);
+    const seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
+
+onMounted(() => {
+  setInterval(() => {
+    const date = new Date();
+    const ms = date.getTime();
+    stopTime.value = store.state.dataAD.stopTime - ms <= 0?'StandBy':millisToMinutesAndSeconds(store.state.dataAD.stopTime - ms)
+  }, 2000);
+})
+
+
 
 
 const router = useRouter();
@@ -15,17 +36,51 @@ const haddleRouteAlwayDry = () => {
 
 const haddleBtnOnOff = () => {
     if(store.state.alwayDryStte){
-      // store.state.alwayDryBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
-      // store.state.alwayDryDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
-      // store.state.alwayDrySvg = "#FFFFFF";
       store.state.alwayDryStte = false;
     }else{
-      // store.state.alwayDryBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#FFF2D5]";
-      // store.state.alwayDryDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#ED7D31]";
-      // store.state.alwayDrySvg = "#ED7D31";
       store.state.alwayDryStte = true;
     }
   }
+
+
+  const haddleOnOff = async (command) => {
+    isloadingIsOn.value = true
+    console.log(command)
+    if(command){
+        const warp = {
+            system: 'zone1',
+            command: false
+        }
+        const status = await axios.post(`http://localhost:8090/api/update/ad/onOff`, warp);
+        if(status.data === 'ok'){
+            setTimeout(() => {
+                isloadingIsOn.value = false
+            }, 1500);
+        }else{
+            console.log("err => ",status.data)
+            setTimeout(() => {
+                isloadingIsOn.value = false
+            }, 1500);
+        }
+    }else{
+        const warp = {
+            system: 'zone1',
+            command: true
+        }
+        const status = await axios.post(`http://localhost:8090/api/update/ad/onOff`, warp);
+        if(status.data === 'ok'){
+            setTimeout(() => {
+                isloadingIsOn.value = false
+            }, 1500);
+        }else{
+            console.log("err => ",status.data)
+            setTimeout(() => {
+                isloadingIsOn.value = false
+            }, 1500);
+        }
+
+    }
+}
 
 </script>
 
@@ -47,14 +102,9 @@ const haddleBtnOnOff = () => {
       <div class="status-c m-auto w-[200px] h-[85px] bg-[#F3F4F8] mt-2 rounded-lg"> 
         <div class="flex">
           <div class="ml-5 mt-3">
-            <button @click="haddleBtnOnOff" >
-              <!-- <div :class="store.state.alwayDryDiv">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.alwayDrySvg" class="w-6 h-6 m-auto translate-y-[3px]">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />
-                </svg>
-              </div> -->
-              <img v-if="store.state.alwayDryStte" src="@/assets/btn_on_ad.png" width="38" height="38"/>
-              <img v-if="!store.state.alwayDryStte" src="@/assets/btn_off.png" width="38" height="38"/>
+            <button @click="haddleOnOff(store.state.dataAD.isOn)" >
+              <img  v-if="store.state.dataAD.isOn" src="@/assets/btn_on_ad.png" width="38" height="38"/>
+              <img v-if="!store.state.dataAD.isOn" src="@/assets/btn_off.png" width="38" height="38"/>
             </button>
             <div class="text-[14px] translate-x-[-5px] font-bold">
               ON/OFF
@@ -73,8 +123,9 @@ const haddleBtnOnOff = () => {
       <div class="data-c m-auto bg-[#F3F4F8] w-[200px] h-[65px] mt-2 rounded-lg">
         <div class="set-timing font-bold flex justify-around">
           <div class="mt-3 text-[#36A090]">
-            <div class="translate-x-[3px] text-[16px]">15</div>
-            <div class="translate-y-[-5px] text-[14px]">Mins</div>
+            <div v-if="stopTime !== 'StandBy'" class="translate-x-[3px]">{{stopTime}}</div>
+            <div v-if="stopTime !== 'StandBy'" class="translate-y-[-5px] text-[14px]">Mins</div>
+            <div v-if="stopTime === 'StandBy'" class="mt-2 text-[14px]">StandBy</div>
           </div>
           <div class="text-[12px] mt-3 translate-y-[2px] translate-x-[-5px]">
             <div>Time</div>

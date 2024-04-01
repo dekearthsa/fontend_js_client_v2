@@ -5,18 +5,18 @@
   import { useRouter } from 'vue-router';
   import {useStore} from "vuex" 
   import {ref} from "vue"
-
+  import axios from "axios";
 
 
   const router = useRouter();
   const store = useStore();
-  
+  const isloadingIsOn = ref(false);
 
   const haddleWellBreath = () => {
     router.push("/wellbreath");
   }
 
-  const percentBattery = ref(100);
+  // const percentBattery = ref(100);
 
 
 const haddleBtnOnOff = () => {
@@ -24,24 +24,62 @@ const haddleBtnOnOff = () => {
       // store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
       // store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
       // store.state.wellBreathSvg = "#FFFFFF";
-      store.state.wellBreathState = false;
+      store.state.dataWB.isOn = false
     }else{
       // store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]";
       // store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#00B0F0]";
       // store.state.wellBreathSvg = "#00B0F0";
-      store.state.wellBreathState = true;
+      store.state.dataWB.isOn = true
     }
   }
 
-  const haddleDebugIAQ = () => {
-    if(store.state.iaqParamState === 0){
-      store.state.iaqParamState = 1;
-    }else if(store.state.iaqParamState === 1){
-      store.state.iaqParamState = 2;
-    }else if(store.state.iaqParamState === 2){
-      store.state.iaqParamState = 0;
+  const haddleOnMode = async (data) => {
+    // console.log(data)
+    isloadingIsOn.value = true
+    try{
+        if(data === true){
+            const command = {
+                selection: "isOn",
+                system: "zone1",
+                command: false
+            }
+            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            if(status === "ok"){
+                setTimeout(() => {
+                    isloadingIsOn.value = false
+                }, 1500);
+                
+            }else{
+                setTimeout(() => {
+                    isloadingIsOn.value = false
+                    // isErrorLoading.value = true
+                }, 1500);
+                
+            }
+
+        }else if(data === false){
+            const command = {
+                selection: "isOn",
+                system: "zone1",
+                command: true
+            }
+            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            if(status === "ok"){
+                setTimeout(() => {
+                    isloadingIsOn.value = false
+                }, 1500)
+            }else{
+                setTimeout(() => {
+                    isloadingIsOn.value = false
+                    isErrorLoading.value = true
+                }, 1500)
+            }
+        }
+    }catch(err){
+        console.log(err);
     }
-  }
+}
+
 
 </script>
 
@@ -62,7 +100,7 @@ const haddleBtnOnOff = () => {
       <div class="status-c m-auto  w-[200px] h-[85px] bg-[#F3F4F8] mt-2 rounded-lg"> 
         <div class="flex">
           <div class="ml-5 mt-3">
-            <button @click="haddleBtnOnOff">
+            <button @click="haddleOnMode(store.state.dataWB.isOn)">
               <!-- <div :class="store.state.wellBreathDiv">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" :stroke="store.state.wellBreathSvg" class="w-6 h-6 m-auto translate-y-[3px]">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9" />

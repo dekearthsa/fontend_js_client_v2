@@ -68,17 +68,17 @@ const haddleBtnOnOff = () => {
                             <button @click="haddleOnOff(store.state.dataLFL.isLightOn)">
                                 <img v-if="store.state.dataLFL.isLightOn" src="@/assets/btn_on_lfl.png" width="38" height="38"/>
                                 <img v-if="!store.state.dataLFL.isLightOn" src="@/assets/btn_off.png" width="38" height="38"/>
-                              </button>
+                            </button>
                             <div class="text-[13px] font-bold">
                                 ON/OFF
                             </div>
                         </div>
-                        <div class="ml-5 mt-2">
-                            <div class="font-bold text-[14px]">
+                        <div class="ml-5 mt-5">
+                            <div class="font-bold text-[12px]">
                                 Status
                             </div>
                             <div
-                                class="border-2 border-[#36A090] w-[56px] text-[14px] font-bold text-center rounded-md text-[#36A090]">
+                                class="border-2 border-[#36A090] w-[56px] text-[12px] font-bold text-center rounded-md text-[#36A090]">
                                 Normal
                             </div>
                         </div>

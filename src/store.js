@@ -32,7 +32,7 @@ export default createStore({
             isAuto: false,
             iaq: "Good",
             humid: "55",
-            arrayDeviceOn: ["Exhaust fan", "Supply low"]
+            arrayDeviceOn: []
         },
         dataAD: {
             onloadData: true,

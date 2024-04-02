@@ -108,12 +108,12 @@ const haddleBtnOnOff = () => {
                                 ON/OFF
                             </div>
                         </div>
-                        <div class="ml-6 mt-3">
-                            <div class="font-bold text-[14px]">
+                        <div class="ml-5 mt-5">
+                            <div class="font-bold text-[12px]">
                                 Status
                             </div>
                             <div
-                                class="border-2 border-[#36A090] w-[56px] text-[14px] font-bold text-center rounded-md text-[#36A090]">
+                                class="border-2 border-[#36A090] w-[56px] text-[12px] font-bold text-center rounded-md text-[#36A090]">
                                 Normal
                             </div>
                         </div>
@@ -122,11 +122,11 @@ const haddleBtnOnOff = () => {
                 <div class="data-c m-auto bg-[#F3F4F8] w-[180px] h-[65px] mt-2 rounded-lg">
                     <div class="set-timing font-bold flex justify-around">
                         <div class="mt-3 text-[#36A090]">
-                            <div>15</div>
-                            <div class="translate-y-[-5px] text-[14px]">Mins</div>
-                            <!-- <div v-if="stopTime !== 'StandBy'" class="translate-x-[3px]">{{stopTime}}</div> -->
-                            <!-- <div v-if="stopTime !== 'StandBy'" class="translate-y-[-5px] text-[14px]">Mins</div> -->
-                            <!-- <div v-if="stopTime === 'StandBy'" class="mt-2 text-[14px]">StandBy</div> -->
+                            <!-- <div class="text-[14px] translate-x-[2px]">15:00</div>
+                            <div class="translate-y-[-5px] translate-x-[7px] text-[13px]">Mins</div> -->
+                            <div v-if="stopTime !== 'StandBy'" class="translate-x-[3px]">{{stopTime}}</div>
+                            <div v-if="stopTime !== 'StandBy'" class="translate-y-[-5px] translate-x-[7px] text-[14px]">Mins</div>
+                            <div v-if="stopTime === 'StandBy'" class="mt-2 text-[14px]">StandBy</div>
                         </div>
                         <div class="text-[11px] mt-2 translate-y-[4px] translate-x-[8px] flex">
                             <div class="mt-2">
@@ -149,12 +149,12 @@ const haddleBtnOnOff = () => {
                                     clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <div class="flex translate-x-[14px]">
+                        <div class="flex translate-x-[8px]">
                             <div>
-                                <img v-if="percentBattery > 60" class="translate-y-[5px]" src="@/assets/bat_max.png" width="35" height="35"/>
-                                <img v-if="percentBattery <= 60 && percentBattery > 50" class="translate-y-[10px]" src="@/assets/bat_max_low.png" width="35" height="35"/>
-                                <img v-if="percentBattery <= 50 && percentBattery > 30" class="translate-y-[10px]" src="@/assets/bat_low.png" width="35" height="35"/>
-                                <img v-if="percentBattery <= 30 && percentBattery >= 0" class="translate-y-[10px]" src="@/assets/bat_empty.png" width="35" height="35"/>
+                                <img v-if="percentBattery > 60" class="translate-y-[5px]" src="@/assets/bat_max.png" width="33" height="33"/>
+                                <img v-if="percentBattery <= 60 && percentBattery > 50" class="translate-y-[10px]" src="@/assets/bat_max_low.png" width="33" height="33"/>
+                                <img v-if="percentBattery <= 50 && percentBattery > 30" class="translate-y-[10px]" src="@/assets/bat_low.png" width="33" height="33"/>
+                                <img v-if="percentBattery <= 30 && percentBattery >= 0" class="translate-y-[10px]" src="@/assets/bat_empty.png" width="33" height="33"/>
                             </div>
                             <div class="text-[#008E29] ml-2 translate-y-[3px] text-[14px] font-bold">
                                 100%

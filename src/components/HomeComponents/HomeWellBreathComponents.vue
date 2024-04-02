@@ -137,7 +137,7 @@ const haddleBtnOnOff = () => {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
               </svg>
             </div>
-            <div class="translate-y-[6px] translate-x-[8px] text-[#00C412] text-[15px] font-bold">
+            <div class="translate-y-[6px] translate-x-[ 1px] text-[#00C412] text-[15px] font-bold">
               Good
             </div>
           </div>
@@ -148,7 +148,7 @@ const haddleBtnOnOff = () => {
               </svg> -->
               <NormalFaceIcon/>
             </div>
-            <div class="translate-y-[5px] translate-x-[15px] text-[#CDC100] text-[15px] font-bold">
+            <div class="translate-y-[5px] translate-x-[20px] text-[#CDC100] text-[15px] font-bold">
               Moderated
             </div>
           </div>
@@ -162,7 +162,7 @@ const haddleBtnOnOff = () => {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 16.318A4.486 4.486 0 0 0 12.016 15a4.486 4.486 0 0 0-3.198 1.318M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
             </svg>
             </div>
-            <div class="translate-y-[5px] translate-x-[20px] text-[#CB2A28] text-[15px] font-bold">
+            <div class="translate-y-[5px] translate-x-[25px] text-[#CB2A28] text-[15px] font-bold">
               Unhealthy
             </div>
           </div>
@@ -174,12 +174,12 @@ const haddleBtnOnOff = () => {
           <div>
             <FilterLogoVue  class="translate-y-[-10px] translate-x-[10px]"/>
           </div>
-          <div class="flex translate-x-[8px]">
+          <div class="flex translate-x-[10px]">
             <div>
-                <img v-if="store.state.dataWB.pressure > 60" class="translate-y-[3px]" src="@/assets/bat_max.png" width="35" height="35"/>
-                <img v-if="store.state.dataWB.pressure <= 60 && store.state.dataWB.pressure > 50" class="translate-y-[3px]" src="@/assets/bat_max_low.png" width="35" height="35"/>
-                <img v-if="store.state.dataWB.pressure <= 50 && store.state.dataWB.pressure > 30" class="translate-y-[3px]" src="@/assets/bat_low.png" width="35" height="35"/>
-                <img v-if="store.state.dataWB.pressure <= 30 && store.state.dataWB.pressure >= 0" class="translate-y-[3px]" src="@/assets/bat_empty.png" width="35" height="35"/>
+                <img v-if="store.state.dataWB.pressure > 60" class="translate-y-[3px]" src="@/assets/bat_max.png" width="33" height="33"/>
+                <img v-if="store.state.dataWB.pressure <= 60 && store.state.dataWB.pressure > 50" class="translate-y-[3px]" src="@/assets/bat_max_low.png" width="33" height="33"/>
+                <img v-if="store.state.dataWB.pressure <= 50 && store.state.dataWB.pressure > 30" class="translate-y-[3px]" src="@/assets/bat_low.png" width="33" height="33"/>
+                <img v-if="store.state.dataWB.pressure <= 30 && store.state.dataWB.pressure >= 0" class="translate-y-[3px]" src="@/assets/bat_empty.png" width="33" height="33"/>
             </div>
             <div class="text-[#008E29] ml-2 translate-y-[-1px] text-[14px] font-bold">
                 {{store.state.dataWB.pressure}}%

@@ -16,22 +16,7 @@
     router.push("/wellbreath");
   }
 
-  // const percentBattery = ref(100);
 
-
-const haddleBtnOnOff = () => {
-    if(store.state.wellBreathState){
-      // store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#DFDFDF]";
-      // store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 bg-[#BDBDBD]";
-      // store.state.wellBreathSvg = "#FFFFFF";
-      store.state.dataWB.isOn = false
-    }else{
-      // store.state.wellBreathBtn = "btn-c rounded-full w-[40px] h-[40px] bg-[#C5F0FF]";
-      // store.state.wellBreathDiv = "rounded-full m-auto  w-[36px] h-[36px] border-2 border-[#00B0F0]";
-      // store.state.wellBreathSvg = "#00B0F0";
-      store.state.dataWB.isOn = true
-    }
-  }
 
   const haddleOnMode = async (data) => {
     // console.log(data)
@@ -71,7 +56,7 @@ const haddleBtnOnOff = () => {
             }else{
                 setTimeout(() => {
                     isloadingIsOn.value = false
-                    isErrorLoading.value = true
+                    // isErrorLoading.value = true
                 }, 1500)
             }
         }

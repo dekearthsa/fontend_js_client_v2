@@ -28,7 +28,6 @@ const fetchLoopFunction =  () => {
       store.state.dataWB.iaq = onSetDataWB.data.data.iaq?onSetDataWB.data.data.iaq:"n/a"
       store.state.dataWB.humid = onSetDataWB.data.data.humid?onSetDataWB.data.data.humid:"n/a"
       store.state.dataWB.arrayDeviceOn = onSetDataWB.data.data.arrayDeviceOn?onSetDataWB.data.data.arrayDeviceOn:["n/a"]
-
     }catch(err){
         store.state.dataWB.temp = "n/a"
         store.state.dataWB.pressure = "n/a"
@@ -82,7 +81,7 @@ const fetchLoopFunction =  () => {
       store.state.dataLFL.arrayBattery = []
       store.state.dataLFL.isLightOn = false
     }
-  }, 2000);
+  }, 1500);
 
 }
 

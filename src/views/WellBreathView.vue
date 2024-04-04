@@ -17,14 +17,6 @@ const menuPage = ref('IAQ');
 const cssBtnWBParam = ref('bg-zinc-400 text-white font-bold text-[14px] w-[200px] h-[22px] rounded-lg');
 const cssBtnWBController = ref('bg-zinc-300 text-white font-bold text-[14px] w-[200px] h-[22px] rounded-lg');
 const cssControllerChange = ref('bg-[#F3F4F8] w-[490px] h-[180px] m-auto rounded-md mb-2');
-const csssStatusSpplyFan = ref('text-red-800 font-bold');
-
-const cssBtnSupplyHigh = ref('bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn');
-const cssBtnSupplyLow = ref('bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn');
-const cssBtnOff = ref('bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn');
-// const cssBtnForceExhaustFan = ref("flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md");
-const cssBtnForceDryFan = ref("flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md");
-const haddleSupplyFan = ref('OFF');
 
 const isloadingIsOn = ref(false);
 
@@ -45,41 +37,14 @@ const haddleSupplyFans = async (evt) => {
         system: "zone1",
         command: evt
     }
+
+    // console.log(command)
     const status = await axios.post("http://localhost:8090/api/forces/wb/supplyfan", command);
+    // console.log(status.data)
     if(status.data !== "ok"){
         alert(status.status)
     }
-    // console.log(evt)
-    // if(evt === 'OFF'){
-    //     if(store.state.cssBtnSpplyFanStatus === 'OFF'){
-    //         alert("Select low speed or high speed to trun on spply fan.")
-    //     }else{
-    //         csssStatusSpplyFan.value = 'text-[#777777] font-bold'
-    //         haddleSupplyFan.value = 'OFF'
-    //         store.state.cssBtnSpplyFanStatus = 'OFF'
-    //         cssBtnForceDryFan.value = 'flex border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md'
-    //         cssBtnOff.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
-    //         cssBtnSupplyLow.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-    //         cssBtnSupplyHigh.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-    //     }
 
-    // }else if(evt === 'low'){
-    //     csssStatusSpplyFan.value = 'text-[#2A83B5] font-bold'
-    //     haddleSupplyFan.value = 'low speed'
-    //     store.state.cssBtnSpplyFanStatus = 'ON'
-    //     cssBtnForceDryFan.value = 'flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md'
-    //     cssBtnOff.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-    //     cssBtnSupplyLow.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
-    //     cssBtnSupplyHigh.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-    // }else if(evt === 'high'){
-    //     csssStatusSpplyFan.value = 'text-[#2A83B5] font-bold'
-    //     haddleSupplyFan.value = 'high speed'
-    //     store.state.cssBtnSpplyFanStatus = 'ON'
-    //     cssBtnForceDryFan.value = 'flex border-2 border-[#66B6AB] pl-3 pr-3 pt-1 pb-1 text-[#66B6AB] rounded-md'
-    //     cssBtnOff.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-    //     cssBtnSupplyLow.value = 'bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn'
-    //     cssBtnSupplyHigh.value = 'bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn'
-    // }
 }
 
 
@@ -107,13 +72,13 @@ onMounted(() => {
 })
 
 
-const haddleBtnOnOff = () => {
-    if(store.state.wellBreathState){
-        store.state.dataWB.isOn = false
-    }else{
-        store.state.dataWB.isOn = true
-    }
-  }
+// const haddleBtnOnOff = () => {
+//     if(store.state.wellBreathState){
+//         store.state.dataWB.isOn = false
+//     }else{
+//         store.state.dataWB.isOn = true
+//     }
+//   }
   const haddleOnMode = async (data) => {
     // console.log(data)
     isloadingIsOn.value = true
@@ -313,8 +278,8 @@ const haddleBtnOnOff = () => {
                                             <button v-if="store.state.dataWB.arrayDeviceOn.includes('Supply low')" class="bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn">Low speed</button>
                                         </div>
                                         <div class="mt-5 -translate-y-[-8px] text-center">
-                                            <button  v-if="!store.state.dataWB.arrayDeviceOn.includes('Supply high')" class="bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn">High speed</button>
-                                            <button  v-if="store.state.dataWB.arrayDeviceOn.includes('Supply high')" class="bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn"  @click="haddleSupplyFans('Supply high')">High speed</button>
+                                            <button  v-if="!store.state.dataWB.arrayDeviceOn.includes('Supply high')" class="bg-[#8A8A8A] w-[80%] text-white rounded-md selection-non-btn" @click="haddleSupplyFans('Supply high')">High speed</button>
+                                            <button  v-if="store.state.dataWB.arrayDeviceOn.includes('Supply high')" class="bg-[#00B0F0] w-[80%] text-white rounded-md selection-non-btn" >High speed</button>
                                         </div>
                                         <div class="mt-[2.6rem] text-center flex justify-center">
                                             <div class="w-[45%]">

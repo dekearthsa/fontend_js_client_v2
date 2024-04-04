@@ -23,15 +23,15 @@ export default createStore({
 
         dataWB: {
             onloadData: true,
-            temp: "30",
-            pressure: "100",
-            co2: "200",
-            pm25: "20",
-            voc: "10",
-            isOn: true,
+            temp: "n/a",
+            pressure: "n/a",
+            co2: "n/a",
+            pm25: "n/a",
+            voc: "n/a",
+            isOn: false,
             isAuto: false,
-            iaq: "Good",
-            humid: "55",
+            iaq: "n/a",
+            humid: "n/a",
             arrayDeviceOn: []
         },
         dataAD: {
@@ -47,7 +47,7 @@ export default createStore({
             stopTime: "n/a",
             endSystem: true,
             isAuto: false,
-            isOn: true,
+            isOn: false,
         },
         dataLFL: {
             onloadData: true,

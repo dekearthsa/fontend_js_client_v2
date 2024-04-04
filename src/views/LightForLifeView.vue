@@ -15,14 +15,6 @@ onMounted(() => {
     store.state.pageNow = "LIGHT FOR LIFE"
 });
 
-const haddleBtnOnOff = () => {
-    if(store.state.lightForLifeState){
-      store.state.lightForLifeState = false;
-    }else{
-      store.state.lightForLifeState = true;
-    }
-  }
-
 
   const haddleOnOff = async (command) => {
     isloadingIsOn.value = true
@@ -131,29 +123,6 @@ const haddleBtnOnOff = () => {
                         </div>
                     </div>
                 </div>
-                <!-- <div class="battery-c bg-[#F3F4F8] rounded-lg w-[180px] h-[67px] mt-2 m-auto">
-                    <div class="text-[14px] font-bold mt-1 ml-1">Battery</div>
-                    <div class="flex justify-around mt-2">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
-                            </svg>
-                        </div>
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#CB2A28"
-                                class="w-6 h-6 translate-y-[-2px]">
-                                <path fill-rule="evenodd"
-                                    d="M.75 9.75a3 3 0 0 1 3-3h15a3 3 0 0 1 3 3v.038c.856.173 1.5.93 1.5 1.837v2.25c0 .907-.644 1.664-1.5 1.838v.037a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3v-6Zm19.5 0a1.5 1.5 0 0 0-1.5-1.5h-15a1.5 1.5 0 0 0-1.5 1.5v6a1.5 1.5 0 0 0 1.5 1.5h15a1.5 1.5 0 0 0 1.5-1.5v-6Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                        <div class="text-[#CB2A28] text-[14px] font-bold">
-                            30%
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
         <div>
@@ -161,143 +130,68 @@ const haddleBtnOnOff = () => {
                 <div class="h-[10px]"></div>
                 <div class="w-[500px] h-[300px] bg-[#F3F4F8] rounded-md m-auto">
                     <div class="text-[#2A83B5] text-[14px] font-bold ml-1">System</div>
-                    <div class="grid grid-cols-2 mt-3">
-                        <div class="">
-                            <div class="text-[14px] ml-2 mt-5">Light Bedroom 1</div>
-                            <div class="flex mt-3">
-                                <div class="mr-2">
-                                    <!-- <LightLogoVue/> -->
-                                    <img v-if="store.state.dataLFL.arrayBattery[0].isRunning" src="@/assets/lfl_on_light.png" width="40" height="40"/>
-                                    <img v-if="!store.state.dataLFL.arrayBattery[0].isRunning" src="@/assets/lfl_off_light.png" width="40" height="40"/>
-                                </div>
-                                <div class="translate-y-[10px] mr-3">
-                                    <!-- <BatteryLowLogoVue/> -->
-                                    <img v-if="store.state.dataLFL.arrayBattery[0].battery > 60"  src="@/assets/bat_max.png" width="40" height="40"/>
-                                    <img v-if="store.state.dataLFL.arrayBattery[0].battery <= 60 && store.state.dataLFL.arrayBattery[0].battery > 50"  src="@/assets/bat_max_low.png" width="40" height="40"/>
-                                    <img v-if="store.state.dataLFL.arrayBattery[0].battery <= 50 && store.state.dataLFL.arrayBattery[0].battery > 30"  src="@/assets/bat_low.png" width="40" height="40"/>
-                                    <img v-if="store.state.dataLFL.arrayBattery[0].battery <= 30 && store.state.dataLFL.arrayBattery[0].battery >= 0"  src="@/assets/bat_empty.png" width="40" height="40"/>
-                                </div>
-                                <div class="font-bold text-[13px] translate-y-[10px]">
-                                    <div class="flex">
-                                        <div class="text-[#36A090]" v-if="store.state.dataLFL.arrayBattery[0].battery > 60">{{store.state.dataLFL.arrayBattery[0].battery}}%</div>
-                                        <div class="text-[#00B050]" v-if="store.state.dataLFL.arrayBattery[0].battery <= 60 && store.state.dataLFL.arrayBattery[0].battery > 50">{{store.state.dataLFL.arrayBattery[0].battery}}%</div>
-                                        <div class="text-[#FFFA7D]" v-if="store.state.dataLFL.arrayBattery[0].battery <= 50 && store.state.dataLFL.arrayBattery[0].battery > 30">{{store.state.dataLFL.arrayBattery[0].battery}}%</div>
-                                        <div class="text-[#FF0000]" v-if="store.state.dataLFL.arrayBattery[0].battery <= 30 && store.state.dataLFL.arrayBattery[0].battery >= 0">{{store.state.dataLFL.arrayBattery[0].battery}}%</div>
-                                        <div class="text-red-700" v-if="store.state.dataLFL.arrayBattery[0].battery <= 30">Charge!</div>
+                    <div >
+                        <div class="grid grid-cols-2 mt-3" >
+                            <div v-for="(item, idx) in store.state.dataLFL.arrayBattery" :key="idx"  class="">
+                                <div class="text-[14px] ml-2 mt-5" v-if="item.subSystem === 'LFL_LIGHT_BEDROOM'">Light Bedroom {{idx + 1}}</div>
+                                <div class="flex mt-3" v-if="item.subSystem === 'LFL_LIGHT_BEDROOM'">
+                                    <div class="mr-2">
+                                        <!-- <LightLogoVue/> -->
+                                        <img v-if="item.isRunning" src="@/assets/lfl_on_light.png" width="40" height="40"/>
+                                        <img v-if="!item.isRunning" src="@/assets/lfl_off_light.png" width="40" height="40"/>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="translate-x-[-50px]">
-                            <div class="text-[14px] ml-2 mt-5">Light Bedroom 2</div>
-                            <div class="flex mt-3">
-                                <div class="mr-2">
-                                    <img v-if="store.state.dataLFL.arrayBattery[1].isRunning" src="@/assets/lfl_on_light.png" width="40" height="40"/>
-                                    <img v-if="!store.state.dataLFL.arrayBattery[1].isRunning" src="@/assets/lfl_off_light.png" width="40" height="40"/>
-                                </div>
-                                <div class="translate-y-[10px] mr-3">
-                                    <img v-if="store.state.dataLFL.arrayBattery[1].battery > 60"  src="@/assets/bat_max.png" width="40" height="40"/>
-                                    <img v-if="store.state.dataLFL.arrayBattery[1].battery <= 60 && store.state.dataLFL.arrayBattery[1].battery > 50"  src="@/assets/bat_max_low.png" width="40" height="40"/>
-                                    <img v-if="store.state.dataLFL.arrayBattery[1].battery <= 50 && store.state.dataLFL.arrayBattery[1].battery > 30"  src="@/assets/bat_low.png" width="40" height="40"/>
-                                    <img v-if="store.state.dataLFL.arrayBattery[1].battery <= 30 && store.state.dataLFL.arrayBattery[1].battery >= 0"  src="@/assets/bat_empty.png" width="40" height="40"/>
-                                </div>
-                                <div class="font-bold text-[13px] translate-y-[10px]">
-                                    <div class="flex">
-                                        <div class="text-[#36A090]" v-if="store.state.dataLFL.arrayBattery[1].battery > 60">{{store.state.dataLFL.arrayBattery[1].battery}}%</div>
-                                        <div class="text-[#00B050]" v-if="store.state.dataLFL.arrayBattery[1].battery <= 60 && store.state.dataLFL.arrayBattery[1].battery > 50">{{store.state.dataLFL.arrayBattery[1].battery}}%</div>
-                                        <div class="text-[#FFFA7D]" v-if="store.state.dataLFL.arrayBattery[1].battery <= 50 && store.state.dataLFL.arrayBattery[1].battery > 30">{{store.state.dataLFL.arrayBattery[1].battery}}%</div>
-                                        <div class="text-[#FF0000]" v-if="store.state.dataLFL.arrayBattery[1].battery <= 30 && store.state.dataLFL.arrayBattery[1].battery >= 0">{{store.state.dataLFL.arrayBattery[1].battery}}%</div>
-                                        <div class="text-red-700" v-if="store.state.dataLFL.arrayBattery[1].battery <= 30">Charge!</div>
+                                    <div class="translate-y-[10px] mr-3">
+                                        <!-- <BatteryLowLogoVue/> -->
+                                        <img v-if="item.battery > 60"  src="@/assets/bat_max.png" width="40" height="40"/>
+                                        <img v-if="item.battery <= 60 && item.battery > 50"  src="@/assets/bat_max_low.png" width="40" height="40"/>
+                                        <img v-if="item.battery <= 50 && item.battery > 30"  src="@/assets/bat_low.png" width="40" height="40"/>
+                                        <img v-if="item.battery <= 30 && item.battery >= 0"  src="@/assets/bat_empty.png" width="40" height="40"/>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-3 mt-10 ">
-                         
-                        <div class=" w-[200px]">
-                            <div class="text-[14px] ml-2 mt-5">Light Bathroom 3</div>
-                            <div class="flex mt-3">
-                                <div class="mr-2">
-                                    <img v-if="store.state.dataLFL.arrayBattery[2].isRunning" src="@/assets/lfl_on_light.png" width="40" height="40"/>
-                                    <img v-if="!store.state.dataLFL.arrayBattery[2].isRunning" src="@/assets/lfl_off_light.png" width="40" height="40"/>
-                                </div>
-                                <div class="translate-y-[10px] mr-3">
-                                    <img v-if="store.state.dataLFL.arrayBattery[2].battery > 60"  src="@/assets/bat_max.png" width="40" height="40"/>
-                                    <img v-if="store.state.dataLFL.arrayBattery[2].battery <= 60 && store.state.dataLFL.arrayBattery[2].battery > 50"  src="@/assets/bat_max_low.png" width="40" height="40"/>
-                                    <img v-if="store.state.dataLFL.arrayBattery[2].battery <= 50 && store.state.dataLFL.arrayBattery[2].battery > 30"  src="@/assets/bat_low.png" width="40" height="40"/>
-                                    <img v-if="store.state.dataLFL.arrayBattery[2].battery <= 30 && store.state.dataLFL.arrayBattery[2].battery >= 0"  src="@/assets/bat_empty.png" width="40" height="40"/>
-                                </div>
-                                <div class="font-bold text-[13px] translate-y-[10px]">
-                                    <div class="flex">
-                                        <div class="text-[#36A090]" v-if="store.state.dataLFL.arrayBattery[2].battery > 60">{{store.state.dataLFL.arrayBattery[2].battery}}%</div>
-                                        <div class="text-[#00B050]" v-if="store.state.dataLFL.arrayBattery[2].battery <= 60 && store.state.dataLFL.arrayBattery[2].battery > 50">{{store.state.dataLFL.arrayBattery[2].battery}}%</div>
-                                        <div class="text-[#FFFA7D]" v-if="store.state.dataLFL.arrayBattery[2].battery <= 50 && store.state.dataLFL.arrayBattery[2].battery > 30">{{store.state.dataLFL.arrayBattery[2].battery}}%</div>
-                                        <div class="text-[#FF0000]" v-if="store.state.dataLFL.arrayBattery[2].battery <= 30 && store.state.dataLFL.arrayBattery[2].battery >= 0">{{store.state.dataLFL.arrayBattery[2].battery}}%</div>
-                                        <div class="text-red-700" v-if="store.state.dataLFL.arrayBattery[2].battery <= 30">Charge!</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="translate-x-[40px]">
-                            <div class="text-[14px] ml-2 mt-5">Sensor</div>
-                            <div class="flex mt-3">
-                                <div class="mr-3 translate-y-[-3px]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9">
-                                        <path fill-rule="evenodd" d="M5.636 4.575a.75.75 0 0 1 0 1.061 9 9 0 0 0 0 12.728.75.75 0 1 1-1.06 1.06c-4.101-4.1-4.101-10.748 0-14.849a.75.75 0 0 1 1.06 0Zm12.728 0a.75.75 0 0 1 1.06 0c4.101 4.1 4.101 10.75 0 14.85a.75.75 0 1 1-1.06-1.061 9 9 0 0 0 0-12.728.75.75 0 0 1 0-1.06ZM7.757 6.697a.75.75 0 0 1 0 1.06 6 6 0 0 0 0 8.486.75.75 0 0 1-1.06 1.06 7.5 7.5 0 0 1 0-10.606.75.75 0 0 1 1.06 0Zm8.486 0a.75.75 0 0 1 1.06 0 7.5 7.5 0 0 1 0 10.606.75.75 0 0 1-1.06-1.06 6 6 0 0 0 0-8.486.75.75 0 0 1 0-1.06ZM9.879 8.818a.75.75 0 0 1 0 1.06 3 3 0 0 0 0 4.243.75.75 0 1 1-1.061 1.061 4.5 4.5 0 0 1 0-6.364.75.75 0 0 1 1.06 0Zm4.242 0a.75.75 0 0 1 1.061 0 4.5 4.5 0 0 1 0 6.364.75.75 0 0 1-1.06-1.06 3 3 0 0 0 0-4.243.75.75 0 0 1 0-1.061ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                                <div class="translate-y-[5px] mr-3">
-                                    <div class="flex">
-                                        <div class="translate-y-[2px] mr-3">
-                                            <img v-if="percentBattery > 60"  src="@/assets/bat_max.png" width="40" height="40"/>
-                                            <img v-if="percentBattery <= 60 && percentBattery > 50"  src="@/assets/bat_max_low.png" width="40" height="40"/>
-                                            <img v-if="percentBattery <= 50 && percentBattery > 30"  src="@/assets/bat_low.png" width="40" height="40"/>
-                                            <img v-if="percentBattery <= 30 && percentBattery >= 0"  src="@/assets/bat_empty.png" width="40" height="40"/>
+                                    <div class="font-bold text-[13px] translate-y-[10px]">
+                                        <div class="flex">
+                                            <div class="text-[#36A090]" v-if="item.battery > 60">{{item.battery}}%</div>
+                                            <div class="text-[#00B050]" v-if="item.battery <= 60 && item.battery > 50">{{item.battery}}%</div>
+                                            <div class="text-[#FFFA7D]" v-if="item.battery <= 50 && item.battery > 30">{{item.battery}}%</div>
+                                            <div class="text-[#FF0000]" v-if="item.battery <= 30 && item.battery >= 0">{{item.battery}}%</div>
+                                            <div class="text-red-700" v-if="item.battery <= 30">Charge!</div>
                                         </div>
-                                        <div class="font-bold translate-y-[2px] text-[13px] text-red-700 ">30%</div>
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
-                        <!-- <div class="translate-x-[50px]">
-                            <div class="text-[14px] ml-2 mt-5">Sensor</div>
-                            <div class="flex mt-3">
-                                <div class="mr-2 translate-y-[-3px]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9">
-                                        <path fill-rule="evenodd" d="M5.636 4.575a.75.75 0 0 1 0 1.061 9 9 0 0 0 0 12.728.75.75 0 1 1-1.06 1.06c-4.101-4.1-4.101-10.748 0-14.849a.75.75 0 0 1 1.06 0Zm12.728 0a.75.75 0 0 1 1.06 0c4.101 4.1 4.101 10.75 0 14.85a.75.75 0 1 1-1.06-1.061 9 9 0 0 0 0-12.728.75.75 0 0 1 0-1.06ZM7.757 6.697a.75.75 0 0 1 0 1.06 6 6 0 0 0 0 8.486.75.75 0 0 1-1.06 1.06 7.5 7.5 0 0 1 0-10.606.75.75 0 0 1 1.06 0Zm8.486 0a.75.75 0 0 1 1.06 0 7.5 7.5 0 0 1 0 10.606.75.75 0 0 1-1.06-1.06 6 6 0 0 0 0-8.486.75.75 0 0 1 0-1.06ZM9.879 8.818a.75.75 0 0 1 0 1.06 3 3 0 0 0 0 4.243.75.75 0 1 1-1.061 1.061 4.5 4.5 0 0 1 0-6.364.75.75 0 0 1 1.06 0Zm4.242 0a.75.75 0 0 1 1.061 0 4.5 4.5 0 0 1 0 6.364.75.75 0 0 1-1.06-1.06 3 3 0 0 0 0-4.243.75.75 0 0 1 0-1.061ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                                <div class="translate-y-[3px] mr-3">
-                                    <div class="flex border-2 h-[25px] border-[#66B6AB] pl-2 pr-2  text-[#66B6AB] rounded-md">
-                                        <div class="translate-y-[2px] mr-1">
-                                            <SpotLogoVue/>
+                        </div>
+                        <div class="grid grid-cols-2 mt-3" >
+                            <div v-for="(item, idx) in store.state.dataLFL.arrayBattery" :key="idx"  class="">
+                                <div class="text-[14px] ml-2 mt-5" v-if="item.subSystem === 'LFL_LIGHT_BATHROOM'">Light Bedroom {{idx + 1}}</div>
+                                <div class="flex mt-3" v-if="item.subSystem === 'LFL_LIGHT_BATHROOM'">
+                                    <div class="mr-2">
+                                        <!-- <LightLogoVue/> -->
+                                        <img v-if="item.isRunning" src="@/assets/lfl_on_light.png" width="40" height="40"/>
+                                        <img v-if="!item.isRunning" src="@/assets/lfl_off_light.png" width="40" height="40"/>
+                                    </div>
+                                    <div class="translate-y-[10px] mr-3">
+                                        <!-- <BatteryLowLogoVue/> -->
+                                        <img v-if="item.battery > 60"  src="@/assets/bat_max.png" width="40" height="40"/>
+                                        <img v-if="item.battery <= 60 && item.battery > 50"  src="@/assets/bat_max_low.png" width="40" height="40"/>
+                                        <img v-if="item.battery <= 50 && item.battery > 30"  src="@/assets/bat_low.png" width="40" height="40"/>
+                                        <img v-if="item.battery <= 30 && item.battery >= 0"  src="@/assets/bat_empty.png" width="40" height="40"/>
+                                    </div>
+                                    <div class="font-bold text-[13px] translate-y-[10px]">
+                                        <div class="flex">
+                                            <div class="text-[#36A090]" v-if="item.battery > 60">{{item.battery}}%</div>
+                                            <div class="text-[#00B050]" v-if="item.battery <= 60 && item.battery > 50">{{item.battery}}%</div>
+                                            <div class="text-[#FFFA7D]" v-if="item.battery <= 50 && item.battery > 30">{{item.battery}}%</div>
+                                            <div class="text-[#FF0000]" v-if="item.battery <= 30 && item.battery >= 0">{{item.battery}}%</div>
+                                            <div class="text-red-700" v-if="item.battery <= 30">Charge!</div>
                                         </div>
-                                        <div class="translate-y-[3px] font-bold text-[10px]">ON</div>
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <div class="text-center m-auto mt-4">
-        <button class="text-[#2A83B5]" @click="haddleRouteHome">
-            <div class="flex">
-                <span class="mr-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                        <path
-                            d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
-                        <path
-                            d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
-                    </svg>
-                </span>
-                <span>HOME</span>
-            </div>
-        </button>
-    </div> -->
 </template>
 
 <style scoped>

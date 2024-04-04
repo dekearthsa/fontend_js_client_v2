@@ -36,13 +36,36 @@ onMounted(() => {
 
 
 
-const haddleBtnOnOff = () => {
-    if(store.state.alwayDryStte){
-      store.state.alwayDryStte = false;
-    }else{
-      store.state.alwayDryStte = true;
+const haddleExhaustFan = async (evt) => {
+    const command = {
+        system: "zone1",
+        command: evt
     }
-  }
+    const status = await axios.post("http://localhost:8090/api/forces/ad/exhaust", command);
+    if(status.data !== "ok"){
+        alert(status.status)
+    }
+}
+
+const haddleDryFan = async (evt) => {
+    console.log(evt)
+    const command = {
+        system: "zone1",
+        command: evt
+    }
+    const status = await axios.post("http://localhost:8090/api/forces/ad/dryfan", command);
+    if(status.data !== "ok"){
+        alert(status.status)
+    }
+}   
+
+// const haddleBtnOnOff = () => {
+//     if(store.state.alwayDryStte){
+//       store.state.alwayDryStte = false;
+//     }else{
+//       store.state.alwayDryStte = true;
+//     }
+//   }
 
 
   const haddleOnOff = async (command) => {
@@ -180,13 +203,21 @@ const haddleBtnOnOff = () => {
                             <div>
                                 <div class="mt-2">
                                     <div>
-                                        <button v-if="!store.state.dataAD.arrayDeviceActive.includes('Exhaust Fan')" class="flex justify-center m-auto border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md" @click="haddleExhaustFan">
+                                        <button 
+                                            v-if="!store.state.dataAD.arrayDeviceActive.includes('Exhaust Fan')" 
+                                            class="flex justify-center m-auto border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md" 
+                                            @click="haddleExhaustFan('exhaust_on')"
+                                            >
                                             <div class="mr-1" >
                                                 <img  src="@/assets/spot_off.png" height="15" width="15" />
                                             </div>
                                             <div class="font-bold text-[10px]">OFF</div>
                                         </button>
-                                        <button  v-if="store.state.dataAD.arrayDeviceActive.includes('Exhaust Fan')" class="flex justify-center m-auto border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" @click="haddleExhaustFan">
+                                        <button  
+                                            v-if="store.state.dataAD.arrayDeviceActive.includes('Exhaust Fan')" 
+                                            class="flex justify-center m-auto border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" 
+                                            @click="haddleExhaustFan('exhaust_off')"
+                                            >
                                             <div class="mr-1" >
                                                 <img src="@/assets/spot_on.png" height="15" width="15"/>
                                             </div>
@@ -205,13 +236,21 @@ const haddleBtnOnOff = () => {
                                 <div>
                                     <div class="mt-3">
                                         <div>
-                                            <button v-if="!store.state.dataAD.arrayDeviceActive.includes('Dry Fan')" class="flex justify-center m-auto border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md" @click="haddleExhaustFan">
+                                            <button 
+                                                v-if="!store.state.dataAD.arrayDeviceActive.includes('Dry Fan')" 
+                                                class="flex justify-center m-auto border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md" 
+                                                @click="haddleDryFan('dryFan_on')"
+                                            >
                                                 <div class="mr-1" >
                                                     <img  src="@/assets/spot_off.png" height="15" width="15" />
                                                 </div>
                                                 <div class="font-bold text-[10px]">OFF</div>
                                             </button>
-                                            <button  v-if="store.state.dataAD.arrayDeviceActive.includes('Dry Fan')" class="flex justify-center m-auto border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" @click="haddleExhaustFan">
+                                            <button  
+                                                v-if="store.state.dataAD.arrayDeviceActive.includes('Dry Fan')" 
+                                                class="flex justify-center m-auto border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" 
+                                                @click="haddleDryFan('dryFan_off')"
+                                            >
                                                 <div class="mr-1" >
                                                     <img src="@/assets/spot_on.png" height="15" width="15"/>
                                                 </div>
@@ -233,7 +272,7 @@ const haddleBtnOnOff = () => {
                                 <div>
                                     <div class="mt-5 translate-y-[3px]">
                                         <div>
-                                            <button class="flex justify-center m-auto border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" @click="haddleExhaustFan">
+                                            <button class="flex justify-center m-auto border-2 border-[#36A090] pl-3 pr-3 pt-1 pb-1 text-[#36A090] rounded-md" >
                                                 <div class="mr-1" >
                                                     <img src="@/assets/spot_on.png" height="15" width="15"/>
                                                 </div>

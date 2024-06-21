@@ -76,6 +76,12 @@ const setDate = () => {
 };
 
 
+const haddleLogging = () => {
+  console.log("push")
+  router.push("/logging")
+}
+
+
 const timing = () => {
   const date = new Date(); 
   const SET_INT = [1,2,3,4,5,6,7,8,9]
@@ -99,10 +105,11 @@ const timing = () => {
 <template>
   <div class="header-home h-[74px] rounded-b-3xl">
     <div class="flex justify-between">
-      <div @click="haddleRouteHome" class="text-white mt-3 ml-5 font-bold text-[24px] flex">
-        <div>MY ROOM</div>
+      <div  class="text-white mt-3 ml-5 font-bold text-[24px] flex">
+        <div @click="haddleRouteHome">MY ROOM</div>
         <div class="border-l-[3px] ml-3 border-white" v-if="store.state.pageNow!== ''"></div>
         <div class="ml-3" v-if="store.state.pageNow!== ''">{{ store.state.pageNow }}</div>
+        <div class=" text-[15px] ml-5 mt-2"><button @click="haddleLogging" class="bg-sky-400 w-[100px] rounded-md logging-btn">Logging</button></div>
       </div>
       <div></div>
       <div class="text-white mt-1 mr-5 font-bold text-[16px]">
@@ -113,9 +120,14 @@ const timing = () => {
   </div>
 </template>
 
+ 
+
 <style scoped>
 .header-home{
   background: #2C82B3;
+}
 
+.logging-btn{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 </style>

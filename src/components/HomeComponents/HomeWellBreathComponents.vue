@@ -70,7 +70,7 @@
 
 <template>
   <div class="">
-    <div class="icon ">
+    <div class="icon m-auto text-center">
       <WellBreathLogoVue class="m-auto"/>
     </div>
     <div class="detail w-[240px] h-[290px] bg-white rounded-lg translate-y-[-10px]">

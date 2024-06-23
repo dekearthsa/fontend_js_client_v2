@@ -1,7 +1,13 @@
 <template>
     <div>
-        <div class="m-auto text-center mb-5">
-            <div>Wellbreath</div>
+        <div class="m-auto text-center mb-5 flex justify-center">
+            <div class="mr-2">Wellbreath</div>
+            <button class="ml-2" @click="funcReloadLogging()">
+                <img src="@/assets/refresh.png" width="30" height="30"/>
+            </button>
+            <!-- <button v-if="fullLog !== ''" class="ml-2" @click="funcFetchLogging">
+                <img src="@/assets/refresh.png" width="30" height="30"/>
+            </button> -->
         </div>
         <div v-if="fullLog !== ''">
             <div class="">
@@ -125,7 +131,7 @@
 <script setup>
 // import router from '@/router'
 import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 const errorDesc = ref("")
 const fullLog = ref("")
@@ -173,7 +179,39 @@ const haddleNextPage = async (page) => {
     selectIdx.value = page
 }
 
-const funcFetchLogging = async () => {
+const funcReloadLogging = async () => {
+    loggingList.value = []
+    await funcFetchLogging();
+    await funcHaddlePush(fullLog.value);
+}
+
+const funcFetchLogging = async (evt) => {
+    console.log("funcFetchLogging")
+    // if (evt === "reload"){
+    //     try {
+    //     isloading.value = true
+    //     const loggingData = await axios.get("http://localhost:8088/api/get/logging/wb")
+    //     await funcHaddlePush(fullLog.value);
+    //     // console.log("loggingData => ",loggingData.data)
+    //     datalogging.value = loggingData.data
+    //     isloading.value = false
+    // } catch (err) {
+    //     errorDesc.value = err.message
+    //     isloading.value = false
+    // }
+    // }else{
+    //     try {
+    //     isloading.value = true
+    //     const loggingData = await axios.get("http://localhost:8088/api/get/logging/wb")
+    //     // console.log("loggingData => ",loggingData.data)
+    //     datalogging.value = loggingData.data
+    //     isloading.value = false
+    // } catch (err) {
+    //     errorDesc.value = err.message
+    //     isloading.value = false
+    // }
+    // }
+
     try {
         isloading.value = true
         const loggingData = await axios.get("http://localhost:8088/api/get/logging/wb")
@@ -184,9 +222,11 @@ const funcFetchLogging = async () => {
         errorDesc.value = err.message
         isloading.value = false
     }
+
 }
 
 const funcHaddlePush = (evt) => {
+    console.log("funcHaddlePush")
     fullLog.value = evt
     totalPage.value = 0
     if (evt === "device1") {
@@ -265,7 +305,7 @@ const funcHaddlePush = (evt) => {
 }
 
 onMounted(async () => {
-    await funcFetchLogging()
+    await funcFetchLogging("")
 })
 
 </script>

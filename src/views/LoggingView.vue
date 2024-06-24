@@ -64,6 +64,10 @@
                             <label>PM2.5</label>
                             <span>{{ datalogging.deviceNum1[0]["PM2.5"] }}</span>
                         </div>
+                        <div class="grid grid-cols-2">
+                            <label>Create Date</label>
+                            <span>{{ datalogging.deviceNum1[0].createDate }}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="c-card" @click="funcHaddlePush('device2')">
@@ -89,6 +93,10 @@
                             <label>PM2.5</label>
                             <span>{{ datalogging.deviceNum2[0]["PM2.5"] }}</span>
                         </div>
+                        <div class="grid grid-cols-2">
+                            <label>Create Date</label>
+                            <span>{{ datalogging.deviceNum2[0].createDate }}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="c-card" @click="funcHaddlePush('device3')">
@@ -113,6 +121,10 @@
                         <div class="grid grid-cols-2">
                             <label>PM2.5</label>
                             <span>{{ datalogging.deviceNum3[0]["PM2.5"] }}</span>
+                        </div>
+                        <div class="grid grid-cols-2">
+                            <label>Create Date</label>
+                            <span>{{ datalogging.deviceNum3[0].createDate }}</span>
                         </div>
                     </div>
                 </div>
@@ -186,32 +198,6 @@ const funcReloadLogging = async () => {
 }
 
 const funcFetchLogging = async (evt) => {
-    console.log("funcFetchLogging")
-    // if (evt === "reload"){
-    //     try {
-    //     isloading.value = true
-    //     const loggingData = await axios.get("http://localhost:8088/api/get/logging/wb")
-    //     await funcHaddlePush(fullLog.value);
-    //     // console.log("loggingData => ",loggingData.data)
-    //     datalogging.value = loggingData.data
-    //     isloading.value = false
-    // } catch (err) {
-    //     errorDesc.value = err.message
-    //     isloading.value = false
-    // }
-    // }else{
-    //     try {
-    //     isloading.value = true
-    //     const loggingData = await axios.get("http://localhost:8088/api/get/logging/wb")
-    //     // console.log("loggingData => ",loggingData.data)
-    //     datalogging.value = loggingData.data
-    //     isloading.value = false
-    // } catch (err) {
-    //     errorDesc.value = err.message
-    //     isloading.value = false
-    // }
-    // }
-
     try {
         isloading.value = true
         const loggingData = await axios.get("http://localhost:8088/api/get/logging/wb")
@@ -226,7 +212,6 @@ const funcFetchLogging = async (evt) => {
 }
 
 const funcHaddlePush = (evt) => {
-    console.log("funcHaddlePush")
     fullLog.value = evt
     totalPage.value = 0
     if (evt === "device1") {

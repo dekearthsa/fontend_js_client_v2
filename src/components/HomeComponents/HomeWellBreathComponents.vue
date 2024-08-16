@@ -28,7 +28,7 @@
                 system: "zone1",
                 command: false
             }
-            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            const status = await axios.post(`http://${store.state.setHostingServerMachine}:8090/api/update/wb/onOff`, command);
             if(status === "ok"){
                 setTimeout(() => {
                     isloadingIsOn.value = false
@@ -48,7 +48,7 @@
                 system: "zone1",
                 command: true
             }
-            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            const status = await axios.post(`http://${store.state.setHostingServerMachine}:8090/api/update/wb/onOff`, command);
             if(status === "ok"){
                 setTimeout(() => {
                     isloadingIsOn.value = false

@@ -2,6 +2,8 @@ import { createStore } from 'vuex'
 
 export default createStore({
     state: {
+        setHostingServerMachine: '192.168.110.160',
+
         cssBtnSpplyFanStatus: 'OFF',
         haddleBtnExhaustStatus: 'OFF',
         wellBreathState: true,

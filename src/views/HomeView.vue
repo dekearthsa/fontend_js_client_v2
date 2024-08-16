@@ -17,7 +17,7 @@ const fetchLoopFunction =  () => {
 
   setInterval(async () => {
     try{
-      const onSetDataWB = await axios.post(`http://localhost:8088/api/send/wb`,command);
+      const onSetDataWB = await axios.post(`http://${store.state.setHostingServerMachine}:8088/api/send/wb`,command);
       // console.log(onSetDataWB)
       store.state.dataWB.temp = onSetDataWB.data.data.temperature?onSetDataWB.data.data.temperature:"n/a"
       store.state.dataWB.pressure = onSetDataWB.data.data.pressure?parseInt(onSetDataWB.data.data.pressure):"n/a"

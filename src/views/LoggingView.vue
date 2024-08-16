@@ -144,6 +144,8 @@
 // import router from '@/router'
 import axios from 'axios'
 import { onMounted, ref, watch } from 'vue'
+import {useStore} from "vuex"
+const store = useStore();
 
 const errorDesc = ref("")
 const fullLog = ref("")
@@ -200,7 +202,7 @@ const funcReloadLogging = async () => {
 const funcFetchLogging = async (evt) => {
     try {
         isloading.value = true
-        const loggingData = await axios.get("http://localhost:8088/api/get/logging/wb")
+        const loggingData = await axios.get(`http://${store.state.setHostingServerMachine}:8088/api/get/logging/wb`)
         // console.log("loggingData => ",loggingData.data)
         datalogging.value = loggingData.data
         isloading.value = false

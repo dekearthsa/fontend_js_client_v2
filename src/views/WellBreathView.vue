@@ -25,7 +25,7 @@ const haddleForceExhaust = async (evt) => {
         system: "zone1",
         command: evt
     }
-    const status = await axios.post("http://localhost:8090/api/forces/wb/exhaust", command);
+    const status = await axios.post(`http://${store.state.setHostingServerMachine}:8090/api/forces/wb/exhaust`, command);
     if(status.data !== "ok"){
         alert(status.status)
     }
@@ -39,7 +39,7 @@ const haddleSupplyFans = async (evt) => {
     }
 
     // console.log(command)
-    const status = await axios.post("http://localhost:8090/api/forces/wb/supplyfan", command);
+    const status = await axios.post(`http://${store.state.setHostingServerMachine}:8090/api/forces/wb/supplyfan`, command);
     // console.log(status.data)
     if(status.data !== "ok"){
         alert(status.status)
@@ -89,7 +89,7 @@ onMounted(() => {
                 system: "zone1",
                 command: false
             }
-            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            const status = await axios.post(`http://${store.state.setHostingServerMachine}:8090/api/update/wb/onOff`, command);
             if(status === "ok"){
                 setTimeout(() => {
                     isloadingIsOn.value = false
@@ -109,7 +109,7 @@ onMounted(() => {
                 system: "zone1",
                 command: true
             }
-            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            const status = await axios.post(`http://${store.state.setHostingServerMachine}:8090/api/update/wb/onOff`, command);
             if(status === "ok"){
                 setTimeout(() => {
                     isloadingIsOn.value = false

@@ -8,6 +8,7 @@ import DetailDataWellbreathCompoentVue from "../components/DetailDataWellbreathC
 import axios from 'axios'
 
 const store = useStore();
+const hosting = "192.168.1.42";
 
 const fetchLoopFunction =  () => {
 
@@ -17,7 +18,7 @@ const fetchLoopFunction =  () => {
 
   setInterval(async () => {
     try{
-      const onSetDataWB = await axios.post(`http://localhost:8088/api/send/wb`,command);
+      const onSetDataWB = await axios.post(`http://${hosting}:8088/api/send/wb`,command);
       // console.log(onSetDataWB)
       store.state.dataWB.temp = onSetDataWB.data.data.temperature?onSetDataWB.data.data.temperature:"n/a"
       store.state.dataWB.pressure = onSetDataWB.data.data.pressure?parseInt(onSetDataWB.data.data.pressure):"n/a"
@@ -43,7 +44,7 @@ const fetchLoopFunction =  () => {
     }
 
     // try{
-    //   const onSetDataAD = await axios.post(`http://localhost:8088/api/send/ad`, command);
+    //   const onSetDataAD = await axios.post(`http://${hosting}:8088/api/send/ad`, command);
     //   // console.log(onSetDataAD.data)
     //   store.state.dataAD.system = onSetDataAD.data.data.system?onSetDataAD.data.data.system:"n/a"
     //   store.state.dataAD.subSystem = onSetDataAD.data.data.subSystem?onSetDataAD.data.data.subSystem:"n/a"
@@ -73,7 +74,7 @@ const fetchLoopFunction =  () => {
     // }
 
     // try{
-    //   const onSetDataLFL = await axios.post(`http://localhost:8088/api/send/battery`, command);
+    //   const onSetDataLFL = await axios.post(`http://${hosting}:8088/api/send/battery`, command);
     //   // console.log(onSetDataLFL.data)
     //   store.state.dataLFL.lowBattery = onSetDataLFL.data.lowBattery
     //   store.state.dataLFL.arrayBattery = onSetDataLFL.data.batteryData[0]?onSetDataLFL.data.batteryData:["n/a"]

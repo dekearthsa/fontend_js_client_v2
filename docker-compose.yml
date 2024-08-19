@@ -12,7 +12,7 @@ services:
     build:
       context: "./"
     ports:
-      - "5111:5111"
+      - "5173:5173"
     networks:
       - net
 

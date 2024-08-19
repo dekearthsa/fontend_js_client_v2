@@ -12,11 +12,13 @@ import {onMounted, ref} from 'vue'
 import axios from "axios";
 
 const store = useStore();
+const hosting = "192.168.1.42";
 const selectPageWB = ref(1);
 const menuPage = ref('IAQ');
 const cssBtnWBParam = ref('bg-zinc-400 text-white font-bold text-[14px] w-[200px] h-[22px] rounded-lg');
 const cssBtnWBController = ref('bg-zinc-300 text-white font-bold text-[14px] w-[200px] h-[22px] rounded-lg');
 const cssControllerChange = ref('bg-[#F3F4F8] w-[490px] h-[180px] m-auto rounded-md mb-2');
+
 
 const isloadingIsOn = ref(false);
 
@@ -25,7 +27,7 @@ const haddleForceExhaust = async (evt) => {
         system: "zone1",
         command: evt
     }
-    const status = await axios.post("http://localhost:8090/api/forces/wb/exhaust", command);
+    const status = await axios.post(`http://${hosting}:8090/api/forces/wb/exhaust`, command);
     if(status.data !== "ok"){
         alert(status.status)
     }
@@ -39,7 +41,7 @@ const haddleSupplyFans = async (evt) => {
     }
 
     // console.log(command)
-    const status = await axios.post("http://localhost:8090/api/forces/wb/supplyfan", command);
+    const status = await axios.post(`http://${hosting}:8090/api/forces/wb/supplyfan`, command);
     // console.log(status.data)
     if(status.data !== "ok"){
         alert(status.status)
@@ -89,7 +91,7 @@ onMounted(() => {
                 system: "zone1",
                 command: false
             }
-            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            const status = await axios.post(`http://${hosting}:8090/api/update/wb/onOff`, command);
             if(status === "ok"){
                 setTimeout(() => {
                     isloadingIsOn.value = false
@@ -109,7 +111,7 @@ onMounted(() => {
                 system: "zone1",
                 command: true
             }
-            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            const status = await axios.post(`http://${hosting}:8090/api/update/wb/onOff`, command);
             if(status === "ok"){
                 setTimeout(() => {
                     isloadingIsOn.value = false

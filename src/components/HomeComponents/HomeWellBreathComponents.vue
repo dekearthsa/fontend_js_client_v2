@@ -16,6 +16,7 @@
     router.push("/wellbreath");
   }
 
+  const hosting = "192.168.1.42";
 
 
   const haddleOnMode = async (data) => {
@@ -28,7 +29,7 @@
                 system: "zone1",
                 command: false
             }
-            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            const status = await axios.post(`http://${hosting}:8090/api/update/wb/onOff`, command);
             if(status === "ok"){
                 setTimeout(() => {
                     isloadingIsOn.value = false
@@ -48,7 +49,7 @@
                 system: "zone1",
                 command: true
             }
-            const status = await axios.post(`http://localhost:8090/api/update/wb/onOff`, command);
+            const status = await axios.post(`http://${hosting}:8090/api/update/wb/onOff`, command);
             if(status === "ok"){
                 setTimeout(() => {
                     isloadingIsOn.value = false

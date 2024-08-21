@@ -1,5 +1,5 @@
 <template>
-    <svg width="50" height="50" viewBox="0 0 51 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="set-logo"  viewBox="0 0 51 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_188_347)">
         <path d="M25.4902 12.8076C20.6393 19.5576 17.5215 23.7764 17.5215 27.8732C17.5215 31.9701 21.0875 35.3076 25.4902 35.3076C29.893 35.3076 33.459 31.9795 33.459 27.8732C33.459 23.767 30.3412 19.5482 25.4902 12.8076Z" fill="url(#paint0_linear_188_347)" stroke="#2885C7" stroke-width="0.25" stroke-miterlimit="10"/>
         </g>
@@ -22,6 +22,18 @@
 
 </script>
 
-<style>
+<style scoped>
+@media only screen and (max-width: 800px) {
+    .set-logo{
+        width: 50px;
+        height: 50px;
+    }
+}
 
+@media only screen and (min-width: 801px) {
+    .set-logo{
+        width: 75px;
+        height: 75px;
+    }
+}
 </style>

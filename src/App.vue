@@ -7,7 +7,7 @@ import HeaderComponentsVue from "./components/HeaderComponents/HeaderComponents.
 <template>
   <div class=" m-0 p-0">
     <div class="">
-      <div class="h-[480px] w-[800px] m-auto ">
+      <div class="set-main-page">
         <HeaderComponentsVue/>
         <HeaderBlockComponentsVue class="rounded-lg translate-y-[-20px]"/>
         <RouterView />
@@ -19,6 +19,24 @@ import HeaderComponentsVue from "./components/HeaderComponents/HeaderComponents.
 
 <style >
 @import  './styles.css';
+
+@media only screen and (max-width: 800px) {
+  .set-main-page  {
+    margin: auto;
+    width: 800px;
+    height: 480px;
+  }
+}
+
+@media only screen and (min-width: 801px) {
+  .set-main-page  {
+    margin: auto;
+    width: 95%;
+  }
+  
+}
+
+
 
 .set-shadow{
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

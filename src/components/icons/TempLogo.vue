@@ -1,5 +1,5 @@
 <template>
-    <svg width="36" height="36" viewBox="0 0 30 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="set-logo" viewBox="0 0 30 41" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_97_846)">
         <g clip-path="url(#clip1_97_846)">
         <path d="M15 33C17.7614 33 20 30.7614 20 28C20 25.2386 17.7614 23 15 23C12.2386 23 10 25.2386 10 28C10 30.7614 12.2386 33 15 33Z" fill="#EF4444"/>
@@ -23,6 +23,21 @@
 
 </script>
 
-<style>
+<style scoped>
+
+
+@media only screen and (max-width: 800px) {
+    .set-logo{
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media only screen and (min-width: 801px) {
+    .set-logo{
+        width: 66px;
+        height: 66px;
+    }
+}
 
 </style>

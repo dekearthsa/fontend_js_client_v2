@@ -75,12 +75,10 @@ const setDate = () => {
 
 };
 
-
 const haddleLogging = () => {
   console.log("push")
   router.push("/logging")
 }
-
 
 const timing = () => {
   const date = new Date(); 
@@ -88,46 +86,132 @@ const timing = () => {
   const isHours = date.getHours();
   const isMin = date.getMinutes();
   let setMin;
-  // const isSec = date.getSeconds();
-
 
   if(SET_INT.includes(isMin)){
     setMin = `0${isMin}`
   }else{
     setMin = isMin
   }
-  // currentTiming.value = `${isHours}:${isMin}:${isSec}`;
   currentTiming.value = `${isHours}:${setMin}`;
 };
 
 </script>
 
 <template>
-  <div class="header-home h-[74px] rounded-b-3xl">
-    <div class="flex justify-between">
-      <div  class="text-white mt-3 ml-5 font-bold text-[24px] flex">
-        <div @click="haddleRouteHome">MY ROOM</div>
-        <div class="border-l-[3px] ml-3 border-white" v-if="store.state.pageNow!== ''"></div>
-        <div class="ml-3" v-if="store.state.pageNow!== ''">{{ store.state.pageNow }}</div>
-        <div class=" text-[15px] ml-5 mt-2"><button @click="haddleLogging" class="bg-sky-400 w-[100px] rounded-md logging-btn">Logging</button></div>
+  <div class="header-home rounded-b-3xl shadow-md">
+    <div class="flex justify-between items-center lg:px-10 lg:py-6">
+      <div class="text-white font-bold text-2xl flex items-center lg:space-x-4">
+        <div @click="haddleRouteHome" class="set-title cursor-pointer hover:text-gray-200 transition-colors duration-300">MY ROOM</div>
+        <div v-if="store.state.pageNow !== ''" class="flex items-center lg:space-x-4">
+          <div class="border-l-2 lg:h-6 border-white"></div>
+          <div class="sm:text-[15px] sm:ml-4 sm:mt-[11px] lg:text-[23px] lg:mt-[1px]">{{ store.state.pageNow }}</div>
+        </div>
       </div>
-      <div></div>
-      <div class="text-white mt-1 mr-5 font-bold text-[16px]">
-        <div class="">{{currentDate}}</div>
-        <div class="text-end ">{{currentTiming}}</div>
+      <div class="set-timing text-white font-bold flex items-center lg:space-x-8">
+        <button @click="haddleLogging" class="debug-cm z-10 hover:from-blue-400 hover:to-teal-300  hover:scale-105">Demo send command</button>
+        <div class="set-timing-s text-right">
+          <div>{{ currentDate }}</div>
+          <div>{{ currentTiming }}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
+
  
-
 <style scoped>
-.header-home{
-  background: #2C82B3;
+
+@media only screen and (max-width: 800px){
+  .set-title{
+    margin-left: 45px;
+    margin-top: 12px;
+    font-size: 16px;
+  }
+  .set-timing{
+    margin-right: 40px;
+  }
+
+  .set-timing-s{
+    margin-top:10px ;
+    font-size: 14px;
+  }
+  .debug-cm{
+    height: 35px;
+    margin-right: 20px;
+  }
+  button{
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    --tw-gradient-from: #3b82f6 var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(59 130 246 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    --tw-gradient-to: #2dd4bf var(--tw-gradient-to-position);
+    height: 40px;
+    z-index: 10px;
+    padding-left: 1rem /* 16px */;
+    padding-right: 1rem /* 16px */;
+    padding-top: 0.5rem /* 8px */;
+    padding-bottom: 0.5rem /* 8px */;
+    border-radius: 0.375rem /* 6px */;
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    font-size: 0.875rem /* 14px */;
+    line-height: 1.25rem /* 20px */;
+  }
+  .header-home {
+    height: 80px;
+    background: linear-gradient(135deg, #3b82f6, #2c82b3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logging-btn {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .logging-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
 }
 
-.logging-btn{
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+@media only screen and (min-width: 801px){
+  
+  button{
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    --tw-gradient-from: #3b82f6 var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(59 130 246 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    --tw-gradient-to: #2dd4bf var(--tw-gradient-to-position);
+    height: 55px;
+    padding-left: 1rem /* 16px */;
+    padding-right: 1rem /* 16px */;
+    padding-top: 0.5rem /* 8px */;
+    padding-bottom: 0.5rem /* 8px */;
+    border-radius: 5.375rem /* 6px */;
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    font-size: 0.875rem /* 14px */;
+    line-height: 1.25rem /* 20px */;
+  }
+  
+  .header-home {
+    height: 140px;
+    background: linear-gradient(135deg, #3b82f6, #2c82b3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logging-btn {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .logging-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
 }
+
 </style>

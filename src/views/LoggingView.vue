@@ -1,326 +1,156 @@
-<template>
-    <div>
-        <div class="m-auto text-center mb-5 flex justify-center">
-            <div class="mr-2">Wellbreath</div>
-            <button class="ml-2" @click="funcReloadLogging()">
-                <img src="@/assets/refresh.png" width="30" height="30"/>
-            </button>
-            <!-- <button v-if="fullLog !== ''" class="ml-2" @click="funcFetchLogging">
-                <img src="@/assets/refresh.png" width="30" height="30"/>
-            </button> -->
-        </div>
-        <div v-if="fullLog !== ''">
-            <div class="">
-                <div>
-                    <div>
-                        <button style="font-size: 20px; margin-bottom: 10px; display:flex; justify-content: end;" @click="haddleCloseLog">X</button>
-                    </div>
-                    <table>
-                        <tr>
-                            <th>DeviceID</th>
-                            <th>Temp</th>
-                            <th>Humid</th>
-                            <th>CO2</th>
-                            <th>PM2.5</th>
-                            <th>Create Time</th>
-                        </tr>
-                        <tr v-for="(el, idx) in loggingList[selectIdx]" :key="idx">
-                            <td>{{el.deviceID }}</td>
-                            <td>{{el.temp }}</td>
-                            <td>{{el.humid }}</td>
-                            <td>{{el.CO2 }}</td>
-                            <td>{{el["PM2.5"] }}</td>
-                            <td>{{el.createDate}}</td>
-                        </tr>
-                    </table>
-                    <div >
-                        <button @click="haddleNextPage(d)" class="ch-c" v-for="d in totalPage" :key="d">{{d}}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div v-if="!isloading && fullLog === ''" >
-            <div class="flex justify-around" v-if="errorDesc === ''">
-                <div class="c-card" @click="funcHaddlePush('device1')">
-                    <div class="mb-4">device 1</div>
-                    <div>
-                        <div class="grid grid-cols-2">
-                            <label>DeviceID</label>
-                            <span>{{ datalogging.deviceNum1[0].deviceID }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>Temp</label>
-                            <span>{{ datalogging.deviceNum1[0].temp }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>Humid</label>
-                            <span>{{ datalogging.deviceNum1[0].humid }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>CO2</label>
-                            <span>{{ datalogging.deviceNum1[0].CO2 }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>PM2.5</label>
-                            <span>{{ datalogging.deviceNum1[0]["PM2.5"] }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>Create Date</label>
-                            <span>{{ datalogging.deviceNum1[0].createDate }}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="c-card" @click="funcHaddlePush('device2')">
-                    <div class="mb-4">device 2</div>
-                    <div>
-                        <div class="grid grid-cols-2">
-                            <label>DeviceID</label>
-                            <span>{{ datalogging.deviceNum2[0].deviceID }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>Temp</label>
-                            <span>{{ datalogging.deviceNum2[0].temp }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>Humid</label>
-                            <span>{{ datalogging.deviceNum2[0].humid }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>CO2</label>
-                            <span>{{ datalogging.deviceNum2[0].CO2 }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>PM2.5</label>
-                            <span>{{ datalogging.deviceNum2[0]["PM2.5"] }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>Create Date</label>
-                            <span>{{ datalogging.deviceNum2[0].createDate }}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="c-card" @click="funcHaddlePush('device3')">
-                    <div class="mb-4">device 3</div>
-                    <div>
-                        <div class="grid grid-cols-2">
-                            <label>DeviceID</label>
-                            <span>{{ datalogging.deviceNum3[0].deviceID }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>Temp</label>
-                            <span>{{ datalogging.deviceNum3[0].temp }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>Humid</label>
-                            <span>{{ datalogging.deviceNum3[0].humid }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>CO2</label>
-                            <span>{{ datalogging.deviceNum3[0].CO2 }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>PM2.5</label>
-                            <span>{{ datalogging.deviceNum3[0]["PM2.5"] }}</span>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <label>Create Date</label>
-                            <span>{{ datalogging.deviceNum3[0].createDate }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div v-if="errorDesc !== ''">
-                <h3>{{ errorDesc }}</h3>
-            </div>
-        </div>
-        <div v-if="isloading">
-            loading...
-        </div>
-
-    </div>
-</template>
-
 <script setup>
 // import router from '@/router'
-import axios from 'axios'
-import { onMounted, ref, watch } from 'vue'
+import axios from 'axios';
+import { ref } from 'vue'
 
-const errorDesc = ref("")
-const fullLog = ref("")
-const totalPage = ref(0);
-const loggingList = ref([])
-// const isSetDevice = ref("")
-const selectIdx = ref(0)
-const datalogging = ref({
-    deviceNum1: [
-        {
-            deviceID: "",
-            temp: "",
-            humid: "",
-            CO2: "",
-            ["PM2.5"]: ""
+const client = ref(null);
+const TEMP = ref();
+const HUMID = ref();
+const CO2 = ref();
+const VOC = ref();
+const PM2 = ref();
+const DEBUG_STATUS = ref("off")
+const hosting = ref("localhost");
+const STATUS_PUB = ref("");
+
+
+const sendMessage = async () => {
+    // Prepare the payload
+    const payload = {
+        
+        deviceID: "client",
+        deviceType: "WB",
+        token: "debug-mode",
+        data: {
+            temp: Number(TEMP.value),
+            humid: Number(HUMID.value),
+            CO2: Number(CO2.value),
+            pressure: 100,
+            VOC: Number(VOC.value),
+            "PM2.5": Number(PM2.value),
         }
-    ],
-    deviceNum2: [
-        {
-            deviceID: "",
-            temp: "",
-            humid: "",
-            CO2: "",
-            ["PM2.5"]: ""
-        }
-    ],
-    deviceNum3: [
-        {
-            deviceID: "",
-            temp: "",
-            humid: "",
-            CO2: "",
-            ["PM2.5"]: ""
-        }
-    ]
-})
-const isloading = ref(false)
+    }
 
-const haddleCloseLog =  () => {
-    fullLog.value = ""
-    loggingList.value = []
-}
-
-const haddleNextPage = async (page) => {
-    selectIdx.value = page
-}
-
-const funcReloadLogging = async () => {
-    loggingList.value = []
-    await funcFetchLogging();
-    await funcHaddlePush(fullLog.value);
-}
-
-const funcFetchLogging = async (evt) => {
     try {
-        isloading.value = true
-        const loggingData = await axios.get("http://localhost:8088/api/get/logging/wb")
-        // console.log("loggingData => ",loggingData.data)
-        datalogging.value = loggingData.data
-        isloading.value = false
+        const status = await axios.post(`http://${hosting.value}:8090/api/command/pub/wb`, payload);
+        console.log(status.status)
+        if (status.status === 200) {
+            STATUS_PUB.value = "pub success!"
+            alert("pub =>", payload)
+        } else {
+            STATUS_PUB.value = "pub fail!"
+            alert(status.status)
+        }
     } catch (err) {
-        errorDesc.value = err.message
-        isloading.value = false
+        STATUS_PUB.value = "pub fail!"
+        alert(err)
     }
 
 }
 
-const funcHaddlePush = (evt) => {
-    fullLog.value = evt
-    totalPage.value = 0
-    if (evt === "device1") {
-        let counting = 0
-        let nestArray = []
-        for (let i = 0; i < datalogging.value.deviceNum1.length; i++) {
-            counting ++
-            if (counting < 15) {
-                // console.log("count 1 => ", counting)
-                nestArray.push(datalogging.value.deviceNum1[i])
-                if(counting === datalogging.value.deviceNum1.length){
-                    // console.log("count 2 => ", counting)
-                    loggingList.value.push(nestArray)
-                    totalPage.value += 1 
-                    nestArray = []
-                    counting = 0
-                }
-            } else {
-                // console.log("count 3 => ", counting)
-                nestArray.push(datalogging.value.deviceNum1[i])
-                loggingList.value.push(nestArray)
-                totalPage.value += 1 
-                nestArray = []
-                counting = 0
-            }
+// '{"deviceID":"wb-sensor", "deviceType":"WB", "token":"g91fu9l7", "data":{"temp":445,"humid":20.3,"CO2":1100, "PM2.5":22, "VOC":22, "pressure":40}}'
+const haddleOpenDebugMode = async () => {
+    if (DEBUG_STATUS.value === "on") {
+        const cmd = {
+            debug: false
         }
-    } else if (evt === "device2") {
-        let counting = 0
-        let nestArray = []
-        for (let i = 0; i < datalogging.value.deviceNum2.length; i++) {
-            counting ++
-            if (counting < 15) {
-                // console.log("count 1 => ", counting)
-                nestArray.push(datalogging.value.deviceNum2[i])
-                if(counting === datalogging.value.deviceNum2.length){
-                    // console.log("count 2 => ", counting)
-                    loggingList.value.push(nestArray)
-                    totalPage.value += 1 
-                    nestArray = []
-                    counting = 0
-                }
+        try {
+            const status = await axios.post(`http://${hosting.value}:8090/api/update/debug/cmd`, cmd)
+            if (status.status === 200) {
+                alert("close debug mode!")
+                DEBUG_STATUS.value = "off"
             } else {
-                // console.log("count 3 => ", counting)
-                nestArray.push(datalogging.value.deviceNum2[i])
-                loggingList.value.push(nestArray)
-                totalPage.value += 1 
-                nestArray = []
-                counting = 0
+                alert(status.status)
+                DEBUG_STATUS.value = "off"
             }
+        } catch (err) {
+            DEBUG_STATUS.value = "off"
+            alert(err + + "when try to off debug mode!")
         }
-    } else if (evt === "device3") {
-        let counting = 0
-        let nestArray = []
-        for (let i = 0; i < datalogging.value.deviceNum3.length; i++) {
-            counting ++
-            if (counting < 15) {
-                // console.log("count 1 => ", counting)
-                nestArray.push(datalogging.value.deviceNum3[i])
-                if(counting === datalogging.value.deviceNum3.length){
-                    // console.log("count 2 => ", counting)
-                    loggingList.value.push(nestArray)
-                    totalPage.value += 1 
-                    nestArray = []
-                    counting = 0
-                }
+
+    } else {
+        const cmd = {
+            debug: true
+        }
+        try {
+            const status = await axios.post(`http://${hosting.value}:8090/api/update/debug/cmd`, cmd)
+            if (status.status === 200) {
+                alert("on debug mode!")
+                DEBUG_STATUS.value = "on"
             } else {
-                // console.log("count 3 => ", counting)
-                nestArray.push(datalogging.value.deviceNum3[i])
-                loggingList.value.push(nestArray)
-                totalPage.value += 1 
-                nestArray = []
-                counting = 0
+                alert(status.status)
+                DEBUG_STATUS.value = "off"
             }
+        } catch (err) {
+            alert(err + "when try to on debug mode!")
+            DEBUG_STATUS.value = "off"
         }
     }
+
 }
 
-onMounted(async () => {
-    await funcFetchLogging("")
-})
 
 </script>
 
-<style scoped>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-.c-card {
-    padding: 15px;
-    width: 250px;
-    border-radius: 4px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    
-}
+<template>
+    <div class="max-w-lg mx-auto p-8 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl shadow-2xl">
+        <div class="flex items-center justify-between mb-10">
+            <button @click="haddleOpenDebugMode()"
+                class="px-8 py-3 bg-gradient-to-r from-gray-800 to-gray-600 text-white font-semibold rounded-full shadow-lg hover:from-gray-900 hover:to-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                Debug mode
+            </button>
+            <span class="ml-5 text-gray-700 text-lg font-medium">{{ DEBUG_STATUS }}</span>
+        </div>
+        <div class="grid gap-8" v-if="DEBUG_STATUS === 'on'">
+            <div>
+                <label class="block text-base font-semibold text-gray-800">Host</label>
+                <input
+                    class="mt-2 block w-full px-4 py-3 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent sm:text-base"
+                    placeholder="Enter hostname" v-model="hosting" />
+            </div>
+            <div>
+                <label class="block text-base font-semibold text-gray-800">Temperature</label>
+                <input
+                    class="mt-2 block w-full px-4 py-3 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent sm:text-base"
+                    placeholder="Enter temperature" v-model="TEMP" />
+            </div>
+            <div>
+                <label class="block text-base font-semibold text-gray-800">Humidity</label>
+                <input
+                    class="mt-2 block w-full px-4 py-3 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent sm:text-base"
+                    placeholder="Enter humidity" v-model="HUMID" />
+            </div>
+            <div>
+                <label class="block text-base font-semibold text-gray-800">CO2</label>
+                <input
+                    class="mt-2 block w-full px-4 py-3 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent sm:text-base"
+                    placeholder="Enter CO2 level" v-model="CO2" />
+            </div>
+            <div>
+                <label class="block text-base font-semibold text-gray-800">PM2.5</label>
+                <input
+                    class="mt-2 block w-full px-4 py-3 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent sm:text-base"
+                    placeholder="Enter CO2 level" v-model="PM2" />
+            </div>
+            <div>
+                <label class="block text-base font-semibold text-gray-800">VOC</label>
+                <input
+                    class="mt-2 block w-full px-4 py-3 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent sm:text-base"
+                    placeholder="Enter CO2 level" v-model="VOC" />
+            </div>
+        </div>
 
-.ch-c{
-    margin-left: 10px;
-}
-</style>
+        <div class="mt-12 flex justify-center">
+            <button v-if="DEBUG_STATUS === 'on'"
+                class="px-8 py-3 bg-gradient-to-r from-gray-800 to-gray-600 text-white font-semibold rounded-full shadow-lg hover:from-gray-900 hover:to-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                @click="sendMessage">
+                SEND
+            </button>
+        </div>
+        <div class="flex justify-center mt-10" v-if="DEBUG_STATUS === 'on'">
+            {{ STATUS_PUB }}
+        </div>
+    </div>
+</template>
+
+<style scoped></style>

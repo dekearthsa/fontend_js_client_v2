@@ -14,7 +14,7 @@ const haddleRouteHome = () => {
 </script>
 
 <template>
-  <div class="block-container mx-auto p-4 bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105">
+  <div class="block-container mx-auto p-4 bg-white rounded-lg shadow-lg ">
     <div class="flex justify-end items-center mt-4 mr-5" v-if="!store.state.selectionHomePage">
       <button class="flex sm:translate-y-[-27px] lg:translate-y-[-10px]  items-center space-x-2 text-blue-600 hover:text-blue-800 transition-colors duration-300" @click="haddleRouteHome">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="sm:w-6 sm:h-6 lg:w-[35px] lg:h-[35px]">
@@ -41,10 +41,6 @@ const haddleRouteHome = () => {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.block-container:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15), 0 8px 10px rgba(0, 0, 0, 0.1);
-}
 
 @media (max-width: 800px) {
   .block-container {

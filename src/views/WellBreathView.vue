@@ -8,7 +8,7 @@ import VOCsLogoVue from "../components/icons/VOCsLogo.vue"
 import WellBreathLogoWBVue from "../components/icons/WellBreathLogoWB.vue"
 import NormalFaceIcon from "../components/icons/NormalFaceIcon.vue";
 import { useStore } from "vuex"
-import { onMounted, ref, watch} from 'vue'
+import { onMounted, ref} from 'vue'
 import axios from "axios";
 
 const store = useStore();

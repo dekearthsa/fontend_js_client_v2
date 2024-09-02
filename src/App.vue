@@ -29,6 +29,7 @@ import HeaderComponentsVue from "./components/HeaderComponents/HeaderComponents.
 
 @media only screen and (min-width: 801px) {
   .set-main-page  {
+    width: 1180px;
     margin: auto;
   }
   

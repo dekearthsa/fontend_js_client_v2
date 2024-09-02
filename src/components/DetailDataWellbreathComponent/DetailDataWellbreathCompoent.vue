@@ -113,7 +113,7 @@
     .detail-c { 
         padding: 2rem;
         transform: translateY(110px);
-        width:  1000px;
+
         padding: 3rem;  
         height: 590px;
     }

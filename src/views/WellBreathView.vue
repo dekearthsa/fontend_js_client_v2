@@ -294,7 +294,7 @@ const haddleOnMode = async (data) => {
                                     </div>
                                 </div>
                             </div>
-                            <div class="border-[1px] lg:w-[610px] border-zinc-400 rounded-md">
+                            <div class="border-[1px]  border-zinc-400 rounded-md">
                                 <div class="text-center sm:translate-y-[5px] lg:text-[20px] lg:font-bold lg:translate-y-[20px]">Supply Fan</div>
                                 <div class="grid grid-cols-2 lg:mt-5">
                                     <div>

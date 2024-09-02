@@ -142,7 +142,7 @@ const haddleOnMode = async (data) => {
 </script>
 
 <template>
-    <div class="flex">
+    <div class="flex m-auto justify-center">
         <div class="set-c ml-8">
             <div>
                 <WellBreathLogoWBVue class="m-auto absolute sm:translate-y-[-70px] sm:translate-x-[55px]  lg:translate-y-[-120px] lg:translate-x-[110px]" />

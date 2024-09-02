@@ -547,7 +547,6 @@ const haddleOnMode = async (data) => {
         height: 615px;
     }
     .set-c{
-        width: 400px;
         height: 515px; 
     }
     .card-c {

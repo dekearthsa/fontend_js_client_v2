@@ -6,7 +6,8 @@ import DetailDataWellbreathCompoentVue from "../components/DetailDataWellbreathC
 import axios from 'axios'
 
 const store = useStore();
-const hosting = "localhost";
+// const hosting = "localhost";
+const hosting = "192.168.155.160";
 
 const fetchLoopFunction =  () => {
 

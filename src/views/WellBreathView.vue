@@ -12,7 +12,8 @@ import { onMounted, ref} from 'vue'
 import axios from "axios";
 
 const store = useStore();
-const hosting = "localhost";
+// const hosting = "localhost";
+const hosting = "192.168.155.160";
 const selectPageWB = ref(1);
 const menuPage = ref('IAQ');
 const cssBtnWBParam = ref('bg-zinc-400 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg');
@@ -238,7 +239,7 @@ const haddleOnMode = async (data) => {
                                     class="set-img sm:translate-y-[10px]" src="@/assets/bat_empty.png"  />
                             </div>
                             <div class="text-[#008E29] lg:text-[20px] sm:ml-2 sm:translate-y-[8px] sm:text-[14px] font-bold">
-                                {{ store.state.dataWB.pressure }}%
+                               100%
                             </div>
                         </div>
                     </div>

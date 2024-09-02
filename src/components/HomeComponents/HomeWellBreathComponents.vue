@@ -16,7 +16,8 @@
     router.push("/wellbreath");
   }
 
-  const hosting = "localhost";
+  // const hosting = "localhost";
+  const hosting = "192.168.155.160";
 
 
   const haddleOnMode = async (data) => {
@@ -117,7 +118,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
               </svg>
             </div>
-            <div class="set-aqi-status translate-y-[6px] translate-x-[1px] text-[#00C412] text-[15px] font-bold">
+            <div class="set-aqi-status translate-y-[6px] translate-x-[20px] text-[#00C412] text-[15px] font-bold">
               Good
             </div>
           </div>
@@ -155,8 +156,10 @@
                 <img class="set-img" v-if="store.state.dataWB.pressure <= 50 && store.state.dataWB.pressure > 30"  src="@/assets/bat_low.png" />
                 <img class="set-img" v-if="store.state.dataWB.pressure <= 30 && store.state.dataWB.pressure >= 0"  src="@/assets/bat_empty.png" />
             </div>
-            <div class="set-pressure text-[#008E29] ml-2 font-bold">
-                {{store.state.dataWB.pressure}}%
+            <div class="set-pressure text-[#008E29] font-bold ">
+              <div class="translate-x-[-30px]">
+                100% 
+              </div>
             </div>
           </div>
         </div>

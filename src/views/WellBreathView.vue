@@ -544,7 +544,6 @@ const haddleOnMode = async (data) => {
 
 @media only screen and (min-width: 801px) {
     .detail-c{
-        width: 1000px;
         height: 615px;
     }
     .set-c{

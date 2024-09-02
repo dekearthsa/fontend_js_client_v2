@@ -269,7 +269,7 @@ const haddleOnMode = async (data) => {
                                         <div class="">
                                             <div>
                                                 <button v-if="!store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')"
-                                                    class="flex lg:w-[100px] lg:translate-x-[15px] border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md"
+                                                    class="flex lg:w-[100px]  border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md"
                                                     @click="haddleForceExhaust('Exhaust fan')">
                                                     <div class="mr-1">
                                                         <img class="lg:h-[20px] lg:w-[20px] sm:h-[15px] sm:w-[15px] lg:translate-y-[3px]" src="@/assets/spot_off.png"  />

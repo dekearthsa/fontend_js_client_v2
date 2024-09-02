@@ -16,8 +16,8 @@ const store = useStore();
 const hosting = "192.168.155.160";
 const selectPageWB = ref(1);
 const menuPage = ref('IAQ');
-const cssBtnWBParam = ref('bg-zinc-400 text-white font-bold lg:w-[250px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[150px] sm:h-[22px] rounded-lg');
-const cssBtnWBController = ref('bg-zinc-300 text-white font-bold lg:w-[250px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[150px] sm:h-[22px] rounded-lg');
+const cssBtnWBParam = ref('bg-zinc-400 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg');
+const cssBtnWBController = ref('bg-zinc-300 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg');
 const cssControllerChange = ref('bg-[#F3F4F8] sm:w-[490px] sm:h-[180px] m-auto rounded-md mb-2');
 const cssPage = ref("bg-[#F3F4F8] lg:w-[95%] lg:h-[360px] sm:w-[490px] sm:h-[180px] m-auto rounded-md mb-2");
 
@@ -66,15 +66,15 @@ const haddleSelectPage = (evt) => {
         cssPage.value = "bg-[#F3F4F8] lg:w-[95%] lg:h-[360px] sm:w-[490px] sm:h-[180px] m-auto rounded-md mb-2"
         selectPageWB.value = 1;
         menuPage.value = 'IAQ'
-        cssBtnWBParam.value = "bg-zinc-400 text-white font-bold lg:w-[250px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[150px] sm:h-[22px] rounded-lg";
-        cssBtnWBController.value = "bg-zinc-300 text-white font-bold lg:w-[250px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[150px] sm:h-[22px] rounded-lg";
+        cssBtnWBParam.value = "bg-zinc-400 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
+        cssBtnWBController.value = "bg-zinc-300 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
         cssControllerChange.value = 'bg-[#F3F4F8] sm:w-[490px] sm:h-[180px] m-auto rounded-md';
     } else {
         cssPage.value = "bg-[#F3F4F8] lg:w-[95%] lg:h-[500px] sm:w-[490px] sm:h-[265px] m-auto rounded-md mb-2"
         selectPageWB.value = 2;
         menuPage.value = 'Control panel'
-        cssBtnWBParam.value = "bg-zinc-300 text-white font-bold lg:w-[250px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[150px] sm:h-[22px] rounded-lg";
-        cssBtnWBController.value = "bg-zinc-400 text-white font-bold lg:w-[250px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[150px] sm:h-[22px] rounded-lg";
+        cssBtnWBParam.value = "bg-zinc-300 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
+        cssBtnWBController.value = "bg-zinc-400 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
         cssControllerChange.value = 'bg-[#F3F4F8] sm:w-[490px] sm:h-[270px] m-auto rounded-md'
     }
 }
@@ -142,7 +142,7 @@ const haddleOnMode = async (data) => {
 </script>
 
 <template>
-    <div class="flex m-auto justify-center">
+    <div class="flex m-auto justify-center w-[90%]">
         <div class="set-c ml-8">
             <div>
                 <WellBreathLogoWBVue class="m-auto absolute sm:translate-y-[-70px] sm:translate-x-[55px]  lg:translate-y-[-120px] lg:translate-x-[110px]" />

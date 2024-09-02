@@ -18,8 +18,8 @@ const selectPageWB = ref(1);
 const menuPage = ref('IAQ');
 const cssBtnWBParam = ref('bg-zinc-400 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg');
 const cssBtnWBController = ref('bg-zinc-300 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg');
-const cssControllerChange = ref('bg-[#F3F4F8] sm:w-[490px] sm:h-[180px] m-auto rounded-md mb-2');
-const cssPage = ref("bg-[#F3F4F8] lg:w-[95%] lg:h-[360px] sm:w-[490px] sm:h-[180px] m-auto rounded-md mb-2");
+const cssControllerChange = ref('bg-[#F3F4F8] sm:w-[350px] sm:h-[180px] m-auto rounded-md mb-2');
+const cssPage = ref("bg-[#F3F4F8] lg:w-[95%] lg:h-[360px] sm:w-[350px] sm:h-[180px] m-auto rounded-md mb-2");
 
 
 const isloadingIsOn = ref(false);
@@ -262,7 +262,7 @@ const haddleOnMode = async (data) => {
                             class="border-[1px] border-zinc-400 rounded-md lg:h-[400px] lg:ml-6 lg:w-[280px] sm:h-[210px] sm:w-[150px]">
                                 <div class="text-center sm:translate-y-[5px] lg:mb-4 lg:text-[20px] lg:font-bold lg:translate-y-[20px]">Exhaust Fan</div>
                                 <div class="translate-y-[24px]">
-                                    <img class="m-auto sm:w-[110px] sm:h-[110px] lg:w-[250px] lg:h-[250px]" src="../assets/ex_fan.png"  />
+                                    <img class="m-auto sm:w-[110px] sm:h-[110px] lg:w-[200px] lg:h-[200px]" src="../assets/ex_fan.png"  />
                                 </div>
                                 <div class="mt-[35px]">
                                     <div class="mt-3 text-center flex justify-center">
@@ -299,25 +299,25 @@ const haddleOnMode = async (data) => {
                                 <div class="grid grid-cols-2 lg:mt-5">
                                     <div>
                                         <img 
-                                        class="sm:mt-4 sm:ml-4 sm:translate-y-3 sm:w-[110px] sm:h-[110px] lg:w-[240px] lg:h-[240px]"  
+                                        class="sm:mt-4 sm:ml-4 sm:translate-y-3 sm:w-[110px] sm:h-[110px] lg:w-[200px] lg:h-[200px]"  
                                         src="../assets/sp_fan.png" 
                                         />
                                     </div>
                                     <div class="sm:mt-3">
                                         <div class="mt-5 text-center">
                                             <button v-if="!store.state.dataWB.arrayDeviceOn.includes('Supply low')"
-                                                class="bg-[#8A8A8A] w-[80%] lg:text-[20px] lg:h-[60px] text-white rounded-md selection-non-btn"
+                                                class="bg-[#8A8A8A] w-[70%] lg:text-[20px] lg:h-[60px] text-white rounded-md selection-non-btn"
                                                 @click="haddleSupplyFans('Supply low')">Low speed</button>
                                             <button v-if="store.state.dataWB.arrayDeviceOn.includes('Supply low')"
-                                                class="bg-[#00B0F0] w-[80%] lg:text-[20px] lg:h-[60px]  text-white rounded-md selection-non-btn">
+                                                class="bg-[#00B0F0] w-[70%] lg:text-[20px] lg:h-[60px]  text-white rounded-md selection-non-btn">
                                                 Low speed</button>
                                         </div>
                                         <div class="mt-5 -translate-y-[-8px] text-center">
                                             <button v-if="!store.state.dataWB.arrayDeviceOn.includes('Supply high')"
-                                                class="bg-[#8A8A8A] w-[80%] lg:text-[20px] lg:h-[60px] text-white rounded-md selection-non-btn"
+                                                class="bg-[#8A8A8A] w-[70%] lg:text-[20px] lg:h-[60px] text-white rounded-md selection-non-btn"
                                                 @click="haddleSupplyFans('Supply high')">High speed</button>
                                             <button v-if="store.state.dataWB.arrayDeviceOn.includes('Supply high')"
-                                                class="bg-[#00B0F0] w-[80%] lg:text-[20px] lg:h-[60px] text-white rounded-md selection-non-btn">High
+                                                class="bg-[#00B0F0] w-[70%] lg:text-[20px] lg:h-[60px] text-white rounded-md selection-non-btn">High
                                                 speed</button>
                                         </div>
                                         <div class="mt-[2.6rem] text-center flex justify-center">
@@ -508,7 +508,7 @@ const haddleOnMode = async (data) => {
                     </div>
                 </div> 
                 <!-- System -->
-                <div class="flex justify-center l lg:mt-5 sm:mt-2  sm:translate-y-[-3px]">
+                <div class="flex justify-center lg:mt-5 sm:mt-2  sm:translate-y-[-3px]">
                     <div class="mr-1">
                         <button :class="cssBtnWBParam" @click="haddleSelectPage(1)">Data Page 1/2</button>
                     </div>

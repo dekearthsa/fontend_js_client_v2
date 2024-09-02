@@ -155,7 +155,7 @@ const haddleOnMode = async (data) => {
                     WELL BREATHED
                 </div>
                 </div>
-                <div class="status-c bg-[#F3F4F8] rounded-lg lg:w-[350px] lg:h-[130px] sm:w-[180px] sm:h-[85px] lg:mt-[60px] sm:mt-10 m-auto">
+                <div class="status-c bg-[#F3F4F8] rounded-lg lg:w-[95%] lg:h-[130px] sm:w-[180px] sm:h-[85px] lg:mt-[60px] sm:mt-10 m-auto">
                     <div class="flex justify-around">
                         <div class="ml-4 mt-3">
                             <button @click="haddleOnMode(store.state.dataWB.isOn)">
@@ -177,7 +177,7 @@ const haddleOnMode = async (data) => {
                         </div>
                     </div>
                 </div>
-                <div class="aqi-c bg-[#F3F4F8] rounded-lg lg:w-[350px] lg:h-[130px] sm:w-[180px] sm:h-[65px] mt-2 m-auto">
+                <div class="aqi-c bg-[#F3F4F8] rounded-lg lg:w-[95%] lg:h-[130px] sm:w-[180px] sm:h-[65px] mt-2 m-auto">
                     <div class="">
                         <div class="sm:text-[14px] lg:text-[20px] lg:ml-3 lg:pt-2 setbold sm:ml-1 sm:mt-1 text-[#545454]">IAQ</div>
                     </div>
@@ -221,7 +221,7 @@ const haddleOnMode = async (data) => {
                     </div>
                 </div>
                 <div 
-                class="battery-c bg-[#F3F4F8] rounded-lg  lg:w-[350px] lg:h-[130px] sm:w-[180px] sm:h-[67px] mt-2 m-auto">
+                class="battery-c bg-[#F3F4F8] rounded-lg  lg:w-[95%] lg:h-[130px] sm:w-[180px] sm:h-[67px] mt-2 m-auto">
                     <div class="lg:text-[20px] lg:ml-3 lg:pt-3 sm:text-[14px] text-[#545454] font-bold sm:mt-1 sm:ml-1">Filter</div>
                     <div class="flex justify-around">
                         <div>

@@ -147,7 +147,7 @@ const haddleOnMode = async (data) => {
             <div>
                 <WellBreathLogoWBVue class="m-auto absolute sm:translate-y-[-70px] sm:translate-x-[55px]  lg:translate-y-[-120px] lg:translate-x-[110px]" />
             </div>
-            <div class="card-c rounded-lg sm:h-[315px]">
+            <div class="card-c rounded-lg lg:w-[98%] sm:h-[315px]">
                 <div class="title-c text-center mt-3">
                     <div 
                         class="set-t lg:text-[25px] text-[#00B0F0] font-bold sm:translate-x-[5px] sm:translate-y-[25px] lg:translate-y-[35px]"

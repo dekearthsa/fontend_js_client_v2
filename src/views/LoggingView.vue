@@ -10,7 +10,7 @@ const CO2 = ref();
 const VOC = ref();
 const PM2 = ref();
 const DEBUG_STATUS = ref("off")
-const hosting = ref("localhost");
+const hosting = ref("192.168.155.160");
 const STATUS_PUB = ref("");
 
 

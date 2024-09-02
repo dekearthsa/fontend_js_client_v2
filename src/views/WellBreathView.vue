@@ -259,10 +259,10 @@ const haddleOnMode = async (data) => {
                         <div class="set-manual-con mt-5">
                             <!-- maintaince -->
                             <div 
-                            class="border-[1px] border-zinc-400 rounded-md lg:h-[400px] lg:ml-6 lg:w-[280px] sm:h-[210px] sm:w-[150px]">
+                            class="border-[1px] border-zinc-400 rounded-md lg:h-[400px] lg:ml-6 lg:w-[98%] sm:h-[210px] sm:w-[150px]">
                                 <div class="text-center sm:translate-y-[5px] lg:mb-4 lg:text-[20px] lg:font-bold lg:translate-y-[20px]">Exhaust Fan</div>
                                 <div class="translate-y-[24px]">
-                                    <img class="m-auto sm:w-[110px] sm:h-[110px] lg:w-[200px] lg:h-[200px]" src="../assets/ex_fan.png"  />
+                                    <img class="m-auto sm:w-[110px] sm:h-[110px] lg:w-[190px] lg:h-[190px]" src="../assets/ex_fan.png"  />
                                 </div>
                                 <div class="mt-[35px]">
                                     <div class="mt-3 text-center flex justify-center">
@@ -295,11 +295,11 @@ const haddleOnMode = async (data) => {
                                 </div>
                             </div>
                             <div class="border-[1px]  border-zinc-400 rounded-md">
-                                <div class="text-center sm:translate-y-[5px] lg:text-[20px] lg:font-bold lg:translate-y-[20px]">Supply Fan</div>
+                                <div class="text-center sm:translate-y-[5px] lg:w-[98%] lg:text-[20px] lg:font-bold lg:translate-y-[20px]">Supply Fan</div>
                                 <div class="grid grid-cols-2 lg:mt-5">
                                     <div>
                                         <img 
-                                        class="sm:mt-4 sm:ml-4 sm:translate-y-3 sm:w-[110px] sm:h-[110px] lg:w-[200px] lg:h-[200px]"  
+                                        class="sm:mt-4 sm:ml-4 sm:translate-y-3 sm:w-[110px] sm:h-[110px] lg:w-[190px] lg:h-[190px]"  
                                         src="../assets/sp_fan.png" 
                                         />
                                     </div>

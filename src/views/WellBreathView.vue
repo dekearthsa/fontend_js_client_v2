@@ -266,7 +266,7 @@ const haddleOnMode = async (data) => {
                                 </div>
                                 <div class="mt-[35px]">
                                     <div class="mt-3 text-center flex justify-center">
-                                        <div class="w-[45%]">
+                                        <div class="">
                                             <div>
                                                 <button v-if="!store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')"
                                                     class="flex lg:w-[100px] lg:translate-x-[15px] border-2 border-[#777777] pl-3 pr-3 pt-1 pb-1 text-[#777777] rounded-md"

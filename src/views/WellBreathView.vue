@@ -66,15 +66,15 @@ const haddleSelectPage = (evt) => {
         cssPage.value = "bg-[#F3F4F8] lg:w-[95%] lg:h-[360px] sm:w-[490px] sm:h-[180px] m-auto rounded-md mb-2"
         selectPageWB.value = 1;
         menuPage.value = 'IAQ'
-        cssBtnWBParam.value = "bg-zinc-400 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
-        cssBtnWBController.value = "bg-zinc-300 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
+        cssBtnWBParam.value = "bg-zinc-400 text-white font-bold lg:w-[250px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
+        cssBtnWBController.value = "bg-zinc-300 text-white font-bold lg:w-[250px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
         cssControllerChange.value = 'bg-[#F3F4F8] sm:w-[490px] sm:h-[180px] m-auto rounded-md';
     } else {
         cssPage.value = "bg-[#F3F4F8] lg:w-[95%] lg:h-[500px] sm:w-[490px] sm:h-[265px] m-auto rounded-md mb-2"
         selectPageWB.value = 2;
         menuPage.value = 'Control panel'
-        cssBtnWBParam.value = "bg-zinc-300 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
-        cssBtnWBController.value = "bg-zinc-400 text-white font-bold lg:w-[300px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
+        cssBtnWBParam.value = "bg-zinc-300 text-white font-bold lg:w-[250px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
+        cssBtnWBController.value = "bg-zinc-400 text-white font-bold lg:w-[250px] lg:text-[18px] lg:h-[55px] sm:text-[14px] sm:w-[200px] sm:h-[22px] rounded-lg";
         cssControllerChange.value = 'bg-[#F3F4F8] sm:w-[490px] sm:h-[270px] m-auto rounded-md'
     }
 }

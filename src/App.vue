@@ -23,7 +23,6 @@ import HeaderComponentsVue from "./components/HeaderComponents/HeaderComponents.
 @media only screen and (max-width: 800px) {
   .set-main-page  {
     margin: auto;
-    width: 800px;
     height: 480px;
   }
 }

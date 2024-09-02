@@ -157,7 +157,7 @@
                 <img class="set-img" v-if="store.state.dataWB.pressure <= 30 && store.state.dataWB.pressure >= 0"  src="@/assets/bat_empty.png" />
             </div>
             <div class="set-pressure text-[#008E29] font-bold ">
-              <div class="translate-x-[-30px]">
+              <div class="">
                 100% 
               </div>
             </div>

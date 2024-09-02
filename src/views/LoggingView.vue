@@ -130,13 +130,13 @@ const haddleOpenDebugMode = async () => {
                 <label class="block text-base font-semibold text-gray-800">PM2.5</label>
                 <input
                     class="mt-2 block w-full px-4 py-3 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent sm:text-base"
-                    placeholder="Enter CO2 level" v-model="PM2" />
+                    placeholder="Enter PM2.5 level" v-model="PM2" />
             </div>
             <div>
                 <label class="block text-base font-semibold text-gray-800">VOC</label>
                 <input
                     class="mt-2 block w-full px-4 py-3 bg-white border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent sm:text-base"
-                    placeholder="Enter CO2 level" v-model="VOC" />
+                    placeholder="Enter VOC level" v-model="VOC" />
             </div>
         </div>
 

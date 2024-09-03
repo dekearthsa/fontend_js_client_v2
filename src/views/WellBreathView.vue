@@ -264,7 +264,7 @@ const haddleOnMode = async (data) => {
                                 <div class="translate-y-[24px]">
                                     <img class="m-auto sm:w-[110px] sm:h-[110px] lg:w-[150px] lg:h-[150px]" src="../assets/ex_fan.png"  />
                                 </div>
-                                <div class="mt-[35px]">
+                                <div class="mt-[55px]">
                                     <div class="mt-3 text-center flex justify-center">
                                         <div class="">
                                             <div>
@@ -489,14 +489,14 @@ const haddleOnMode = async (data) => {
                                 <div>
                                     <div v-if="!store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')"
                                         class="flex border-2 border-[#777777] sm:pl-2 sm:pr-2 lg:pl-4 lg:pr-4  text-[#777777] rounded-md">
-                                        <div class="mr-1 lg:translate-y-[10px]">
+                                        <div class="mr-1 lg:translate-y-[2px]">
                                             <img src="@/assets/spot_off.png" height="20" width="20" />
                                         </div>
                                         <div class="sm:translate-y-[2px] lg:translate-y-[-1px]  font-bold sm:text-[10px] lg:text-[18px]">OFF</div>
                                     </div>
                                     <div v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')"
                                         class="flex border-2 border-[#66B6AB] sm:pl-2 sm:pr-2 lg:pl-4 lg:pr-4  text-[#66B6AB] rounded-md">
-                                        <div class="mr-1 lg:translate-y-[10px]">
+                                        <div class="mr-1 lg:translate-y-[2px]">
                                             <img src="@/assets/spot_on.png" height="20" width="20" />
                                         </div>
                                         <div class="sm:translate-y-[2px] lg:translate-y-[-1px] font-bold sm:text-[10px] lg:text-[18px]">ON</div>

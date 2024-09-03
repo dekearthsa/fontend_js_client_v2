@@ -457,7 +457,6 @@ const haddleOnMode = async (data) => {
                                     </svg>
                                 </div>
                                 <div>
-
                                     <div v-if="!store.state.dataWB.arrayDeviceOn.includes('Supply low') && !store.state.dataWB.arrayDeviceOn.includes('Supply high')"
                                         class="flex border-2 border-[#777777] sm:pl-2 sm:pr-2 lg:pl-4 lg:pr-4  text-[#777777] rounded-md">
                                         <div class="mr-1 lg:translate-y-[2px] ">
@@ -490,14 +489,14 @@ const haddleOnMode = async (data) => {
                                 <div>
                                     <div v-if="!store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')"
                                         class="flex border-2 border-[#777777] sm:pl-2 sm:pr-2 lg:pl-4 lg:pr-4  text-[#777777] rounded-md">
-                                        <div class="mr-1 lg:translate-y-[2px]">
+                                        <div class="mr-1 lg:translate-y-[10px]">
                                             <img src="@/assets/spot_off.png" height="20" width="20" />
                                         </div>
                                         <div class="sm:translate-y-[2px] lg:translate-y-[-1px]  font-bold sm:text-[10px] lg:text-[18px]">OFF</div>
                                     </div>
                                     <div v-if="store.state.dataWB.arrayDeviceOn.includes('Exhaust fan')"
                                         class="flex border-2 border-[#66B6AB] sm:pl-2 sm:pr-2 lg:pl-4 lg:pr-4  text-[#66B6AB] rounded-md">
-                                        <div class="mr-1 lg:translate-y-[2px]">
+                                        <div class="mr-1 lg:translate-y-[10px]">
                                             <img src="@/assets/spot_on.png" height="20" width="20" />
                                         </div>
                                         <div class="sm:translate-y-[2px] lg:translate-y-[-1px] font-bold sm:text-[10px] lg:text-[18px]">ON</div>

@@ -247,7 +247,7 @@ const haddleOnMode = async (data) => {
             </div>
         </div>
         <div>
-            <div class="detail-c rounded-lg ml-5 mt-3">
+            <div class="detail-c rounded-lg ml-5 mt-3 w-[550px]">
                 <div class="h-[10px]"></div>
                 <div 
                     :class="cssPage">
@@ -264,7 +264,7 @@ const haddleOnMode = async (data) => {
                                 <div class="translate-y-[24px]">
                                     <img class="m-auto sm:w-[110px] sm:h-[110px] lg:w-[150px] lg:h-[150px]" src="../assets/ex_fan.png"  />
                                 </div>
-                                <div class="mt-[55px]">
+                                <div class="mt-[65px]">
                                     <div class="mt-3 text-center flex justify-center">
                                         <div class="">
                                             <div>

@@ -247,7 +247,7 @@ const haddleOnMode = async (data) => {
             </div>
         </div>
         <div>
-            <div class="detail-c rounded-lg ml-5 mt-3 w-[600px]">
+            <div class="detail-c rounded-lg ml-5 mt-3 w-[640px]">
                 <div class="h-[10px]"></div>
                 <div 
                     :class="cssPage">

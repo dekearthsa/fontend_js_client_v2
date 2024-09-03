@@ -142,7 +142,7 @@ const haddleOnMode = async (data) => {
 </script>
 
 <template>
-    <div class="flex m-auto justify-center ">
+    <div class="flex m-auto justify-center mb-10">
         <div class="set-c w-[370px] ml-8">
             <div>
                 <WellBreathLogoWBVue class="m-auto absolute sm:translate-y-[-70px] sm:translate-x-[55px]  lg:translate-y-[-120px] lg:translate-x-[110px]" />
@@ -247,7 +247,7 @@ const haddleOnMode = async (data) => {
             </div>
         </div>
         <div>
-            <div class="detail-c rounded-lg ml-5 mt-3 w-[550px]">
+            <div class="detail-c rounded-lg ml-5 mt-3 w-[600px]">
                 <div class="h-[10px]"></div>
                 <div 
                     :class="cssPage">
